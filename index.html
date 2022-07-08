@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+    <head>
+        <script src="https://distill.pub/template.v2.js"></script>
+        <script src="https://unpkg.com/mathjs@10.6.3/lib/browser/math.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+<body distill-prerendered="">
+    <distill-header distill-prerendered="">
+        <div class="content">
+            <a class="logo" href="/">
+                <svg viewBox="-607 419 64 64">
+                    <path
+                        d="M-573.4,478.9c-8,0-14.6-6.4-14.6-14.5s14.6-25.9,14.6-40.8c0,14.9,14.6,32.8,14.6,40.8S-565.4,478.9-573.4,478.9z">
+                    </path>
+                </svg>
+                Distil
+            </a>
+            <nav class="nav">
+                <a href="/about/">About</a>
+                <a href="/prize/">Prize</a>
+                <a href="/journal/">Submit</a>
+            </nav>
+        </div>
+    </distill-header>
+
+    <d-title style="padding-bottom: 0">
+        <h1>What is it next?</h1>
+        <p>How recommender systems choose the next item.</p>
+        <d-figure class="l-screen shade-figure" style="border-bottom: none">
+        </d-figure>
+    </d-title>
+
+    <d-byline>
+        <div class="byline grid">
+            <div class="authors-affiliations grid">
+                <h3>Authors</h3>
+                <h3>Affiliations</h3>
+                <p class="author">
+                    Ibrahim Al Hazwani
+                </p>
+                <p class="affiliation">
+                    University of Zurich and UZH Digital Society Initiative
+                </p>
+                <p class="author">
+                    Jürgen Bernard
+                </p>
+                <p class="affiliation">
+                    University of Zurich and UZH Digital Society Initiative
+                </p>
+            </div>
+            <div>
+                <h3>Published</h3>
+                <p>TBA</p>
+            </div>
+            <div>
+                <h3>DOI</h3>
+                <p>TBA</p>
+            </div>
+        </div>
+    </d-byline>
+
+    <d-article>
+        <p>If you have ever used online services like e-commerce or streaming platforms, you have already seen at least
+            one of the following sentences "recommend for you" or "other users have also bought this". With this blog
+            post, we want to give an introduction to the Recommender System field and illustrate how new techniques that
+            rely on deep learning algorithms work.
+        </p>
+        <p>
+            Recommender Systems (RSs) are software tools and techniques providing suggestions for items to interact with
+            a user [1]. With item, we refer to "what" the system is recommending to the user. An item could be the next
+            movie or song to listen to, the fastest path to reach a destination or a person to match with or hire for a
+            particular position. Usually, recommendations, especially on the web, are personalized to the specific user
+            that is using the system. It is important to note that also not personalized recommendations exist and can
+            be found in newspapers or magazines.
+
+            <!--
+            <d-cite key="ricci2011introduction">
+                <d-hover-box id="hover-box" style="display: none;">
+                    <ul>
+                        <li>
+                            <strong>Introduction to recommender systems handbook</strong>
+                            <a href="https://doi.org/10.1007/978-0-387-85820-3_1"></a>
+                            <br> F. Ricci, L. Rokach, B. Shapira
+                            <br> Recommender Systems Handbook. Springer, Boston, MA.
+                            <a href="https://doi.org/10.1007/978-0-387-85820-3_1" style="text-decoration: inherit;">DOI: 10.1007/978-0-387-85820-3_1 </a>
+                        </li>
+                    </ul>
+                </d-hover-box>
+                <div id="citation-" class="citation">
+                    <span class="citation-number">[1]</span>
+                </div>
+            </d-cite>
+        -->
+        </p>
+        <p>
+            We will first illustrate how a simple recommender system works, then we will dive into how modern systems
+            work. By interacting with the figures and menu you are going to be able to change various parameters of the
+            different models. After following this article we hope that you will have a visual understanding of how RSs
+            work and how the parameter tuning phase can change the outcome.
+        </p>
+
+        <h2>Recommender system</h2>
+
+        <img src='rs-workflow.png' height="150px">
+        <p></p>
+        <p>
+            Recommender systems in order to generate recommendations require different types of input data such as
+            users' preference, items features, explicit feedback, implicit feedback, etc.
+        </p>
+        <p>
+            The most accessible data are the explicit rating which include explicit input from the user regarding their
+            interest in a product i.e. rating that the user gives to items. Usually, explicit feedback can be
+            represented by a sparse matrix since users are likely to rate only a small percentage of possible items.
+        </p>
+        <p>
+            When explicit feedback is not available, it is possible to use implicit feedback that reflects user
+            behavior. Examples of implicit feedback are the browser history on a website, the number of clicks made or
+            mouse movement. As opposed to explicit feedback, implicit feedback can be represented by a densely filled
+            matrix.
+        </p>
+        <p>
+            Classical recommender systems can be grouped in two main approaches: content-based (CB) and collaborative
+            filtering (CF). 
+            <!--The former one recommends an item, i.e. movie, song, ad, etc., to a user based on the item
+            characteristics and user's interests. The latter one uses the known preferences of a group of users to make
+            recommendations or predictions for other users.-->
+        </p>
+        <p>
+            <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past user-item interactions, 
+            like providing rating to movies watched in the past, it is sufficience to detect similar users and/or items and 
+            cluster them to make new predictions based on the similarity [6]. User A will be recommended with a new item based on 
+            the interest of similar user B. Collaborative filtering methods belows to the bigger category of approaches called 
+            memory-based. One of the most used method, which is going to be decribe later, is called matrix factorization. 
+            The main downside of this method is that the predictions for a given user-item pair are made via dot product. 
+            So, if an item is not in the training dataset, the recommender system will not be able to query this item 
+            to generate recommendation. This issue is known as cold-start problem.
+        </p>
+        <p>
+            <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate the recommendation using 
+            additional information (called features) about user and/or item that explain the observed interaction between user and item. 
+            Content-based methods are less prompt to the cold-start problem because new items or new users can be described 
+            using their characteristics.
+        </p>
+
+        <h2>
+            Collaborative filtering: matrix factorization
+        </h2>
+        <p>
+            Matrix factorization is a class of collaborative filtering techniques [3]. This technique is used to
+            generate latent features (embeddings) when two different entities are multiplied together. In its simplistic
+            form, matrix factorization characterizes both the items and the users by vectors of factors inferred from
+            item rating patterns. As [2] states this kind of method has become popular since it combines good
+            scalability with predictive accuracy while offering flexibility for modeling real-life scenarios. Moreover,
+            it enables to add additional information when explicit feedback is not available.
+        </p>
+        <p>
+            Each item i and user u are associated with a vector qi and wu respectively. For a given item, the
+            corresponding vector measures the extent to which feature the item possesses. Similarly, the user vector wu
+            measure the interest of the user in the items. The interaction, defined as the interest of the user u in the
+            item i, is then captured by the dot product of the two vectors. Once all the dot products are completed it
+            is possible to then rank the predicted ratings to identify the best item to recommend to the user.
+        </p>
+        <span class="katex-display">
+            <span class="katex">
+                <span class="katex-mathmk">
+                    <math>
+                        <semantics>
+                            <mrow>
+                                <msub>
+                                    <mi>R</mi>
+                                    <mi>qui</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <msup>
+                                    <msub>
+                                        <mi>q</mi>
+                                        <mi>i</mi>
+                                    </msub>
+                                    <mi>T</mi>
+                                </msup>
+                                <mo>&#8901</mo>
+                                <msub>
+                                    <mi>w</mi>
+                                    <mi>u</mi>
+                                </msub>
+                                <mo>
+                                    =
+                                </mo>
+                                <msub>
+                                    <mo>&#8721;</mo>
+                                    <mi>k</mi>
+                                </msub>
+                                <msub>
+                                    <mi>p</mi>
+                                    <mi>ik</mi>
+                                </msub>
+                                <mo>&#8901</mo>
+                                <msub>
+                                    <mi>w</mi>
+                                    <mi>ku</mi>
+                                </msub>
+                            </mrow>
+                        </semantics>
+                    </math>
+                </span>
+            </span>
+        </span>
+        <p>
+            Let's consider the following example: we have a user matrix and item matrix. We want to predict the next movie
+            to recommend based on these two matrixes to the user Anna.
+        </p>
+        <p>
+            <b>User matrix</b> The user matrix stores the users' genre preference. In particular, in this example, the matrix stores the user 
+            preference (value between 0 and 1)for two movie genre: comedy and horror. With the sliders below it is possible to adjst the 
+            preference of Anna between the two genres.
+        </p>
+
+        <p>Comedy score:</p>
+        <input type="range" name="mySlider" id=mySlider min="0" max="1" step="0.1" value="0.5" ,
+            onchange="updateUserWeightComedy(this.value)">
+        <p>Horror score:</p>
+        <input type="range" name="mySlider" id=mySlider min="0" max="1" step="0.1" value="0.5" ,
+            onchange="updateUserWeightHorror(this.value)">
+        <table id="user_feature">
+            <tr>
+                <th>User</th>
+                <th>Comedy</th>
+                <th>Horror</th>
+            </tr>
+            <tr>
+                <td>Anna</td>
+                <td>0.3</td>
+                <td>0.7</td>
+            </tr>
+            <tr>
+                <td>Jonny</td>
+                <td>0.7</td>
+                <td>0.1</td>
+            </tr>
+            <tr>
+                <td>Kimi</td>
+                <td>0.1</td>
+                <td>0.9</td>
+            </tr>
+        </table>
+        <p>
+            <b>Item matrix</b>The item matrix stores the movies features scores. In this case, it is possible to see if the movie is a 
+            comedy one, a horror one or a balance of the two.
+        </p>
+        <!--
+        <p>Score slider:</p>
+
+        <input type="range" name="mySlider2" id=mySlider2 min="0" max="5" step="1" value="2.5" ,
+            onchange="updateItemWeight(this.value)">
+        -->
+        <table id="item_feature">
+            <tr>
+                <th>Item</th>
+                <th>Comedy</th>
+                <th>Horror</th>
+            </tr>
+            <tr>
+                <td>Movie 1</td>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>Movie 2</td>
+                <td>1</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Movie 3</td>
+                <td>5</td>
+                <td>1</td>
+            </tr>
+            <!-- <tr>
+                <td>Movie 4</td>
+                <td>4</td>
+                <td>1</td>
+            </tr> -->
+        </table>
+
+        <button id="MF_calculate" type="button" onclick="calculateMatrixFact()">Calculate Matrix Factorization</button>
+
+        <table id="matrix_factorization">
+            <tr>
+                <th>User</th>
+                <th>Movie One</th>
+                <th>Movie Two</th>
+                <th>Movie Three</th>
+            </tr>
+        </table>
+
+        <script>
+            function updateUserWeightComedy(slideAmount) {
+                //  to retrieve the value of the slider and display it
+                //	var sliderDiv = document.getElementById("sliderAmount");
+                //  sliderDiv.innerHTML = slideAmount;
+
+                var cell_change = document.getElementById("user_feature").rows[1].cells;
+                // console.log(cell_change)
+                cell_change[1].innerHTML = slideAmount;
+                //cell_change[2].innerHTML = (1 - slideAmount).toFixed(1);
+                CacheValues(); // to save the new array
+            }
+
+            function updateUserWeightHorror(slideAmount) {
+                //  to retrieve the value of the slider and display it
+                //	var sliderDiv = document.getElementById("sliderAmount");
+                //  sliderDiv.innerHTML = slideAmount;
+
+                var cell_change = document.getElementById("user_feature").rows[1].cells;
+                // console.log(cell_change)
+                cell_change[2].innerHTML = slideAmount;
+                //cell_change[2].innerHTML = (1 - slideAmount).toFixed(1);
+                CacheValues(); // to save the new array
+            }
+
+            function updateItemWeight(slideAmount2) {
+                //  to retrieve the value of the slider and display it
+                //  var sliderDiv2 = document.getElementById("sliderAmount2");
+                //  sliderDiv2.innerHTML = slideAmount2;
+
+                var cell_change2 = document.getElementById("item_feature").rows[2].cells;
+                cell_change2[2].innerHTML = slideAmount2;
+                CacheValues();
+            }
+
+            function createGroups(arr, numGroups) {
+                const perGroup = Math.ceil(arr.length / numGroups);
+                return new Array(numGroups)
+                    .fill('')
+                    .map((_, i) => arr.slice(i * perGroup, (i + 1) * perGroup));
+            }
+
+            // create an empty array to store the values
+            var matrix_user = [];
+            var matrix_score = [];
+
+            function CacheValues() {
+
+                matrix_user = [];
+                matrix_score = [];
+
+                // retrieve all the code of the table
+                var user_table = document.getElementById("user_feature");
+                var score_table = document.getElementById("item_feature");
+
+                // get length of the rows
+                var row_length = user_table.rows.length;
+                var score_row_length = score_table.rows.length;
+
+                for (let i = 1; i < row_length; i++) {
+                    // retrieve cells info
+                    var table_cells = user_table.rows.item(i).cells;
+
+                    // gets amount of cells of current row
+                    var col_length = table_cells.length;
+
+                    for (var j = 0; j < col_length; j++) {
+                        // get cell info here 
+                        var cell_value = table_cells.item(j).innerHTML;
+                        // push every row value in the empty matrix
+                        matrix_user.push(cell_value);
+                    }
+                }
+
+                for (let i = 1; i < score_row_length; i++) {
+                    // retrieve cells info
+                    var score_table_cells = score_table.rows.item(i).cells;
+
+                    // gets amount of cells of current row
+                    var score_col_length = score_table_cells.length;
+
+                    for (var j = 0; j < score_col_length; j++) {
+                        // get cell info here 
+                        var score_cell_value = score_table_cells.item(j).innerHTML;
+                        matrix_score.push(score_cell_value);
+                    }
+                }
+                return {
+                    mu: matrix_user,
+                    ms: matrix_score
+                }
+            }
+
+            function calculateMatrixFact() {
+
+                var cache = CacheValues();
+
+                // split the array in two single arrays one per each user and movie
+                var user_matrix = createGroups(cache.mu, 3);
+                // console.log(user_matrix);
+                var score_matrix = createGroups(cache.ms, 3);
+                //console.log(score_matrix);
+
+                // remove the string user_name and movie_name
+                for (let i = 0; i < user_matrix.length; i++) {
+                    user_matrix[i].shift();
+                }
+
+                for (let j = 0; j < score_matrix.length; j++) {
+                    score_matrix[j].shift();
+                }
+
+                var dot_matrix = [];
+
+                // perform the dot product
+                for (let j = 0; j < user_matrix.length; j++) {
+                    for (let k = 0; k < score_matrix.length; k++) {
+                        //console.log(user_matrix[j])
+                        //console.log(score_matrix[k])
+                        var dot_product = (math.multiply(user_matrix[j], score_matrix[k]) - 1).toFixed(1);
+                        dot_matrix.push(dot_product);
+                    }
+                }
+
+                // create the matrix and push back the string (first column of the table)
+                var dot_prod_matrix = createGroups(dot_matrix, 3);
+                dot_prod_matrix[0].unshift("Anna");
+                dot_prod_matrix[1].unshift("Jonny");
+                dot_prod_matrix[2].unshift("Kimi");
+
+                // from array to HTML table
+                fetch = document.getElementById('matrix_factorization');
+                fetch.innerHTML = `<tr>
+                <th>User</th>
+                <th>Movie One</th>
+                <th>Movie Two</th>
+                <th>Movie Three</th>
+                 </tr>`;
+                for (var i = 0; i < dot_prod_matrix.length; i++) {
+                    var newRow = fetch.insertRow(fetch.length);
+                    for (var j = 0; j < dot_prod_matrix[i].length; j++) {
+                        var cell = newRow.insertCell(j);
+                        cell.innerHTML = dot_prod_matrix[i][j];
+                    }
+                }
+            }
+        </script>
+
+        <h2>Deep Learning Recommender System</h2>
+        <p>
+            Modern recommender systems have to consider many features that can be:
+        </p>
+        <ul>
+            <li> categorical like userID, itemID, brand, genre, language, etc.;</li>
+            <li> numerical like price, delivery time, number of reviews, avg of the reviews, etc.;</li>
+            <li> unstructured, like keywords, colors, material, etc.</li>
+        </ul>
+        <p>
+            The first deep learning model that we are going to consider is called Wide&Deep [5]. This model, made by
+            Google in 2016, can be considered as the first deep learning model that has generated state of the art
+            (SOTA) results. The second model that we are going to consider is called Deep Learning Recommendation Models, or abbreviated DLRM [6]. 
+        </p>
+
+        <h3>Wide&Deep</h3>
+        <p>
+            Architecturally the Wide&Deep model is composed of two main parts: a wide part which serves as feature memorization and a 
+            deep one which is used to generalize the feature combinations. More precisely, on one hand memorization can be defined as the frequency learning of the
+            co-occurence of items or features and explotation of the correlation in the historical data. On the other hand, generalization is based on the transitivity of the correlation
+            and explores new combination of features that have never occured in the past. The combination of a linear (wide) and multi-layer model (deep) enables the Wide&Deep model to use 
+            input metadata for generating the recommendation.
+        </p>
+        <p>
+            <b>Wide component</b> The wide component is a linear model that can be represented with the equation
+        </p>
+        <span class="katex-display">
+            <span class="katex">
+                <span class="katex-mathmk">
+                    <math>
+                        <semantics>
+                            <mrow>
+                                <mi>y</mi>
+                                <mo>=</mo>
+                                <msup>
+                                    <mi>w</mi>
+                                    <mi>T</mi>
+                                </msup>
+                                <mi>x</mi>
+                                <mo>+</mo>
+                                <mi>b</mi>
+                            </mrow>
+                        </semantics>
+                    </math>
+                </span>
+            </span>
+        </span>
+        <p>
+            where y is the prediction, x is a vector of n features, w are the parameters of the model, and b is the bias. It is important 
+            to spotlight that the feature set includes both the raw input features and the transformed ones. It is in part of the model that the cross-product
+            transformation is made. The cross-product captures the interaction between binary features and adds nonlinearity to generalize the linear model.
+        </p>
+        <p>
+            <b>Deep component</b> The deep component is a feed-forward neural network. The categorical features, that are represented as sparse high-dimensional matrix, are
+            first converted into a low-dimension and dense vector (embedding vectors) and then fed into the hidden layers of a neural network during the forward pass. Each hidden layer
+            perform the following computation:
+        </p>
+        <span class="katex-display">
+            <span class="katex">
+                <span class="katex-mathmk">
+                    <math>
+                        <semantics>
+                            <mrow>
+                                <msup>
+                                    <mi>a</mi>
+                                    <mi>(l+1)</mi>
+                                </msup>
+                                <mo>=</mo>
+                                <mi>f</mi>
+                                <mo>(</mo>
+                                <msup>
+                                    <mi>W</mi>
+                                    <mi>(l)</mi>
+                                </msup>
+                                <msup>
+                                    <mi>a</mi>
+                                    <mi>(l)</mi>
+                                </msup>
+                                <mo>+</mo>
+                                <msup>
+                                    <mi>b</mi>
+                                    <mi>(l)</mi>
+                                </msup>
+                                <mo>)</mo>
+                            </mrow>
+                        </semantics>
+                    </math>
+                </span>
+            </span>
+        </span>
+        <p>
+            where l represent the number of the layer and f is the activation function. a, b, and W are respectively the activations, biad, and model weights of the l-th layer.
+        </p>
+        <p>
+            <b>Joint training</b> The two components are combined using a weighted sum of their output lof odds as the prediction. The sum is then fed to one common logistic loss dfunction for joint training.
+            In specific, the joint training is done by back-propagating the gradients from the output to both the wide and deep part of the model simultaneosly using min-bach stocastic optimization [5].
+        </p>
+
+        <h3>Deep Learning Recommendation Models (DLRM)</h3>
+        <p>
+            The DLRM architecture is composed on four different parts: embedding lookup, first layer of neural networks, interactions, and second layer of neural networks.
+        </p>
+        <p>
+            <b>Embedding lookup</b> Embeddings can be seen as a mapping of abstract concepts, object or items into an abstract vector space. Embeddings play a key role when the deep learnign model has to handle of 
+            categorical data. Each embedding lookup is used as a one-hot encoding vector to optain the corresponding row vecotr of embeeding table [6]. In particular, DLRM utilize embedding tables to map categorical 
+            features to a dense representations. 
+        </p>
+        <p>
+            <b>First layers of neural network: multi-layer perceptron</b>
+        </p>
+            
+
+
+    </d-article>
+</body>
