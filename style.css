@@ -79,7 +79,11 @@ distill-header svg {
 }
 
 #user_feature tr:nth-child(2) td:nth-child(2) {
-    background-color: #E4B363
+    background-color: #fadf7f
+}
+
+#user_feature tr:nth-child(2) td:nth-child(3) {
+    background-color: #68EDC6
 }
 
 /*
