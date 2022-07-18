@@ -78,16 +78,100 @@ distill-header svg {
     margin-right: 2px;
 }
 
-#user_feature tr:nth-child(2) td:nth-child(2) {
+#user_feature tr:nth-child(5) td:nth-child(2) {
     background-color: #fadf7f
 }
 
-#user_feature tr:nth-child(2) td:nth-child(3) {
+#user_feature tr:nth-child(5) td:nth-child(3) {
     background-color: #68EDC6
 }
 
-/*
-#item_feature tr:nth-child(3) td:nth-child(3) {
-    background-color: #E4B363;
+#comedySlider {
+    background: #68EDC6;
 }
-*/
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+}
+
+.example {
+    background-color: #f2efef;
+    border-radius: 10px;
+}
+
+.example_text {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.user_table {
+    width: 90%;
+    margin-left: 10px;
+}
+
+.item_table {
+    width: 90%;
+    margin-left: 10px;
+}
+
+.rec_table {
+    width: 90%;
+    margin-left: 10px;
+
+}
+
+.MF_button {
+    margin-left: 10px;
+    margin-right: 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.occupation {
+    margin-left: 10px;
+}
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.autocomplete-items {
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    margin-left: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+input[type=text] {
+    background-color: #f1f1f1;
+}
