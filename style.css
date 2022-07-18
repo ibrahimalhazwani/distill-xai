@@ -78,6 +78,11 @@ distill-header svg {
     margin-right: 2px;
 }
 
+img {
+    float: left;
+    margin: 10px;
+}
+
 #user_feature tr:nth-child(5) td:nth-child(2) {
     background-color: #fadf7f
 }
@@ -88,6 +93,20 @@ distill-header svg {
 
 #comedySlider {
     background: #68EDC6;
+}
+
+#left_caption_CF {
+    padding-top: 2px;
+    align-self: flex-end;
+}
+
+#left_caption_CB {
+    padding-top: 2px;
+    align-self: flex-end;
+}
+
+.centered {
+    text-align: center;
 }
 
 .row {

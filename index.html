@@ -80,6 +80,14 @@
     </d-byline>
 
     <d-article>
+        <div class="centered">
+            <img src='rs-timeline.png' width="700px" height="187px">
+        </div>
+        <figcaption class="centered">
+            Timeline of recommender systems. Highlighted are the two methods describe in the article. A clear
+            distinction between pre and post deep learning era is on the year 2012.
+        </figcaption>
+        <p></p>
         <p>If you have ever used online services like e-commerce or streaming platforms, you have already seen at least
             one of the following sentences <q>recommend for you</q> or <q>other users have also bought this</q>. With
             this blog post, we want to give an introduction to the Recommender System field and illustrate how new
@@ -378,37 +386,58 @@
             characteristics and user's interests. The latter one uses the known preferences of a group of users to make
             recommendations or predictions for other users.-->
         </p>
-        <p>
-            <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past user-item
-            interaction, like providing ratings to movies watched in the past, is sufficient to detect similar users
-            and/or items and cluster them to make new predictions based on the similarity [6]. User A will be
-            recommended with a new item based on the interest of similar user B. Collaborative filtering methods belong
-            to the bigger category of approaches called memory-based. One of the most used methods, which is going to be
-            decribed later, is called Matrix Factorization (MF).
-            The main downside of this method is that the predictions for a given user-item pair are made via dot
-            product. So, if an item is not in the training dataset, the recommender system will not be able to query
-            this item to generate a recommendation. This issue is known as the cold-start problem.
-        </p>
-        <p style="color: red;">
-            TODO: add image of CF method
-        </p>
-        <p>
-            <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate the
-            recommendation using additional information (called features) about the user and/or item that explains the
-            observed interaction between user and item.
-            Content-based methods are less prompt to the cold-start problem because new items or new users can be
-            described using their characteristics.
-        </p>
-        <p style="color: red;">
-            TODO: add image of CB method
-        </p>
+
+        <div>
+            <div class="centered">
+                <img src='CF.png' width="383px" height="408px">
+            </div>
+            <p>
+                <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past user-item
+                interaction, like providing ratings to movies watched in the past, is sufficient to detect similar users
+                and/or items and cluster them to make new predictions based on the similarity [6]. The main issue with
+                CF method is known as the cold-start problem.
+            </p>
+            <figcaption id="left_caption_CF">
+                On the left a illustration of Collaborative Filtering process. Alan and Sarah have watched the same
+                movies and have the same interest, the recommender system for these reasons will then recommend Sarah
+                with a movie that Alan has watched.
+            </figcaption>
+        </div>
+        <p></p>
+
+        <!-- User A will be
+                recommended with a new item based on the interest of similar user B. Collaborative filtering methods
+                belong to the bigger category of approaches called memory-based. that the predictions for a given user-item pair are made via dot
+                product. So, if an item is not in the training dataset, the recommender system will not be able to query
+                this item to generate a recommendation.  One of the most used
+                methods, which is going to be decribed later, is called Matrix Factorization (MF).This issue is known as the cold-start problem. The main downside of this method is knwon as cold-start problem.-->
+
+        <div>
+            <div class="centered">
+                <img src='CB.png' width="383px" height="470px">
+            </div>
+            <p>
+                <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate the
+                recommendation using additional information (called features) about the user and/or item that explains
+                the
+                observed interaction between user and item.
+                Content-based methods are less prompt to the cold-start problem because new items or new users can be
+                described using their characteristics.
+            </p>
+            <figcaption id="left_caption_CB">
+                On the left a illustration of Content Based process. Alan has watched a movie, the recommender system
+                will then find similar movies to the one Alan has watched and recommend a similar one.
+            </figcaption>
+        </div>
 
         <h2>
             Collaborative filtering: Matrix Factorization
         </h2>
+
         <p style="color: red;">
-            TODO: add image of matrix factorization. full matrix = user matrix x item matrix.
+            TODO: add image of MF method
         </p>
+
         <p>
             Matrix Factorization is a class of collaborative filtering techniques [3]. This technique is used to
             generate latent features (embeddings) when two different entities are multiplied together. In its simplistic
@@ -525,7 +554,7 @@
                 </tr>
                 <tr>
                     <td>Kimi</td>
-                    <td>0.3</td>
+                    <td>0.4</td>
                     <td>0.9</td>
                 </tr>
                 <tr>
@@ -573,16 +602,20 @@
                 </tr>
             </table>
             <p class="example_text">
-                Based on your friends preference and yours, the movie you should watch is ... This beacuse
+                Based on your friends preference and yours, the movie you should watch is movie beacuse
             </p>
+            <p style="color: red"> TODO: find a way to retrieve the movie from the table and print it in the above
+                sentence where movie is written.</p>
         </div>
+
+        <p></p>
 
         <p>
             While Matrix Factorization can produces some good results, this methods has the following main disavantages:
         <ul>
             <li><b>Small feature space</b>: the only features that can be quried are just movie or user i.</li>
             <li><b>The relevance of recommendation</b>: since Matrix Factorization it uses the dot product to
-                recommende the item, the most popular items will be then recommended to everyone.</li>
+                recommend the item, the most popular items will be then recommended to everyone.</li>
             <li><b>Cold start problem</b> as a techniques from the collaborative filtering class, the model is not able
                 to predict a new item to the user is this was not in the training set.</li>
             <li><b>Hard feature encoding</b> in order to generate the recommendation, we have to explicit provide the
@@ -590,7 +623,16 @@
         </ul>
         </p>
 
-        <h2>Modern recommender systems</h2>
+        <h2>Modern Recommender Systems</h2>
+        <p>
+            Modern recommender systems have to consider many features that can be:
+        </p>
+        <ul>
+            <li><b>Categorical</b> like userID, itemID, brand, genre, language, etc.;</li>
+            <li><b>Numerical</b> like price, delivery time, number of reviews, avg of the reviews, etc.;</li>
+            <li><b>Unstructured</b> like keywords, colors, material, etc.</li>
+        </ul>
+
         <div class="example">
             <p></p>
             <p class="example_text">
@@ -631,14 +673,10 @@
             </form>
             <p></p>
         </div>
-        <p>
-            Modern recommender systems have to consider many features that can be:
-        </p>
-        <ul>
-            <li><b>Categorical</b> like userID, itemID, brand, genre, language, etc.;</li>
-            <li><b>Numerical</b> like price, delivery time, number of reviews, avg of the reviews, etc.;</li>
-            <li><b>Unstructured</b> like keywords, colors, material, etc.</li>
-        </ul>
+
+        <p></p>
+
+
         <h3>Neural Network Recommender System</h3>
         <p style="color: red">
             TODO: write this part!
@@ -650,10 +688,6 @@
             made by Google in 2016. A complete timeline of SOTA model can be seen in the figure below. For the goal of
             this article, we are going to consider as a deep learning model, the Factorization-Machine based neural
             network (DeepFM), developed by Huawei in 2017 [6].
-        </p>
-
-        <p style="color: red;">
-            TODO: add timeline of recommender systems evolution
         </p>
 
         <h3>DeepFM</h3>
@@ -717,7 +751,51 @@
             TODO: add figure about DeepFM architecture.
         </p>
 
+        <h2>Conclusion</h2>
+
     </d-article>
+    <d-appendix>
+        <h3>Acknowledgments</h3>
+        <p>Text</p>
+        <h3>Further Reading</h3>
+        <p>text</p>
+        <h3>References</h3>
+        <p>
+            [1] Ricci, Francesco, Lior Rokach, and Bracha Shapira. "Introduction to recommender systems handbook."
+            Recommender systems handbook. Springer, Boston, MA, 2011. 1-35.
+        </p>
+        <p>
+            [2] Koren, Yehuda, Robert Bell, and Chris Volinsky. "Matrix factorization techniques for recommender
+            systems." Computer 42.8 (2009): 30-37.
+        </p>
+        <p>
+            [3] Lee, Daniel D., and H. Sebastian Seung. "Learning the parts of objects by non-negative matrix
+            factorization." Nature 401.6755 (1999): 788-791.
+        </p>
+        <p>
+            [4] Glauber, Rafael, and Angelo Loula. "Collaborative filtering vs. content-based filtering: differences and
+            similarities." arXiv preprint arXiv:1912.08932 (2019).
+        </p>
+        <p>
+            [5] Cheng, Heng-Tze, et al. "Wide & deep learning for recommender systems." Proceedings of the 1st workshop
+            on deep learning for recommender systems. 2016.
+        </p>
+        <p>
+            [6] Guo, Huifeng, et al. "DeepFM: a factorization-machine based neural network for CTR prediction." arXiv
+            preprint arXiv:1703.04247 (2017).
+        </p>
+        <p>
+            [7] Rendle, Steffen. "Factorization machines." 2010 IEEE International conference on data mining. IEEE,
+            2010.
+        </p>
+        <h3>Reuse</h3>
+        <p>
+            Diagrams and text are licensed under Creative Commons Attribution CC-BY 4.0 with the source available on
+            GitHub, unless noted otherwise. The figures that have been reused from other sources don’t fall under this
+            license and can be recognized by a note in their caption: “Figure from …”.
+        </p>
+
+    </d-appendix>
 
     <script>
         function updateUserWeightComedy(slideAmount) {
