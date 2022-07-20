@@ -819,57 +819,106 @@
             return row.map(function (row) { return row[key] });
         }
 
-        var drawChart = async () => {
-            //const data = await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/prediction-movie-df.csv?token=GHSAT0AAAAAABWE2OTBNFXX7LG33MS2NSTWYWYC2DA",)
+        function nn_plot(rows, colour_line, colour_fill){
+            var x =  unpack(rows, 'rating')
+            var y =  unpack(rows, 'avg_squared_error')
+            //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
 
-            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv?token=GHSAT0AAAAAABWZXAJ4WFUOXQT6DDVC26QAYWYE6CQ",
+            console.log(x)
+            console.log(y)
+            var errors_deepfm = {
+                x: x,
+                y: y,
+                type: "scatter",
+                mode: "lines+markers",
+                line: { shape: 'spline' },
+                fill: 'tozeroy',
+                fillcolor: colour_fill,
+                marker: { color: colour_line },
+                hoverinfo: "x+y"
+            };
+            var layout = { title: "Distribution of Squared Prediction Errors of the NN (blue) and DeepFM (orange) Models" };
+            var config = { responsive: true, displayModeBar: false };
+            
+            if (document.getElementById("tester") ) { 
+                Plotly.newPlot(TESTER, [errors_deepfm], layout, config)
+                
+            }
+        }
+
+        var drawChart = async () => {
+            
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv",
                 function (rows) {
                     return {
                         avg_squared_error: rows.avg_squared_error,
                         rating: rows.rating
                     }
-                }).then(function (rows) {
+                }).then(
+                        function (rows) {
 
-                    var x =  unpack(rows, 'rating')
-                    var y =  unpack(rows, 'avg_squared_error')
-
-                    console.log(x)
-                    console.log(y)
-                    var errors_deepfm = {
-                        x: x,
-                        y: y,
-                        type: "scatter",
-                        mode: "lines+markers",
-                        line: { shape: 'spline' },
-                        fill: '#81ADC8',
-                        marker: { color: "red" },
-                        hoverinfo: "x+y"
-                    };
-                    var layout = { title: "Distribution of Squared Prediction Errors for NN Model" };
-                    var config = { responsive: true, displayModeBar: false };
-                    
-                    if (document.getElementById("tester") ) { 
-                        Plotly.newPlot(TESTER, [errors_deepfm], layout, config);
+                            var x =  unpack(rows, 'rating')
+                            var y =  unpack(rows, 'avg_squared_error')
+                            //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
                         
-                    
-                    }
-                    
-                })
-            // var errors_deepfm = {
-            //     x: unpack(rows, 'uid'),
-            //     y: unpack(rows, 'error'),
-            //     type: "scatter",
-            //     mode: "lines+markers",
-            //     line: { shape: 'spline' },
-            //     fill: '#81ADC8',
-            //     marker: { color: "red" },
-            //     hoverinfo: "x+y"
-            // };
-            // var layout = { title: "Distribution of Squared Prediction Errors for DeepFM Model" };
-            // var config = { responsive: true, displayModeBar: false };
+                            console.log(x)
+                            console.log(y)
+                            var errors_nn = {
+                                x: x,
+                                y: y,
+                                type: "scatter",
+                                mode: "lines+markers",
+                                line: { shape: 'spline' },
+                                fill: 'tozeroy',
+                                fillcolor: 'rgba(129, 173, 200, 0.4)',
+                                marker: { color: "#81ADC8" },
+                                hoverinfo: "x+y"
+                            };
+                            var layout = { title: "Distribution of Squared Prediction Errors of the NN (blue) and DeepFM (orange) Models" };
+                            var config = { responsive: true, displayModeBar: false };
+                            
+                            if (document.getElementById("tester") ) { 
+                                Plotly.newPlot(TESTER, [errors_nn], layout, config)
+                                
+                            }
+                            
+                        }
+                    )
 
-            // Plotly.newPlot('tester', errors_deepfm, layout, config);
-
+                    await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/mse-deepfm.csv",
+                    function (rows) {
+                        return {
+                            avg_squared_error: rows.avg_squared_error
+                            
+                        }
+                    }).then(
+                            function (rows) {
+                                var y =  unpack(rows, 'avg_squared_error')
+                                //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
+                                
+                                console.log(y)
+                                var errors_deepfm = {
+                                    x: [1,2,3,4,5],
+                                    y: y,
+                                    type: "scatter",
+                                    mode: "lines+markers",
+                                    line: { shape: 'spline' },
+                                    fill: 'tozeroy',
+                                    fillcolor: 'rgba(199, 240, 189, 0.4)',
+                                    marker: { color: "#C7F0BD" },
+                                    hoverinfo: "x+y"
+                                };
+                                var layout = { title: "Distribution of Squared Prediction Errors of the NN (blue) and DeepFM (orange) Models" };
+                                var config = { responsive: true, displayModeBar: false };
+                                
+                                if (document.getElementById("tester") ) { 
+                                    Plotly.addTraces(TESTER, errors_deepfm)
+                                    
+                                }
+                                
+                            }
+                        )
+            
         }
         if (document.getElementById('tester')){
             drawChart();
