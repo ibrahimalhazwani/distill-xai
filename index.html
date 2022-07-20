@@ -9,6 +9,11 @@
     <head>
         <script src="https://distill.pub/template.v2.js"></script>
         <script src="https://unpkg.com/mathjs@10.6.3/lib/browser/math.js"></script>
+
+        <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
+        <script src="plotly-2.12.1.min.js"></script>
+
+        <!-- Load CSS file. -->
         <link rel="stylesheet" href="style.css">
     </head>
 
@@ -751,9 +756,12 @@
             TODO: add figure about DeepFM architecture.
         </p>
 
+        <div id="tester" style="width:600px;height:250px;"></div>
+
         <h2>Conclusion</h2>
 
     </d-article>
+
     <d-appendix>
         <h3>Acknowledgments</h3>
         <p>Text</p>
@@ -1034,6 +1042,16 @@
             });
         }
 
-        autocomplete(document.getElementById("movieInput"), movie_array);
+        TESTER = document.getElementById('tester');
+
+        Plotly.newPlot(TESTER, [{
+
+            x: [1, 2, 3, 4, 5],
+
+            y: [1, 2, 4, 8, 16]
+        }], {
+
+            margin: { t: 0 }
+        });
     </script>
 </body>
