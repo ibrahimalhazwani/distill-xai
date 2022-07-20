@@ -819,33 +819,7 @@
             return row.map(function (row) { return row[key] });
         }
 
-        function nn_plot(rows, colour_line, colour_fill){
-            var x =  unpack(rows, 'rating')
-            var y =  unpack(rows, 'avg_squared_error')
-            //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
-
-            console.log(x)
-            console.log(y)
-            var errors_deepfm = {
-                x: x,
-                y: y,
-                type: "scatter",
-                mode: "lines+markers",
-                line: { shape: 'spline' },
-                fill: 'tozeroy',
-                fillcolor: colour_fill,
-                marker: { color: colour_line },
-                hoverinfo: "x+y"
-            };
-            var layout = { title: "Distribution of Squared Prediction Errors of the NN (blue) and DeepFM (orange) Models" };
-            var config = { responsive: true, displayModeBar: false };
-            
-            if (document.getElementById("tester") ) { 
-                Plotly.newPlot(TESTER, [errors_deepfm], layout, config)
-                
-            }
-        }
-
+        // colour palette: https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
         var drawChart = async () => {
             
             await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv",
@@ -864,17 +838,43 @@
                             console.log(x)
                             console.log(y)
                             var errors_nn = {
+                                name: 'Embeddings Only',
                                 x: x,
                                 y: y,
                                 type: "scatter",
                                 mode: "lines+markers",
                                 line: { shape: 'spline' },
                                 fill: 'tozeroy',
-                                fillcolor: 'rgba(129, 173, 200, 0.4)',
-                                marker: { color: "#81ADC8" },
-                                hoverinfo: "x+y"
+                                fillcolor: 'rgba(57, 45, 50, 0.3)',
+                                marker: { color: "#392d32" },
+                                hovertemplate: '<b>MSE: %{y:.2f}</b>' +
+                                                '<br>True Rating: %{x}<br>'
                             };
-                            var layout = { title: "Distribution of Squared Prediction Errors of the NN (blue) and DeepFM (orange) Models" };
+                            var layout = { 
+                                title: {
+                                    text: "Distribution of Mean Squared Prediction Errors: <br><i>Embeddings Only vs. DeepFM</i>",
+                                    font: {
+                                        size: 20
+                                      },
+                                    xref: 'paper',
+                                    x: 0.01,
+                                    
+                                },
+                                xaxis: {
+                                    title: "<b>True Rating (Categorical)<b>"
+                                },
+                                yaxis: {
+                                    title: "<b>MSE</b>"
+                                },
+                                showlegend: true,
+		                        legend: {
+                                    "orientation": "h",
+                                    x: 1,
+                                    xanchor: 'right',
+                                    y: 1
+                                }
+        
+                            };
                             var config = { responsive: true, displayModeBar: false };
                             
                             if (document.getElementById("tester") ) { 
@@ -898,21 +898,24 @@
                                 
                                 console.log(y)
                                 var errors_deepfm = {
+                                    name: 'DeepFM',
                                     x: [1,2,3,4,5],
                                     y: y,
                                     type: "scatter",
                                     mode: "lines+markers",
                                     line: { shape: 'spline' },
                                     fill: 'tozeroy',
-                                    fillcolor: 'rgba(199, 240, 189, 0.4)',
-                                    marker: { color: "#C7F0BD" },
-                                    hoverinfo: "x+y"
+                                    fillcolor: 'rgba(244, 159, 10 0.6)',
+                                    marker: { color: "#F49F0A" },
+                                    hovertemplate: '<b>MSE: %{y:.2f}</b>' +
+                                                    '<br>True Rating: %{x}<br>'
+                                    
                                 };
-                                var layout = { title: "Distribution of Squared Prediction Errors of the NN (blue) and DeepFM (orange) Models" };
-                                var config = { responsive: true, displayModeBar: false };
+                                
+                                var config = { responsive: true};
                                 
                                 if (document.getElementById("tester") ) { 
-                                    Plotly.addTraces(TESTER, errors_deepfm)
+                                    Plotly.addTraces(TESTER, errors_deepfm, 0)
                                     
                                 }
                                 
