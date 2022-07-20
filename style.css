@@ -83,16 +83,14 @@ img {
     margin: 10px;
 }
 
-#user_feature tr:nth-child(5) td:nth-child(2) {
-    background-color: #fadf7f
+#user_feature tr:nth-child(5){
+    background-color: #ccf1c2
 }
 
-#user_feature tr:nth-child(5) td:nth-child(3) {
-    background-color: #68EDC6
-}
+
 
 #comedySlider {
-    background: #68EDC6;
+    background: #8EB5CD;
 }
 
 #left_caption_CF {
@@ -118,11 +116,12 @@ img {
 }
 
 .example {
-    background-color: #f2efef;
+    background-color: rgba(57, 45, 50, 0.03);
     border-radius: 10px;
 }
 
 .example_text {
+    color: #392d32;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -144,10 +143,11 @@ img {
 }
 
 .MF_button {
-    margin-left: 10px;
-    margin-right: 5px;
+
     background-color: white;
     border-radius: 10px;
+    margin-right: 30%;
+    margin-left: 35%;
 }
 
 .occupation {
