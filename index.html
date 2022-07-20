@@ -819,17 +819,41 @@
             return row.map(function (row) { return row[key] });
         }
 
-        const drawChart = async () => {
-            const data = await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/prediction-movie-df.csv?token=GHSAT0AAAAAABWE2OTBNFXX7LG33MS2NSTWYWYC2DA",)
+        var drawChart = async () => {
+            //const data = await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/prediction-movie-df.csv?token=GHSAT0AAAAAABWE2OTBNFXX7LG33MS2NSTWYWYC2DA",)
 
-            d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/prediction-movie-df.csv?token=GHSAT0AAAAAABWE2OTBNFXX7LG33MS2NSTWYWYC2DA",
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv?token=GHSAT0AAAAAABWZXAJ4WFUOXQT6DDVC26QAYWYE6CQ",
                 function (rows) {
                     return {
-                        uid: rows.uid,
-                        erorr: rows.error
+                        avg_squared_error: rows.avg_squared_error,
+                        rating: rows.rating
                     }
                 }).then(function (rows) {
-                    console.log(unpack(rows, 'uid'));
+
+                    var x =  unpack(rows, 'rating')
+                    var y =  unpack(rows, 'avg_squared_error')
+
+                    console.log(x)
+                    console.log(y)
+                    var errors_deepfm = {
+                        x: x,
+                        y: y,
+                        type: "scatter",
+                        mode: "lines+markers",
+                        line: { shape: 'spline' },
+                        fill: '#81ADC8',
+                        marker: { color: "red" },
+                        hoverinfo: "x+y"
+                    };
+                    var layout = { title: "Distribution of Squared Prediction Errors for NN Model" };
+                    var config = { responsive: true, displayModeBar: false };
+                    
+                    if (document.getElementById("tester") ) { 
+                        Plotly.newPlot(TESTER, [errors_deepfm], layout, config);
+                        
+                    
+                    }
+                    
                 })
             // var errors_deepfm = {
             //     x: unpack(rows, 'uid'),
@@ -847,7 +871,10 @@
             // Plotly.newPlot('tester', errors_deepfm, layout, config);
 
         }
-        drawChart();
+        if (document.getElementById('tester')){
+            drawChart();
+        }
+        
 
     </script>
 </body>
