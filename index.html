@@ -94,18 +94,22 @@
             distinction between pre and post deep learning era is on the year 2012.
         </figcaption>
         <p></p>
-        <p>If you have ever used online services like e-commerce or streaming platforms, you have already seen at least
-            one of the following sentences <q>recommend for you</q> or <q>other users have also bought this</q>. With
-            this blog post, we want to give an introduction to the Recommender System field and illustrate how new
-            technique that rely on deep learning algorithms works.
-        </p>
+        <p>If you have ever used an e-commerce service or a streaming platform, you have already seen at least
+            one of these: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. With
+            this blog post, we will give you an introduction to Recommender Systems (RS), and illustrate how new
+            deep-learning algorithmic techniques in this field work. 
         <p>
-            Recommender Systems (RSs) can be defined as software tools and techniques that provide suggestions for items
-            to interact with a user [1]. With item, we refer to <q>what</q> the system is recommending to the user. An
-            item could be the next movie or song to listen to, the fastest path to reach a destination, or a person to
-            match with or hire for a particular position. Usually, recommendations, especially on the web, are
-            personalized to the specific user that is using the system. It is important to note that also not
-            personalized recommendations exist and can be found in newspapers or magazines.
+            First, we use a toy example to illustrate how <q>Matrix Factorization</q>, a relatively simply designed recommender system,
+            works. Then, we dive into two modern approaches: neural networks and deep learning models (via Guo et al's DeepFM). We visualize and discuss the distributions of the ratings data used to train these two models, focusing on how to use these visualizations to explain the differences in the models' competence in predicting a user's rating of a movies they've seen. Following this article, we hope that you will have some intuition and visual understanding of
+            how RS work.
+        
+        <p>
+            Recommender Systems can be defined as software tools and techniques that provide suggestions for items
+            to interact with a given user [1]. Usually, and so especially on the web, recommendations are
+            personalized to the specific user interacting with the system. By <q><i>item</i></q>, we refer to <i>what</i> the system is recommending to the user. This
+            item could represent the next movie to watch, song to listen to, the fastest path to a destination, or the best match for a particular position (or your next date!). 
+            <p style="color: red;">TO EDIT (unclear how this relates to above): It is important to note that non-personalized recommendations also exist, such as those you may have seen in print newspapers or magazines.</p>
+            
 
             <!--
             <d-cite key="ricci2011introduction">
@@ -126,13 +130,7 @@
             </d-cite>
         -->
         </p>
-        <p>
-            We will first illustrate via a toy example how a simple recommender system, <q>Matrix Factorization</q>,
-            works. Then we will dive into how modern systems work. First, we will show how neural networks can be
-            used to generate explanation and then we will show how a deep learning model, called DeepFM, works.
-            SOMETHING MISSING HERE. After following this article we hope that you will have a visual understanding of
-            how RSs work.
-        </p>
+        
 
         <h2>Recommender systems</h2>
 
@@ -142,19 +140,19 @@
         </figcaption>
         <p></p>
         <p>
-            Recommender systems in order to generate recommendations require different types of input data such as
-            users' preferences, item features, explicit feedback, implicit feedback, etc.
+            In order to generate recommendations, RS require several types of input data. Examples of these may include
+            users' preferences, items' characteristics, explicit feedback, implicit feedback, and essentially can be any measurable information about either the items or the users the RS is interested in modeling.
         </p>
         <p>
-            The most accessible data are the explicit rating which includes explicit input from the user regarding their
-            interest in a product i.e. rating that the user gives to items. Usually, explicit feedback can be
-            represented by a sparse matrix since users are likely to rate only a small percentage of possible items.
+            The most accessible data are explicit ratings, which include explicit input from the user regarding their
+            level of interest in a product (i.e. rating that the user gives to an item). Usually, explicit feedback can be
+            represented by a sparse matrix, since users are likely to rate only a small percentage of entirety of items a dataset includes. We can't expect a single user to have seen every possible movie! But we can learn about their similarity to other users, and thus try to predict how this user would feel <i>if they were to watch</i> a new movie.
         </p>
         <p>
             When explicit feedback is not available, it is possible to use implicit feedback that reflects user
-            behavior. Examples of implicit feedback are the browser history on a website, the number of clicks made, or
+            behavior. Examples of implicit feedback include the browser history on a website, the number of clicks made on a given page, or a user's pattern of
             mouse movement. As opposed to explicit feedback, implicit feedback can be represented by a densely filled
-            matrix.
+            matrix, perhaps because we have more say in how this data is to be collected or organized.
         </p>
         <p>
             Classical recommender systems can be grouped into two main approaches: content-based (CB) and collaborative
@@ -171,13 +169,12 @@
             <p>
                 <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past user-item
                 interaction, like providing ratings to movies watched in the past, is sufficient to detect similar users
-                and/or items and cluster them to make new predictions based on the similarity [6]. The main issue with
-                CF method is known as the cold-start problem.
+                and/or items, cluster them, and make new predictions based on the similarity existing within a cluster [6]. The main issue with
+                CF method is known as the <i>Cold-Start Problem</i>.
             </p>
             <figcaption id="left_caption_CF">
-                On the left a illustration of Collaborative Filtering process. Alan and Sarah have watched the same
-                movies and have the same interest, the recommender system for these reasons will then recommend Sarah
-                with a movie that Alan has watched.
+                On the left is an illustration of the collaborative filtering process. If Alan and Sarah have watched the same
+                movies and have the same interests, the recommender system will learn that these data support recommending to Sarah a movie that Alan has watched.
             </figcaption>
         </div>
         <p></p>
@@ -194,16 +191,16 @@
                 <img src='CB.png' width="383px" height="470px">
             </div>
             <p>
-                <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate the
-                recommendation using additional information (called features) about the user and/or item that explains
-                the
-                observed interaction between user and item.
-                Content-based methods are less prompt to the cold-start problem because new items or new users can be
-                described using their characteristics.
+                <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate a
+                recommendation using additional information about the given user and/or item, through what we call <i>features</i>, which explain the observed interaction between a user and an item.
+                Content-based methods are less prone to the <i>Cold-Start Problem</i> because new items or new users can be
+                described using characteristics relating to them alone, rather than by describing them through their similarity to the behaviour of others'.
             </p>
+            <p style="color: red;">
+                TO EDIT (additional details): Are there any drawbacks to CB? What is the Cold Start Prob exactly? Are there significant benefits to CF?
             <figcaption id="left_caption_CB">
-                On the left a illustration of Content Based process. Alan has watched a movie, the recommender system
-                will then find similar movies to the one Alan has watched and recommend a similar one.
+                On the left is an illustration of the content-based process. If Alan has watched one movie, the recommender system
+                will then find similar movies to it, and Alan will be given a recommendation from the set of movies most similar to the one he has already watched.
             </figcaption>
         </div>
 
@@ -217,19 +214,22 @@
 
         <p>
             Matrix Factorization is a class of collaborative filtering techniques [3]. This technique is used to
-            generate latent features (embeddings) when two different entities are multiplied together. In its simplistic
+            generate latent features (<i>embeddings</i>) when two different entities are multiplied together. In its most simplistic
             form, matrix factorization characterizes both the items and the users by vectors of factors inferred from
-            item rating patterns. This kind of method has become popular since it combines good
-            scalability with predictive accuracy while offering flexibility for modeling real-life scenarios [2].
-            Moreover, it enables to add additional information when explicit feedback is not available.
+            item rating patterns. This kind of method has become popular, since it combines robust
+            scalability with predictive accuracy, while offering flexibility for modeling real-life scenarios [2].
+            Moreover, it enables the addition of new information when explicit feedback is not available.
+            <p style="color: red;">
+                TO EDIT (unclear): why is this important? The last sentene
+            </p>
         </p>
         <p>
             Each item <i>i</i> and user <i>u</i> are associated with a vector <i>q<sub>i</sub></i> and
-            <i>w<sub>u</sub></i> respectively. For a given item, the corresponding vector measures the extent to which
-            feature the item possesses. Similarly, the user vector <i>w<sub>u</sub></i> measure the interest of the user
-            in the items. The interaction, defined as the interest of the user <i>u</i> in item <i>i</i>, is then
-            captured by the dot product of the two vectors. Once all the dot products are completed it is possible to
-            then rank the predicted ratings to identify the best item to recommend to the user.
+            <i>w<sub>u</sub></i>, respectively. For a given item, the corresponding vector measures the degree to which
+            a feature represents the dataset's items. Similarly, the user vector <i>w<sub>u</sub></i> measures the degree of interest the user has
+            in the dataset's items. The interaction, defined as <q>the interest of the user <i>u</i> in item <i>i</i></q> , is then
+            captured by the dot product of these two vectors. Once all the dot products are computed, it becomes possible to
+            rank the predicted ratings and identify the best item to recommend to any given user.
         </p>
         <span class="katex-display">
             <span class="katex">
@@ -284,14 +284,14 @@
             <b>User matrix</b> The user matrix stores the users' genre preference.
         </p>
         <p>
-            <b>Item matrix</b> The item matrix stores the movie features scores.
+            <b>Item matrix</b> The item matrix stores the movies' features scores.
         </p>
         <div class="example">
             <p></p>
             <p class="example_text">
-                Let's consider the following toy example: you are planning to have a movie night with your friend Anna,
+                Let's consider the following toy example: you are planning a movie night with your friends Anna,
                 Jonny, and Kimi. You know that Anna likes both horror movies and comedy, Jonny has a strong preference
-                for comedy movie, and Kimi prefer horror movie but he enjoy also watching comedy from time to time. To
+                for comedy, and Kimi prefers horror movies but also enjoys watching comedy from time to time. To
                 find the best movie that everyone will enjoy, you are going to use a recommender system based on the
                 Matrix Factorization techniques described above.
             </p>
