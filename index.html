@@ -353,7 +353,7 @@
                     <td>2</td>
                 </tr>
                 <tr>
-                    <td>Ted</td>
+                    <td>Modern Times</td>
                     <td>5</td>
                     <td>1</td>
                 </tr>
@@ -374,8 +374,8 @@
                 <tr>
                     <th>User</th>
                     <th>Zombieland</th>
-                    <th>Ted</th>
-                    <th>It</th>
+                    <th>Modern Times</th>
+                    <th>The Grudge</th>
                 </tr>
             </table>
             <p class="example_text">
@@ -444,7 +444,7 @@
             <br>
             <form id="movieForm" autocomplete="off">
                 <div class="autocomplete">
-                    <label for="movie" class="movie">Choose one movie that you have watch:</label>
+                    <label for="movie" class="movie">Choose one movie that you have watched:</label>
                     <input id="movieInput" type="text" name="movie" placeholder="Select a movie">
                 </div>
             </form>
@@ -454,9 +454,30 @@
         <p></p>
 
 
-        <h3>Neural Network Recommender System</h3>
-        <p style="color: red">
-            TODO: write this part!
+        <h3>Neural Network Recommender System: Embedding approach</h3>
+        <p>
+            In a real-world scenario, we do not explicitly know the preferences of every user and all the
+            characteristics of a movie to make optimal recommendations.
+            However, we can use gradient descent to learn the latent factors (implicit characteristics) for each movie
+            and user based on user-movie ratings.
+            Using the “Dot Product + Bias” approach, we first create two embedding matrices.
+            (1) A user embedding matrix (U) containing a user per row and n-factors (columns) representing the user
+            features.
+            (2) A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific movie
+            (row).
+            By setting the same amount of columns in each matrix, we can multiply the two embedding matrices (UxMT).
+            Next, we can add the user and movie bias terms. This results in the rating for users and movies.
+            Since these latent factors are initialized with random numbers, the initial ratings that are computed by the
+            model differ largely from the ground truth but are minimized during training.
+        </p>
+        <p>
+            The model consists of a user matrix of size (n_users x 128) and a movie matrix of size (n_movies x 128) and
+            a user bias (n_users) and a movie bias (n_movies). We randomly initialize the latent factors for every user
+            and movie with a mean of 0 and a standard deviation of 0.01. After the multiplication of users and movies we
+            apply a sigmoid range that squeezes the results between 0 and 5.5 so the model can focus on learning
+            something within this range. We trained the model over 15 epochs using the MSELoss, a learning rate of
+            0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
+
         </p>
         <h3>Deep Learning Recommender System</h3>
         <p>
@@ -528,7 +549,10 @@
             TODO: add figure about DeepFM architecture.
         </p>
 
+        <h2>Discussion</h2>
+
         <div id="tester" style="width:600px;height:600px;"></div>
+        <div id="tester2" style="width:600px;height:600px;"></div>
 
         <h2>Conclusion</h2>
 
@@ -703,7 +727,7 @@
             fetch.innerHTML = `<tr>
             <th>User</th>
             <th>Zombieland</th>
-            <th>Ted</th>
+            <th>Modern Times</th>
             <th>The Grudge</th>
              </tr>`;
             for (var i = 0; i < dot_prod_matrix.length; i++) {
@@ -814,6 +838,8 @@
             });
         }
 
+        autocomplete(document.getElementById("movieInput"), movie_array);
+
         TESTER = document.getElementById('tester');
         function unpack(row, key) {
             return row.map(function (row) { return row[key] });
@@ -821,7 +847,7 @@
 
         // colour palette: https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
         var drawChart = async () => {
-            
+
             await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv",
                 function (rows) {
                     return {
@@ -829,104 +855,171 @@
                         rating: rows.rating
                     }
                 }).then(
-                        function (rows) {
-
-                            var x =  unpack(rows, 'rating')
-                            var y =  unpack(rows, 'avg_squared_error')
-                            //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
-                        
-                            console.log(x)
-                            console.log(y)
-                            var errors_nn = {
-                                name: 'Embeddings Only',
-                                x: x,
-                                y: y,
-                                type: "scatter",
-                                mode: "lines+markers",
-                                line: { shape: 'spline' },
-                                fill: 'tozeroy',
-                                fillcolor: 'rgba(57, 45, 50, 0.3)',
-                                marker: { color: "#392d32" },
-                                hovertemplate: '<b>MSE: %{y:.2f}</b>' +
-                                                '<br>True Rating: %{x}<br>'
-                            };
-                            var layout = { 
-                                title: {
-                                    text: "Distribution of Mean Squared Prediction Errors: <br><i>Embeddings Only vs. DeepFM</i>",
-                                    font: {
-                                        size: 20
-                                      },
-                                    xref: 'paper',
-                                    x: 0.01,
-                                    
-                                },
-                                xaxis: {
-                                    title: "<b>True Rating (Categorical)<b>"
-                                },
-                                yaxis: {
-                                    title: "<b>MSE</b>"
-                                },
-                                showlegend: true,
-		                        legend: {
-                                    "orientation": "h",
-                                    x: 1,
-                                    xanchor: 'right',
-                                    y: 1
-                                }
-        
-                            };
-                            var config = { responsive: true, displayModeBar: false };
-                            
-                            if (document.getElementById("tester") ) { 
-                                Plotly.newPlot(TESTER, [errors_nn], layout, config)
-                                
-                            }
-                            
-                        }
-                    )
-
-                    await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/mse-deepfm.csv",
                     function (rows) {
-                        return {
-                            avg_squared_error: rows.avg_squared_error
-                            
-                        }
-                    }).then(
-                            function (rows) {
-                                var y =  unpack(rows, 'avg_squared_error')
-                                //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
-                                
-                                console.log(y)
-                                var errors_deepfm = {
-                                    name: 'DeepFM',
-                                    x: [1,2,3,4,5],
-                                    y: y,
-                                    type: "scatter",
-                                    mode: "lines+markers",
-                                    line: { shape: 'spline' },
-                                    fill: 'tozeroy',
-                                    fillcolor: 'rgba(244, 159, 10 0.6)',
-                                    marker: { color: "#F49F0A" },
-                                    hovertemplate: '<b>MSE: %{y:.2f}</b>' +
-                                                    '<br>True Rating: %{x}<br>'
-                                    
-                                };
-                                
-                                var config = { responsive: true};
-                                
-                                if (document.getElementById("tester") ) { 
-                                    Plotly.addTraces(TESTER, errors_deepfm, 0)
-                                    
-                                }
-                                
+
+                        var x = unpack(rows, 'rating')
+                        var y = unpack(rows, 'avg_squared_error')
+                        //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
+
+                        console.log(x)
+                        console.log(y)
+                        var errors_nn = {
+                            name: 'Embeddings Only',
+                            x: x,
+                            y: y,
+                            type: "scatter",
+                            mode: "lines+markers",
+                            line: { shape: 'spline' },
+                            fill: 'tozeroy',
+                            fillcolor: 'rgba(57, 45, 50, 0.3)',
+                            marker: { color: "#392d32" },
+                            hovertemplate: '<b>MSE: %{y:.2f}</b>' +
+                                '<br>True Rating: %{x}<br>'
+                        };
+                        var layout = {
+                            title: {
+                                text: "Distribution of Mean Squared Prediction Errors: <br><i>Embeddings Only vs. DeepFM</i>",
+                                font: {
+                                    size: 20
+                                },
+                                xref: 'paper',
+                                x: 0.01,
+
+                            },
+                            xaxis: {
+                                title: "<b>True Rating (Categorical)<b>"
+                            },
+                            yaxis: {
+                                title: "<b>MSE</b>"
+                            },
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h",
+                                x: 1,
+                                xanchor: 'right',
+                                y: 1
                             }
-                        )
-            
+
+                        };
+                        var config = { responsive: true, displayModeBar: false };
+
+                        if (document.getElementById("tester")) {
+                            Plotly.newPlot(TESTER, [errors_nn], layout, config)
+
+                        }
+
+                    }
+                )
+
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/mse-deepfm.csv",
+                function (rows) {
+                    return {
+                        avg_squared_error: rows.avg_squared_error
+
+                    }
+                }).then(
+                    function (rows) {
+                        var y = unpack(rows, 'avg_squared_error')
+                        //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
+
+                        console.log(y)
+                        var errors_deepfm = {
+                            name: 'DeepFM',
+                            x: [1, 2, 3, 4, 5],
+                            y: y,
+                            type: "scatter",
+                            mode: "lines+markers",
+                            line: { shape: 'spline' },
+                            fill: 'tozeroy',
+                            fillcolor: 'rgba(244, 159, 10 0.6)',
+                            marker: { color: "#F49F0A" },
+                            hovertemplate: '<b>MSE: %{y:.2f}</b>' +
+                                '<br>True Rating: %{x}<br>'
+
+                        };
+
+                        var config = { responsive: true };
+
+                        if (document.getElementById("tester")) {
+                            Plotly.addTraces(TESTER, errors_deepfm, 0)
+
+                        }
+
+                    }
+                )
+
         }
-        if (document.getElementById('tester')){
+        if (document.getElementById('tester')) {
             drawChart();
         }
-        
+
+        // set the dimensions and margins of the graph
+        const margin = { top: 30, right: 30, bottom: 30, left: 50 },
+            width = 460 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        const svg = d3.select("#tester2")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // get the data
+        d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/deep-fm-kde-plot-def.csv").then(function (data) {
+            console.log(data)
+            // add the x Axis
+            const x = d3.scaleLinear()
+                .domain([-10, 10])
+                .range([0, width]);
+            svg.append("g")
+                .attr("transform", `translate(0, ${height})`)
+                .call(d3.axisBottom(x));
+
+            // add the y Axis
+            const y = d3.scaleLinear()
+                .range([height, 0])
+                .domain([0, 0.3]);
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // Compute kernel density estimation
+            const kde = kernelDensityEstimator(kernelEpanechnikov(1), x.ticks(10))
+            const density = kde(data.map(function (d) { return d.pred_rating; }))
+
+            // Plot the area
+            svg.append("path")
+                .attr("class", "mypath")
+                .datum(density)
+                .attr("fill", "#69b3a2")
+                .attr("opacity", ".8")
+                .attr("stroke", "#000")
+                .attr("stroke-width", 1)
+                .attr("stroke-linejoin", "round")
+                .attr("d", d3.line()
+                    .curve(d3.curveBasis)
+                    .x(function (d) { return x(d[0]); })
+                    .y(function (d) { return y(d[1]); })
+                );
+
+        });
+
+
+        // Function to compute density
+        function kernelDensityEstimator(kernel, X) {
+            return function (V) {
+                return X.map(function (x) {
+                    return [x, d3.mean(V, function (v) { return kernel(x - v); })];
+                });
+            };
+        }
+        function kernelEpanechnikov(k) {
+            return function (v) {
+                return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
+            };
+        }
+
 
     </script>
 </body>
