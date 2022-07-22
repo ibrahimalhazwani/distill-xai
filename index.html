@@ -943,12 +943,14 @@
         // autocomplete(document.getElementById("movieInput"), movie_array);
 
         TESTER = document.getElementById('tester');
+        TESTER2 = document.getElementById('tester2');
         function unpack(row, key) {
             return row.map(function (row) { return row[key] });
         }
 
-        // colour palette: https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
-        var drawChart = async () => {
+        
+        // Error plot //
+        var drawChartError = async () => {
 
             await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_rmse_df.csv",
                 function (rows) {
@@ -961,8 +963,7 @@
 
                         var x = unpack(rows, 'rating')
                         var y = unpack(rows, 'rmse')
-                        //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
-
+                        
                         console.log(x)
                         console.log(y)
                         var errors_nn = {
@@ -1033,7 +1034,7 @@
                             mode: "lines+markers",
                             line: { shape: 'spline' },
                             fill: 'tozeroy',
-                            fillcolor: 'rgba(244, 159, 10 0.6)',
+                            fillcolor: 'rgba(244, 159, 10, 0.6)',
                             marker: { color: "#F49F0A" },
                             hovertemplate: '<b>RMSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
@@ -1052,8 +1053,132 @@
 
         }
         if (document.getElementById('tester')) {
-            drawChart();
+            drawChartError();
+        }
+
+
+        // Density Plot //
+        var drawChartDensity = async () => {
+
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/ratings_val.csv",
+                function (rows) {
+                    return {
+                        true_rating: rows.true_rating,
+                        pred_rating: rows.pred_rating
+                    }
+                }).then(
+                    function (rows) {
+
+                        var y1 = unpack(rows, 'true_rating')
+                        var y2 = unpack(rows, 'pred_rating')
+                        //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
+
+                        console.log(y1)
+                        console.log(y2)
+                        var true_ratings = {
+                            name: 'True Rating',
+                            x: y1,
+                            type: "histogram",
+                            histnorm: "density",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //    size:5
+                            //},
+                            marker: { color: "rgba(103, 141, 88, 0.5)" },
+                            hoverlabel: {
+                                namelength: 15
+                            },
+                        };
+                        var embeddings_ratings = {
+                            name: 'Embeddings Only (Predicted Rating)',
+                            x: y2,
+                            type: "histogram",
+                            histnorm: "density",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //    
+                            //},
+                            marker: { color: "#392d32" },
+                            
+                        };
+                        var layout = {
+                            title: {
+                                text: "Distribution of Ratings by Model: <br><i>True vs. Embeddings Only vs. DeepFM</i>",
+                                font: {
+                                    size: 20
+                                },
+                                xref: 'paper',
+                                x: 0.01,
+
+                            },
+                            xaxis: {
+                                title: "<b>True Rating (Categorical (true) and Numeric (predictions))<b>"
+                            },
+                            yaxis: {
+                                title: "<b>Count</b>"
+                            },
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h",
+                                y: -0.25
+                            },
+                            barmode: "overlay"
+
+                        };
+                        var config = { responsive: true, displayModeBar: false };
+
+                        if (document.getElementById("tester2")) {
+                            Plotly.newPlot(TESTER2, [embeddings_ratings, true_ratings], layout, config)
+
+                        }
+
+                    }
+                )
+
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/deepFM-final-dataset.csv",
+                function (rows) {
+                    return {
+                        pred_rating: rows.pred_rating
+
+                    }
+                }).then(
+                    function (rows) {
+                        var x = unpack(rows, 'pred_rating')
+                        
+                        console.log(x)
+                        var deepfm_ratings = {
+                            name: 'DeepFM (Predicted Rating)',
+                            x: x,
+                            type: "histogram",
+                            histnorm: "density",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //   
+                            //},
+                            marker: { color: 'rgba(244, 159, 10, 0.6)' },
+                            
+                        };
+
+                        if (document.getElementById("tester2")) {
+                            Plotly.addTraces(TESTER2, deepfm_ratings, 2)
+
+                        }
+
+                    }
+                )
+
+        }
+        if (document.getElementById('tester2')) {
+            drawChartDensity();
         }
 
     </script>
 </body>
+
+
