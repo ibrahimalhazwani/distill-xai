@@ -491,8 +491,8 @@
 
         <h3>An embedding approach on matrix factorization</h3>
         <p>
-            In a real-world scenario, we do not explicitly know the preferences of every user and all the
-            characteristics of a movie to make optimal recommendations.
+            In a real-world scenario, we do not explicitly know all the preferences of every user and all the
+            characteristics of a movie to make a optimal recommendation.
             However, we can use gradient descent to learn the latent factors (implicit characteristics) for each movie
             and user based on user-movie ratings.
             Using the “Dot Product + Bias” approach, we first create two embedding matrices.
@@ -592,7 +592,7 @@
         </p>
         <div id="tester" style="width:600px;height:600px;"></div>
         <p>
-            TO have a good recommendation systems, it is important to recommend movies that the users will like,
+            To have a good recommendation systems, it is important to recommend movies that the users will like,
             predictive ratings of 5 should have a
             low MSE.
         </p>
@@ -919,17 +919,17 @@
         // colour palette: https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
         var drawChart = async () => {
 
-            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv",
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_rmse_df.csv",
                 function (rows) {
                     return {
-                        avg_squared_error: rows.avg_squared_error,
+                        rmse: rows.rmse,
                         rating: rows.rating
                     }
                 }).then(
                     function (rows) {
 
                         var x = unpack(rows, 'rating')
-                        var y = unpack(rows, 'avg_squared_error')
+                        var y = unpack(rows, 'rmse')
                         //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
 
                         console.log(x)
@@ -944,12 +944,12 @@
                             fill: 'tozeroy',
                             fillcolor: 'rgba(57, 45, 50, 0.3)',
                             marker: { color: "#392d32" },
-                            hovertemplate: '<b>MSE: %{y:.2f}</b>' +
+                            hovertemplate: '<b>RMSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
                         };
                         var layout = {
                             title: {
-                                text: "Distribution of Mean Squared Prediction Errors: <br><i>Embeddings Only vs. DeepFM</i>",
+                                text: "Distribution of Root Mean Squared Errors: <br><i>Embeddings Only vs. DeepFM</i>",
                                 font: {
                                     size: 20
                                 },
@@ -961,7 +961,7 @@
                                 title: "<b>True Rating (Categorical)<b>"
                             },
                             yaxis: {
-                                title: "<b>MSE</b>"
+                                title: "<b>RMSE</b>"
                             },
                             showlegend: true,
                             legend: {
@@ -982,15 +982,15 @@
                     }
                 )
 
-            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/mse-deepfm.csv",
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/deepfm_rmse_df.csv",
                 function (rows) {
                     return {
-                        avg_squared_error: rows.avg_squared_error
+                        rmse: rows.rmse
 
                     }
                 }).then(
                     function (rows) {
-                        var y = unpack(rows, 'avg_squared_error')
+                        var y = unpack(rows, 'rmse')
                         //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
 
                         console.log(y)
@@ -1004,7 +1004,7 @@
                             fill: 'tozeroy',
                             fillcolor: 'rgba(244, 159, 10 0.6)',
                             marker: { color: "#F49F0A" },
-                            hovertemplate: '<b>MSE: %{y:.2f}</b>' +
+                            hovertemplate: '<b>RMSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
 
                         };
