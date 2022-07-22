@@ -148,7 +148,7 @@
         </p>
 
 
-        <h2>Recommender systems</h2>
+        <h2>Recommender Systems: what are they?</h2>
 
         <img src='rs-workflow2.png' width="700px">
         <figcaption class="centered">
@@ -236,7 +236,7 @@
         </div>
 
         <h2>
-            Collaborative filtering: Matrix Factorization
+            An interpretable collaborative filtering recommender system: Matrix Factorization
         </h2>
 
         <p style="color: red;">
@@ -414,7 +414,8 @@
                 </tr>
             </table>
             <p class="example_text">
-                aaaa
+                <i>How to read</i>: to decide what movie to watch look at the last row that represent the average of the
+                predictive rating.
             </p>
         </div>
 
@@ -487,7 +488,7 @@
         <p></p>
 
 
-        <h3>Neural Network Recommender System: Embedding approach</h3>
+        <h3>An embedding approach on matrix factorization</h3>
         <p>
             In a real-world scenario, we do not explicitly know the preferences of every user and all the
             characteristics of a movie to make optimal recommendations.
@@ -512,7 +513,7 @@
             0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
 
         </p>
-        <h3>Deep Learning Recommender System</h3>
+        <h3>Deep Learning Recommender System: DeepFM</h3>
         <p>
             The adoption of deep learning models has been on the rise in every domain, including recommender system.
             The first model that generated state of the art (SOTA) results was Wide&Deep [5], a deep learning model
@@ -521,7 +522,7 @@
             network (DeepFM), developed by Huawei in 2017 [6].
         </p>
 
-        <h3>DeepFM</h3>
+        <!-- <h3>DeepFM</h3> -->
         <p>
             Architecturally DeepFM consists of two components, a Factorization Machine (FM) component and a deep
             component that share the same input. For a feature <i>i</i>, a scale <i>w<sub>i</sub></i> is used to weigh
@@ -582,9 +583,18 @@
             TODO: add figure about DeepFM architecture.
         </p>
 
-        <h2>Discussion</h2>
-
+        <h2>One recommender can not rule them all</h2>
+        <p>
+            Recommender systems are usually evaluated using the Mean Squared Error (MSE). By plotting the MSE of the two
+            models it is possible to notice that both the two models described above present a high MSE value at the
+            extreme (prediction rating of 1 or 2 and rating of 5).
+        </p>
         <div id="tester" style="width:600px;height:600px;"></div>
+        <p>
+            TO have a good recommendation systems, it is important to recommend movies that the users will like,
+            predictive ratings of 5 should have a
+            low MSE.
+        </p>
         <div id="tester2" style="width:600px;height:600px;"></div>
 
         <h2>Conclusion</h2>
@@ -796,14 +806,6 @@
                     cell.innerHTML = dot_prod_matrix[i][j];
                 }
             }
-
-            // var table = document.getElementById("matrix_factorization");
-            // var avgVal, sumVal = 0;
-            // var rowCount = table.rows.length - 2
-            // console.log(rowCount)
-            // for (var i = 1; i < table.rows.length; i++) {
-            //     console.log(sumVal, '+', parseInt(table.rows[i].cells[1]), table.rows[i].cells[1])
-            // }
 
         }
 
