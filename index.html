@@ -857,12 +857,14 @@
         autocomplete(document.getElementById("movieInput"), movie_array);
 
         TESTER = document.getElementById('tester');
+        TESTER2 = document.getElementById('tester2');
         function unpack(row, key) {
             return row.map(function (row) { return row[key] });
         }
 
-        // colour palette: https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
-        var drawChart = async () => {
+        
+        // Error plot //
+        var drawChartError = async () => {
 
             await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/nn_mse_df.csv",
                 function (rows) {
@@ -875,7 +877,7 @@
 
                         var x = unpack(rows, 'rating')
                         var y = unpack(rows, 'avg_squared_error')
-                        //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
+                    
 
                         console.log(x)
                         console.log(y)
@@ -947,7 +949,7 @@
                             mode: "lines+markers",
                             line: { shape: 'spline' },
                             fill: 'tozeroy',
-                            fillcolor: 'rgba(244, 159, 10 0.6)',
+                            fillcolor: 'rgba(244, 159, 10, 0.6)',
                             marker: { color: "#F49F0A" },
                             hovertemplate: '<b>MSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
@@ -966,61 +968,183 @@
 
         }
         if (document.getElementById('tester')) {
-            drawChart();
+            drawChartError();
+        }
+
+
+        // Density Plot //
+        var drawChartDensity = async () => {
+
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/ratings_val.csv",
+                function (rows) {
+                    return {
+                        true_rating: rows.true_rating,
+                        pred_rating: rows.pred_rating
+                    }
+                }).then(
+                    function (rows) {
+
+                        var y1 = unpack(rows, 'true_rating')
+                        var y2 = unpack(rows, 'pred_rating')
+                        //https://coolors.co/211a1d-f4c3c2-f49f0a-c7f0bd-81adc8
+
+                        console.log(y1)
+                        console.log(y2)
+                        var true_ratings = {
+                            name: 'True Rating',
+                            x: y1,
+                            type: "histogram",
+                            histnorm: "density",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //    size:5
+                            //},
+                            marker: { color: "rgba(103, 141, 88, 0.5)" },
+                            hoverlabel: {
+                                namelength: 15
+                            },
+                        };
+                        var embeddings_ratings = {
+                            name: 'Embeddings Only (Predicted Rating)',
+                            x: y2,
+                            type: "histogram",
+                            histnorm: "density",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //    
+                            //},
+                            marker: { color: "#392d32" },
+                            
+                        };
+                        var layout = {
+                            title: {
+                                text: "Distribution of Ratings by Model: <br><i>True vs. Embeddings Only vs. DeepFM</i>",
+                                font: {
+                                    size: 20
+                                },
+                                xref: 'paper',
+                                x: 0.01,
+
+                            },
+                            xaxis: {
+                                title: "<b>True Rating (Categorical (true) and Numeric (predictions))<b>"
+                            },
+                            yaxis: {
+                                title: "<b>Count</b>"
+                            },
+                            showlegend: true,
+                            legend: {
+                                "orientation": "h",
+                                y: -0.25
+                            },
+                            barmode: "overlay"
+
+                        };
+                        var config = { responsive: true, displayModeBar: false };
+
+                        if (document.getElementById("tester2")) {
+                            Plotly.newPlot(TESTER2, [embeddings_ratings, true_ratings], layout, config)
+
+                        }
+
+                    }
+                )
+
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/deepFM-final-dataset.csv",
+                function (rows) {
+                    return {
+                        pred_rating: rows.pred_rating
+
+                    }
+                }).then(
+                    function (rows) {
+                        var x = unpack(rows, 'pred_rating')
+                        
+                        console.log(x)
+                        var deepfm_ratings = {
+                            name: 'DeepFM (Predicted Rating)',
+                            x: x,
+                            type: "histogram",
+                            histnorm: "density",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //   
+                            //},
+                            marker: { color: 'rgba(244, 159, 10, 0.6)' },
+                            
+                        };
+
+                        if (document.getElementById("tester2")) {
+                            Plotly.addTraces(TESTER2, deepfm_ratings, 2)
+
+                        }
+
+                    }
+                )
+
+        }
+        if (document.getElementById('tester2')) {
+            drawChartDensity();
         }
 
         // set the dimensions and margins of the graph
-        var margin = { top: 30, right: 30, bottom: 30, left: 50 },
-            width = 460 - margin.left - margin.right,
-            height = 400 - margin.top - margin.bottom;
+        ////var margin = { top: 30, right: 30, bottom: 30, left: 50 },
+        ////    width = 460 - margin.left - margin.right,
+        ////    height = 400 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
-        var svg = d3.select("#tester2")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
+        ////var svg = d3.select("#tester2")
+        ////    .append("svg")
+        ////    .attr("width", width + margin.left + margin.right)
+        ////    .attr("height", height + margin.top + margin.bottom)
+        ////    .append("g")
+        ////    .attr("transform",
+        ////        "translate(" + margin.left + "," + margin.top + ")");
 
         // get the data
-        d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/deep-fm-kde-plot-def.csv", function (data) {
+        //d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/deep-fm-kde-plot-def.csv", function (data) {
 
-            // add the x Axis
-            var x = d3.scaleLinear()
-                .domain([0, 1000])
-                .range([0, width]);
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+        //    // add the x Axis
+        //    var x = d3.scaleLinear()
+        //        .domain([0, 1000])
+        //        .range([0, width]);
+        //    svg.append("g")
+        //        .attr("transform", "translate(0," + height + ")")
+        //        .call(d3.axisBottom(x));
 
             // add the y Axis
-            var y = d3.scaleLinear()
-                .range([height, 0])
-                .domain([0, 0.01]);
-            svg.append("g")
-                .call(d3.axisLeft(y));
+        //    var y = d3.scaleLinear()
+        //        .range([height, 0])
+        //        .domain([0, 0.01]);
+        //    svg.append("g")
+        //        .call(d3.axisLeft(y));
 
             // Compute kernel density estimation
-            var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(10))
-            var density = kde(data.map(function (d) { return d.pred_rating; }))
+        // //   var kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(10))
+        //    var density = kde(data.map(function (d) { return d.pred_rating; }))
 
             // Plot the area
-            svg.append("path")
-                .attr("class", "mypath")
-                .datum(density)
-                .attr("fill", "#69b3a2")
-                .attr("opacity", ".8")
-                .attr("stroke", "#000")
-                .attr("stroke-width", 1)
-                .attr("stroke-linejoin", "round")
-                .attr("d", d3.line()
-                    .curve(d3.curveBasis)
-                    .x(function (d) { return x(d[0]); })
-                    .y(function (d) { return y(d[1]); })
-                );
+        //    svg.append("path")
+        //        .attr("class", "mypath")
+        //        .datum(density)
+        //        .attr("fill", "#69b3a2")
+        //        .attr("opacity", ".8")
+        //        .attr("stroke", "#000")
+        //        .attr("stroke-width", 1)
+        //        .attr("stroke-linejoin", "round")
+        //        .attr("d", d3.line()
+        //            .curve(d3.curveBasis)
+        //            .x(function (d) { return x(d[0]); })
+        //            .y(function (d) { return y(d[1]); })
+        //        );
 
-        });
+        //});
 
 
         // Function to compute density
