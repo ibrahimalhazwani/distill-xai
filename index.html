@@ -151,35 +151,101 @@
 
         <h2>Recommender Systems: what are they?</h2>
 
-        <img src='rs-workflow2.png' width="700px">
-        <figcaption class="centered">
-            Workflow of recommender systems.
-        </figcaption>
+        <!-- <img src='rs-workflow2.png' width="700px"> -->
+
+        <p>
+            In order to generate recommendations, RS require several types of input data. Examples of these may
+            include users' preferences, items' characteristics, explicit feedback, implicit feedback, and essentially
+            can be any measurable information about either the items or the users the RS is interested in modeling.
+        </p>
+        <div class="example">
+            <p></p>
+
+            <p class="example_text">
+                The recommendation process can be devided in four steps: querying, retrieving, filtering, scoring, and
+                ranking.
+            </p>
+            <p class="example_text">
+                How to use it: mouse over the different steps to know more about them.
+            </p>
+            <div class="row">
+                <div class="column-rs">
+                    <figcaption>
+                        Query the database
+                    </figcaption>
+                </div>
+                <div class="column-rs">
+                    <figcaption>
+                        Retrieval
+                    </figcaption>
+                </div>
+                <div class="column-rs">
+                    <figcaption>
+                        Filtering
+                    </figcaption>
+                </div>
+                <div class="column-rs">
+                    <figcaption>
+                        Scoring and ranking
+                    </figcaption>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-rs">
+                    <div id="parent">
+                        <img src="avatar-rs-workflow.png" width="150px">
+                        <div id="popup" style="display: None">
+                            The recommendation process starts when a user makes a query to an online platflorm.
+                        </div>
+                    </div>
+                </div>
+                <div class="column-rs-cloud">
+                    <div id="parent2">
+                        <img src="retrieve-rs-workflow.png" width="150px">
+                        <div id="popup2" style="display: None">
+                            Based on the query the items are retrieval with no specific orde from the database.
+                        </div>
+                    </div>
+                </div>
+                <div class="column-rs">
+                    <div id="parent3">
+                        <img src="filter-rs-workflow.png" width="150px">
+                        <div id="popup3" style="display: None">
+                            The elements retrieved are then filtered based on specific features of the items or the
+                            users.
+                        </div>
+                    </div>
+                </div>
+                <div class="column-rs">
+                    <div id="parent4">
+                        <img src="ranking-rs-workflow.png" width="150px">
+                        <div id="popup4" style="display: None">
+                            Finally, each item will be given a score and ranked based on it.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+        </div>
         <p></p>
         <p>
-            In order to generate recommendations, RS require several types of input data. Examples of these may include
-            users' preferences, items' characteristics, explicit feedback, implicit feedback, and essentially can be any
-            measurable information about either the items or the users the RS is interested in modeling.
-        </p>
-        <p>
-            The most accessible data are explicit ratings, which include explicit input from the user regarding their
-            level of interest in a product (i.e. rating that the user gives to an item). Usually, explicit feedback can
-            be
-            represented by a sparse matrix, since users are likely to rate only a small percentage of entirety of items
-            a dataset includes. We can't expect a single user to have seen every possible movie! But we can learn about
-            their similarity to other users, and thus try to predict how this user would feel <i>if they were to
-                watch</i> a new movie.
+            The most accessible data are explicit ratings, which include explicit input from the user regarding
+            their level of interest in a product (i.e. rating that the user gives to an item). Usually, explicit
+            feedback can be represented by a sparse matrix, since users are likely to rate only a small percentage of
+            entirety of items a dataset includes. We can't expect a single user to have seen every possible movie! But
+            we can learn about their similarity to other users, and thus try to predict how this user would feel <i>if
+                they were to watch</i> a new movie.
         </p>
         <p>
             When explicit feedback is not available, it is possible to use implicit feedback that reflects user
-            behavior. Examples of implicit feedback include the browser history on a website, the number of clicks made
-            on a given page, or a user's pattern of
-            mouse movement. As opposed to explicit feedback, implicit feedback can be represented by a densely filled
-            matrix, perhaps because we have more say in how this data is to be collected or organized.
+            behavior. Examples of implicit feedback include the browser history on a website, the number of
+            clicks made on a given page, or a user's pattern of mouse movement. As opposed to explicit feedback,
+            implicit feedback can be represented by a densely filled matrix, perhaps because we have more say in how
+            this data is to be collected or organized.
         </p>
         <p>
-            Classical recommender systems can be grouped into two main approaches: content-based (CB) and collaborative
-            filtering (CF).
+            Classical recommender systems can be grouped into two main approaches: content-based (CB) and
+            collaborative filtering (CF).
             <!--The former one recommends an item, i.e. movie, song, ad, etc., to a user based on the item
             characteristics and user's interests. The latter one uses the known preferences of a group of users to make
             recommendations or predictions for other users.-->
@@ -190,14 +256,19 @@
                 <img src='CF.png' width="383px" height="408px">
             </div>
             <p>
-                <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past user-item
-                interaction, like providing ratings to movies watched in the past, is sufficient to detect similar users
-                and/or items, cluster them, and make new predictions based on the similarity existing within a cluster
+                <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past
+                user-item
+                interaction, like providing ratings to movies watched in the past, is sufficient to detect
+                similar
+                users
+                and/or items, cluster them, and make new predictions based on the similarity existing within a
+                cluster
                 [6]. The main issue with
                 CF method is known as the <i>Cold-Start Problem</i>.
             </p>
             <figcaption id="left_caption_CF">
-                On the left is an illustration of the collaborative filtering process. If Alan and Sarah have watched
+                On the left is an illustration of the collaborative filtering process. If Alan and Sarah have
+                watched
                 the same
                 movies and have the same interests, the recommender system will learn that these data support
                 recommending to Sarah a movie that Alan has watched.
@@ -218,20 +289,28 @@
             </div>
             <p>
                 <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate a
-                recommendation using additional information about the given user and/or item, through what we call
+                recommendation using additional information about the given user and/or item, through what we
+                call
                 <i>features</i>, which explain the observed interaction between a user and an item.
-                Content-based methods are less prone to the <i>Cold-Start Problem</i> because new items or new users can
+                Content-based methods are less prone to the <i>Cold-Start Problem</i> because new items or new
+                users
+                can
                 be
-                described using characteristics relating to them alone, rather than by describing them through their
+                described using characteristics relating to them alone, rather than by describing them through
+                their
                 similarity to the behaviour of others'.
             </p>
             <p style="color: red;">
-                TO EDIT (additional details): Are there any drawbacks to CB? What is the Cold Start Prob exactly? Are
+                TO EDIT (additional details): Are there any drawbacks to CB? What is the Cold Start Prob
+                exactly?
+                Are
                 there significant benefits to CF?
             <figcaption id="left_caption_CB">
                 On the left is an illustration of the content-based process. If Alan has watched one movie, the
                 recommender system
-                will then find similar movies to it, and Alan will be given a recommendation from the set of movies most
+                will then find similar movies to it, and Alan will be given a recommendation from the set of
+                movies
+                most
                 similar to the one he has already watched.
             </figcaption>
         </div>
@@ -246,11 +325,14 @@
 
         <p>
             Matrix Factorization is a class of collaborative filtering techniques [3]. This technique is used to
-            generate latent features (<i>embeddings</i>) when two different entities are multiplied together. In its
+            generate latent features (<i>embeddings</i>) when two different entities are multiplied together. In
+            its
             most simplistic
-            form, matrix factorization characterizes both the items and the users by vectors of factors inferred from
+            form, matrix factorization characterizes both the items and the users by vectors of factors inferred
+            from
             item rating patterns. This kind of method has become popular, since it combines robust
-            scalability with predictive accuracy, while offering flexibility for modeling real-life scenarios [2].
+            scalability with predictive accuracy, while offering flexibility for modeling real-life scenarios
+            [2].
             Moreover, it enables the addition of new information when explicit feedback is not available.
         <p style="color: red;">
             TO EDIT (unclear): why is this important? The last sentene
@@ -258,8 +340,11 @@
         </p>
         <p>
             Each item <i>i</i> and user <i>u</i> are associated with a vector <i>q<sub>i</sub></i> and
-            <i>w<sub>u</sub></i>, respectively. For a given item, the corresponding vector measures the degree to which
-            a feature represents the dataset's items. Similarly, the user vector <i>w<sub>u</sub></i> measures the
+            <i>w<sub>u</sub></i>, respectively. For a given item, the corresponding vector measures the degree
+            to
+            which
+            a feature represents the dataset's items. Similarly, the user vector <i>w<sub>u</sub></i> measures
+            the
             degree of interest the user has
             in the dataset's items. The interaction, defined as <q>the interest of the user <i>u</i> in item
                 <i>i</i></q> , is then
@@ -313,7 +398,8 @@
             </span>
         </span>
         <p style="color: red;">
-            TODO: make the equation more clear - add mouse over to each part of the formula or add boxes like in the
+            TODO: make the equation more clear - add mouse over to each part of the formula or add boxes like in
+            the
             Gaussian example.
         </p>
         <p>
@@ -326,14 +412,18 @@
             <p></p>
             <p class="example_text">
                 Let's consider the following toy example: you are planning a movie night with your friends Anna,
-                Jonny, and Kimi. You know that Anna likes both horror movies and comedy, Jonny has a strong preference
+                Jonny, and Kimi. You know that Anna likes both horror movies and comedy, Jonny has a strong
+                preference
                 for comedy, and Kimi prefers horror movies but also enjoys watching comedy from time to time. To
-                find the best movie that everyone will enjoy, you are going to use a recommender system based on the
+                find the best movie that everyone will enjoy, you are going to use a recommender system based on
+                the
                 Matrix Factorization techniques described above.
             </p>
             <p class="example_text">
-                <i>How to use</i>: adjust your preferences on the movie genres (comedy and horror) and then click on
-                <q>Calculate Matrix Factorization</q> to how your preferences are alligned with the one of your friends.
+                <i>How to use</i>: adjust your preferences on the movie genres (comedy and horror) and then
+                click on
+                <q>Calculate Matrix Factorization</q> to how your preferences are alligned with the one of your
+                friends.
             </p>
             <div class="row">
                 <div class="column"></div>
@@ -400,7 +490,8 @@
                 </tr>
             </table>
 
-            <button id="MF_calculate" class="MF_button" type="button" onclick="calculateMatrixFact()">Calculate Matrix
+            <button id="MF_calculate" class="MF_button" type="button" onclick="calculateMatrixFact()">Calculate
+                Matrix
                 Factorization</button>
 
             <p>
@@ -415,7 +506,9 @@
                 </tr>
             </table>
             <p class="example_text">
-                <i>How to read</i>: to decide what movie to watch look at the last row that represent the average of the
+                <i>How to read</i>: to decide what movie to watch look at the last row that represent the
+                average of
+                the
                 predictive rating.
             </p>
         </div>
@@ -423,14 +516,19 @@
         <p></p>
 
         <p>
-            While Matrix Factorization can produces some good results, this methods has the following main disavantages:
+            While Matrix Factorization can produces some good results, this methods has the following main
+            disavantages:
         <ul>
             <li><b>Small feature space</b>: the only features that can be quried are just movie or user i.</li>
             <li><b>The relevance of recommendation</b>: since Matrix Factorization it uses the dot product to
                 recommend the item, the most popular items will be then recommended to everyone.</li>
-            <li><b>Cold start problem</b> as a techniques from the collaborative filtering class, the model is not able
+            <li><b>Cold start problem</b> as a techniques from the collaborative filtering class, the model is
+                not
+                able
                 to predict a new item to the user is this was not in the training set.</li>
-            <li><b>Hard feature encoding</b> in order to generate the recommendation, we have to explicit provide the
+            <li><b>Hard feature encoding</b> in order to generate the recommendation, we have to explicit
+                provide
+                the
                 system with the user preference and item features.</li>
         </ul>
         </p>
@@ -493,45 +591,66 @@
         <p>
             In a real-world scenario, we do not explicitly know all the preferences of every user and all the
             characteristics of a movie to make a optimal recommendation.
-            However, we can use gradient descent to learn the latent factors (implicit characteristics) for each movie
+            However, we can use gradient descent to learn the latent factors (implicit characteristics) for each
+            movie
             and user based on user-movie ratings.
             Using the “Dot Product + Bias” approach, we first create two embedding matrices.
-            (1) A user embedding matrix (U) containing a user per row and n-factors (columns) representing the user
+            (1) A user embedding matrix (U) containing a user per row and n-factors (columns) representing the
+            user
             features.
-            (2) A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific movie
+            (2) A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific
+            movie
             (row).
-            By setting the same amount of columns in each matrix, we can multiply the two embedding matrices (UxMT).
+            By setting the same amount of columns in each matrix, we can multiply the two embedding matrices
+            (UxMT).
             Next, we can add the user and movie bias terms. This results in the rating for users and movies.
-            Since these latent factors are initialized with random numbers, the initial ratings that are computed by the
+            Since these latent factors are initialized with random numbers, the initial ratings that are
+            computed by
+            the
             model differ largely from the ground truth but are minimized during training.
         </p>
         <p>
-            The model consists of a user matrix of size (n_users x 128) and a movie matrix of size (n_movies x 128) and
-            a user bias (n_users) and a movie bias (n_movies). We randomly initialize the latent factors for every user
-            and movie with a mean of 0 and a standard deviation of 0.01. After the multiplication of users and movies we
+            The model consists of a user matrix of size (n_users x 128) and a movie matrix of size (n_movies x
+            128)
+            and
+            a user bias (n_users) and a movie bias (n_movies). We randomly initialize the latent factors for
+            every
+            user
+            and movie with a mean of 0 and a standard deviation of 0.01. After the multiplication of users and
+            movies we
             apply a sigmoid range that squeezes the results between 0 and 5.5 so the model can focus on learning
-            something within this range. We trained the model over 15 epochs using the MSELoss, a learning rate of
+            something within this range. We trained the model over 15 epochs using the MSELoss, a learning rate
+            of
             0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
 
         </p>
         <h3>Deep Learning Recommender System: DeepFM</h3>
         <p>
-            The adoption of deep learning models has been on the rise in every domain, including recommender system.
-            The first model that generated state of the art (SOTA) results was Wide&Deep [5], a deep learning model
-            made by Google in 2016. A complete timeline of SOTA model can be seen in the figure below. For the goal of
-            this article, we are going to consider as a deep learning model, the Factorization-Machine based neural
+            The adoption of deep learning models has been on the rise in every domain, including recommender
+            system.
+            The first model that generated state of the art (SOTA) results was Wide&Deep [5], a deep learning
+            model
+            made by Google in 2016. A complete timeline of SOTA model can be seen in the figure below. For the
+            goal
+            of
+            this article, we are going to consider as a deep learning model, the Factorization-Machine based
+            neural
             network (DeepFM), developed by Huawei in 2017 [6].
         </p>
 
         <!-- <h3>DeepFM</h3> -->
         <p>
             Architecturally DeepFM consists of two components, a Factorization Machine (FM) component and a deep
-            component that share the same input. For a feature <i>i</i>, a scale <i>w<sub>i</sub></i> is used to weigh
-            its order-1 (linear) importance , a laten vector <i>V<sub>i</sub></i> is used to measure its impact of
+            component that share the same input. For a feature <i>i</i>, a scale <i>w<sub>i</sub></i> is used to
+            weigh
+            its order-1 (linear) importance , a laten vector <i>V<sub>i</sub></i> is used to measure its impact
+            of
             interactions with other features. The laten vector is then fed in the FM component to model order-2
             (pairwise) feature interactions.
-            The result of this is then fed in the deep component to model the high-order feature interactions. all
-            parameters are trained joyintly for the combined prediction that is represented by the following formula:
+            The result of this is then fed in the deep component to model the high-order feature interactions.
+            all
+            parameters are trained joyintly for the combined prediction that is represented by the following
+            formula:
         </p>
         <span class="katex-display">
             <span class="katex">
@@ -563,19 +682,24 @@
             A visual representation of the architecture is shown in the image above.
         </p>
         <p>
-            <b>Factorization Machines</b> Are model class that combines the advantages of Support Vector Machines
-            (SVM) with factorization models [7]. Factorization Machine are are a general predictor that model all
+            <b>Factorization Machines</b> Are model class that combines the advantages of Support Vector
+            Machines
+            (SVM) with factorization models [7]. Factorization Machine are are a general predictor that model
+            all
             interactions between variables using factorized parameters. By doing so, they are able to estimate
             interactions even in problems with huge sparsisty as is the case in recommender systems.
         </p>
 
         <p>
-            <b>Deep component</b> The deep component is a feed-forward neural network which is used to learn high-order
+            <b>Deep component</b> The deep component is a feed-forward neural network which is used to learn
+            high-order
             feature interactions. Two interesting feature of this deep learning structure are:
         <ol>
-            <li>While the lengths of different input field vectors can be different, thei embedding are of the same
+            <li>While the lengths of different input field vectors can be different, thei embedding are of the
+                same
                 size.</li>
-            <li>The latent feature vectors, output of the FM, is now use as network weights which are learned and
+            <li>The latent feature vectors, output of the FM, is now use as network weights which are learned
+                and
                 used to compress the input fields vector to the embedding vectors. </li>
         </ol>
         </p>
@@ -586,20 +710,29 @@
 
         <h2>One recommender can not rule them all: <q>All models are wrong, but some are useful</q></h2>
         <p>
-            We have trained the two models described above, the EmbeddingFM and the DeepFM, with the task of generating
+            We have trained the two models described above, the EmbeddingFM and the DeepFM, with the task of
+            generating
             a
-            recommendation to a test set of 100k entries. By plotting the distribution of the true and predictive
-            rating, see figure below, it is possible to notice that the distribution of the DeepFM is skewed towards the
+            recommendation to a test set of 100k entries. By plotting the distribution of the true and
+            predictive
+            rating, see figure below, it is possible to notice that the distribution of the DeepFM is skewed
+            towards
+            the
             rating 3, while the one of the EmbeddingFM is skewed towards the 4 as the true ratings.
         </p>
         <div id="tester2" style="width:750px;height:700px;"></div>
         <figcaption>TODO</figcaption>
         <p></p>
         <p>
-            To better understand these results, we decide to validate our approaches using the Root Mean Squared Error
-            (RMSE), one of the most used metrics in the Recommender System field. RMSE is typically used when the
-            developer wants to evaluate a predicted score, like the predictive rating of a movie, and compare it to a
-            ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute error.
+            To better understand these results, we decide to validate our approaches using the Root Mean Squared
+            Error
+            (RMSE), one of the most used metrics in the Recommender System field. RMSE is typically used when
+            the
+            developer wants to evaluate a predicted score, like the predictive rating of a movie, and compare it
+            to
+            a
+            ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute
+            error.
             Lower RMSE better is the recommendation accuracy [1, 8].
         </p>
         <span class="katex-display">
@@ -640,9 +773,13 @@
             </span>
         </span>
         <p>
-            By plotting the RMSE of the two models it is possible to notice that both the two models described above
-            present a high RMSE value at the two extremes (prediction rating of 1 or 2 and rating of 5). While the error
-            on rating 1 and 2 can be explained considering that <q>people are more willing to share positive experiences
+            By plotting the RMSE of the two models it is possible to notice that both the two models described
+            above
+            present a high RMSE value at the two extremes (prediction rating of 1 or 2 and rating of 5). While
+            the
+            error
+            on rating 1 and 2 can be explained considering that <q>people are more willing to share positive
+                experiences
                 than negative ones</q> [9].
         </p>
 
@@ -651,17 +788,22 @@
         <p></p>
         <p>
             We define a perfect recommendation systems as system that will recommend only movies that the
-            user will 100% like and rate as 5. The above plot, on the contrary, it shows that both models are not
+            user will 100% like and rate as 5. The above plot, on the contrary, it shows that both models are
+            not
             perfect in recommending that kind of movies. Based on this evidence and our definition of perfect
-            recommender system, we decide to use the explain by example methodology to explain how the two models
+            recommender system, we decide to use the explain by example methodology to explain how the two
+            models
             generate the movie recommendations for a user that are predicted with a rating of 5.
         </p>
         <p>
 
         </p>
         <p>
-            To support this direction, we are going to use a custom Venn Diagram with three sets: true rating (movie
-            rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted ratings from
+            To support this direction, we are going to use a custom Venn Diagram with three sets: true rating
+            (movie
+            rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted
+            ratings
+            from
             the DeepFM model.
         </p>
         <p>
@@ -677,22 +819,29 @@
         <div id='myDiv'></div>
         <p></p>
         <p>
-            Of the above plot, what it is interesting to notice are the two movie in the bottom left of the true rating
-            set and the two movies in the intersection between the two movies. The first movies represent movies that
-            the user has liked and rate 5 but both models will not recommend to the user. The latter ones, are movies
+            Of the above plot, what it is interesting to notice are the two movie in the bottom left of the true
+            rating
+            set and the two movies in the intersection between the two movies. The first movies represent movies
+            that
+            the user has liked and rate 5 but both models will not recommend to the user. The latter ones, are
+            movies
             that both models think that the user will like and rate 5 but in reality the users will not like.
         </p>
         <p>
-            We can explore more in details these cases where the movies recommended and the user preferences do not
-            overlap, we can plot the rating distribution on the training data together with the user rating. By doing
+            We can explore more in details these cases where the movies recommended and the user preferences do
+            not
+            overlap, we can plot the rating distribution on the training data together with the user rating. By
+            doing
             so, we can see if the model suffer from some kind of bias or not.
         </p>
 
         <h2>Conclusion</h2>
         <p>
-            While recommender systems aims in generating a personalized experience on the web, the model are not trained
+            While recommender systems aims in generating a personalized experience on the web, the model are not
+            trained
             on a single user but on a group. With this article we have shows that ....
-            Thanks to this explnation we tried to show that if the focus shift from data/model centric to more human
+            Thanks to this explnation we tried to show that if the focus shift from data/model centric to more
+            human
             centric the models are not really generate personalized recommendations.
         </p>
     </d-article>
@@ -748,6 +897,39 @@
     </d-appendix>
 
     <script>
+
+        var e = document.getElementById('parent');
+        e.onmouseover = function () {
+            document.getElementById('popup').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        var e = document.getElementById('parent2');
+        e.onmouseover = function () {
+            document.getElementById('popup2').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup2').style.display = 'none';
+        }
+
+        var e = document.getElementById('parent3');
+        e.onmouseover = function () {
+            document.getElementById('popup3').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup3').style.display = 'none';
+        }
+
+        var e = document.getElementById('parent4');
+        e.onmouseover = function () {
+            document.getElementById('popup4').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup4').style.display = 'none';
+        }
+
         function updateUserWeightComedy(slideAmount) {
             //  to retrieve the value of the slider and display it
             //	var sliderDiv = document.getElementById("sliderAmount");

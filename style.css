@@ -84,10 +84,53 @@ img {
     margin: 10px;
 }
 
+#parent #parent2 #parent3 #parent4 #popup #popup2 #popup3 #popup4 {
+    display: none;
+}
+
+#parent:hover #popup {
+    display: block;
+    font-size: 1rem;
+    text-align: left;
+    line-height: 1.2rem;
+    margin-left: 10px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+
+#parent2:hover #popup2 {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-left: 10px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+
+#parent3:hover #popup3 {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-left: 10px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+
+#parent4:hover #popup4 {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-left: 10px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+
 #user_feature tr:nth-child(5) {
     background-color: #ccf1c2
 }
-
 
 
 #comedySlider {
@@ -114,6 +157,17 @@ img {
 
 .column {
     flex: 50%;
+}
+
+.column-rs {
+    flex: 50%;
+    text-align: center;
+}
+
+.column-rs-cloud {
+    text-align: center;
+    flex: 50%;
+    margin-top: 20px;
 }
 
 .example {
