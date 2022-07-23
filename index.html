@@ -98,31 +98,29 @@
             <img src='rs-timeline.png' width="700px" height="187px">
         </div>
         <figcaption class="centered">
-            Timeline of recommender systems. Highlighted are the two methods describe in the article. A clear
+            Timeline of recommender systems. Highlighted are the two methods described in this article. A clear
             distinction between pre and post deep learning era is on the year 2012.
         </figcaption>
         <p></p>
         <p>If you have ever used an e-commerce service or a streaming platform, you have already seen at least
             one of these: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. With
-            this blog post, we will give you an introduction to Recommender Systems (RS), and illustrate how new
+            this article, we will give you an introduction to Recommender Systems (RS), and illustrate how new
             deep-learning algorithmic techniques in this field work.
         <p>
-            First, we use a toy example to illustrate how <q>Matrix Factorization</q>, a relatively simply designed
-            recommender system,
-            works. Then, we dive into two modern approaches: neural networks and deep learning models (via Guo et al's
-            DeepFM). We visualize and discuss the distributions of the ratings data used to train these two models,
-            focusing on how to use these visualizations to explain the differences in the models' competence in
-            predicting a user's rating of a movies they've seen. Following this article, we hope that you will have some
-            intuition and visual understanding of
-            how RS work.
+            First, we use a toy example to illustrate how Matrix Factorization a relatively simply designed
+            recommender system works. Then, we dive into two modern approaches: neural networks and deep learning
+            models (via Guo et al's DeepFM). We visualize and discuss the distributions of the ratings data used to
+            train these two models, focusing on how to use these visualizations to explain the differences in the
+            models' competence in predicting a user's rating of a movies they've seen. Following this article, we hope
+            that you will have some intuition and visual understanding of how RS work.
 
         <p>
             Recommender Systems can be defined as software tools and techniques that provide suggestions for items
             to interact with a given user [1]. Usually, and so especially on the web, recommendations are
             personalized to the specific user interacting with the system. By <q><i>item</i></q>, we refer to
-            <i>what</i> the system is recommending to the user. This
-            item could represent the next movie to watch, song to listen to, the fastest path to a destination, or the
-            best match for a particular position (or your next date!).
+            <i>what</i> the system is recommending to the user. This item could represent the next movie to watch, song
+            to listen to, the fastest path to a destination, or the best match for a particular job position (or your
+            next date!).
         <p style="color: red;">TO EDIT (unclear how this relates to above): It is important to note that
             non-personalized recommendations also exist, such as those you may have seen in print newspapers or
             magazines.</p>
@@ -166,7 +164,7 @@
                 ranking.
             </p>
             <p class="example_text">
-                How to use it: mouse over the different steps to know more about them.
+                <u>How to use it</u>: mouse over the different steps to know more about them.
             </p>
             <div class="row">
                 <div class="column-rs">
@@ -230,7 +228,7 @@
         <p></p>
         <p>
             The most accessible data are explicit ratings, which include explicit input from the user regarding
-            their level of interest in a product (i.e. rating that the user gives to an item). Usually, explicit
+            their level of interest in a product i.e. rating that the user gives to an item. Usually, explicit
             feedback can be represented by a sparse matrix, since users are likely to rate only a small percentage of
             entirety of items a dataset includes. We can't expect a single user to have seen every possible movie! But
             we can learn about their similarity to other users, and thus try to predict how this user would feel <i>if
@@ -256,8 +254,8 @@
                 <img src='CB.png' width="383px" height="470px">
             </div>
             <p>
-                <b>Content-based filtering (CB)</b> The main idea of content-based filtering is to generate a
-                recommendation using additional information about the given user and/or item, through what we
+                <b>Content-based filtering</b> The main idea of content-based filtering is to generate a
+                recommendations using additional information about the given user and item, through what we
                 call <i>features</i>, which explain the observed interaction between a user and an item.
                 <!-- Content-based methods are less prone to the <i>Cold-Start Problem</i> because new items or new
                 users can be described using characteristics relating to them alone, rather than by describing them
@@ -275,7 +273,7 @@
                 <img src='CF.png' width="383px" height="408px">
             </div>
             <p>
-                <b>Collaborative filtering (CF)</b> The main idea of collaborative filtering is that past
+                <b>Collaborative filtering</b> The main idea of collaborative filtering is that past
                 user-item interaction, like providing ratings to movies watched in the past, is sufficient to detect
                 similar users and/or items, cluster them, and make new predictions based on the similarity existing
                 within a cluster [6].
@@ -284,10 +282,8 @@
             </p>
             <figcaption id="left_caption_CF">
                 On the left is an illustration of the collaborative filtering process. If Alan and Sarah have
-                watched
-                the same
-                movies and have the same interests, the recommender system will learn that these data support
-                recommending to Sarah a movie that Alan has watched.
+                watched the same movies and have the same interests, the recommender system will learn this information
+                and recommend to Sarah a movie that Alan has watched.
             </figcaption>
         </div>
         <p></p>
@@ -334,7 +330,7 @@
                 </td>
                 <td>
                     <ul>
-                        <li>Can not handle fresh items (cold-start).</li>
+                        <li>Can not handle fresh items or user (cold-start problem).</li>
                         <li>Hard to include features beyond the query.</li>
                     </ul>
                 </td>
@@ -344,41 +340,79 @@
             <h2>
                 An interpretable collaborative filtering recommender system: Matrix Factorization
             </h2>
-
-            <p style="color: red;">
-                TODO: add image of MF method
-            </p>
+            <div class="example">
+                <div class="row">
+                    <div class="column">
+                        <div id="parent5">
+                            <img src="rating-matrix.png" width="300px">
+                        </div>
+                    </div>
+                    <div class="column-umatrix">
+                        <div id="parent6">
+                            <img src="user-matrix.png" width="150px">
+                            <div id="popup6" style="display: None">The <b>user matrix</b> stores the users' item feature
+                                preference.
+                                <!-- Usually the preference are in the range [0,1] where 0 means that the user
+                                does not like that feature, while one means that the use like it. -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-imatrix">
+                        <div id="parent7">
+                            <img src="item-matrix.png" width="150px">
+                            <div id="popup7" style="display: None">The <b>item matrix</b> stores the movies' features
+                                scores.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="column-rs-rmatrix">
+                        <p>Rating Matrix</p>
+                    </div>
+                    <div class="column-rs-umatrix">
+                        <p>User Matrix</p>
+                    </div>
+                    <div class="column-rs-imatrix">
+                        <p>Item Matrix</p>
+                    </div>
+                </div> -->
+            </div>
+            <p></p>
 
             <p>
-                Matrix Factorization is a class of collaborative filtering techniques [3]. This technique is used to
+                Matrix Factorization is a class of collaborative filtering techniques [3] it is used to
                 generate latent features (<i>embeddings</i>) when two different entities are multiplied together. In
-                its
-                most simplistic
-                form, matrix factorization characterizes both the items and the users by vectors of factors inferred
-                from
-                item rating patterns. This kind of method has become popular, since it combines robust
-                scalability with predictive accuracy, while offering flexibility for modeling real-life scenarios
-                [2].
-                Moreover, it enables the addition of new information when explicit feedback is not available.
-            <p style="color: red;">
-                TO EDIT (unclear): why is this important? The last sentene
-            </p>
+                its most simplistic form, Matrix Factorization characterizes both the items and the users by a vector of
+                factors (<i>matrixes</i>). This kind of method has become popular, since it combines robust scalability
+                with predictive accuracy, while offering flexibility for modeling real-life scenarios [2]. Moreover,
+                since it is based on pure math it can be classified as an interpretable recommendation method.
             </p>
             <p>
                 Each item <i>i</i> and user <i>u</i> are associated with a vector <i>q<sub>i</sub></i> and
                 <i>w<sub>u</sub></i>, respectively. For a given item, the corresponding vector measures the degree
-                to
-                which
-                a feature represents the dataset's items. Similarly, the user vector <i>w<sub>u</sub></i> measures
-                the
-                degree of interest the user has
-                in the dataset's items. The interaction, defined as <q>the interest of the user <i>u</i> in item
-                    <i>i</i></q> , is then
-                captured by the dot product of these two vectors. Once all the dot products are computed, it becomes
-                possible to
+                to which a feature represents the item dataset. Similarly, the user vector <i>w<sub>u</sub></i>
+                measures the degree of interest the user has in the item dataset.
+            </p>
+            <p>The interaction, defined as <q>the interest of the user <i>u</i> in item <i>i</i></q> , is then captured
+                by the dot product of these two vectors. Once all the dot products are computed, it becomes possible to
                 rank the predicted ratings and identify the best item to recommend to any given user.
             </p>
-            <span class="katex-display">
+
+            <div class="row">
+                <div class="column">
+                </div>
+                <div class="column">
+                    <img src="mf-formula.png" height="200px">
+                </div>
+                <div class="column">
+                </div>
+            </div>
+            <div class="centered">
+                <figcaption>Matrix Factorization formula.</figcaption>
+            </div>
+
+            <!-- <span class="katex-display">
                 <span class="katex">
                     <span class="katex-mathmk">
                         <math>
@@ -422,34 +456,26 @@
                         </math>
                     </span>
                 </span>
-            </span>
-            <p style="color: red;">
-                TODO: make the equation more clear - add mouse over to each part of the formula or add boxes like in
-                the
-                Gaussian example.
-            </p>
-            <p>
-                <b>User matrix</b> The user matrix stores the users' genre preference.
-            </p>
-            <p>
-                <b>Item matrix</b> The item matrix stores the movies' features scores.
-            </p>
+            </span> -->
+
             <div class="example">
                 <p></p>
                 <p class="example_text">
-                    Let's consider the following toy example: you are planning a movie night with your friends Anna,
+                    Let's consider the following example: you are planning a movie night with your friends Anna,
                     Jonny, and Kimi. You know that Anna likes both horror movies and comedy, Jonny has a strong
-                    preference
-                    for comedy, and Kimi prefers horror movies but also enjoys watching comedy from time to time. To
-                    find the best movie that everyone will enjoy, you are going to use a recommender system based on
-                    the
-                    Matrix Factorization techniques described above.
+                    preference for comedy, and Kimi prefers horror movies but also enjoys watching comedy from time to
+                    time. To find the best movie that everyone will enjoy, you are going to use a recommender system
+                    based on the Matrix Factorization techniques described above.
                 </p>
                 <p class="example_text">
-                    <i>How to use</i>: adjust your preferences on the movie genres (comedy and horror) and then
-                    click on
-                    <q>Calculate Matrix Factorization</q> to how your preferences are alligned with the one of your
-                    friends.
+                    <u>How to use</u>: adjust your preferences on the movie genres (comedy and horror) and then
+                    click on <q>Calculate Matrix Factorization</q> to see how your preferences are alligned with the one
+                    of your friends.
+                </p>
+                <p class="example_text">
+                    <u>How to read the results</u>: to facilitate the decision of which movie to watch, you just need to
+                    look at the
+                    last row of the Matrix Factorization that represent the average of the predictive rating.
                 </p>
                 <div class="row">
                     <div class="column"></div>
@@ -517,45 +543,33 @@
                 </table>
 
                 <button id="MF_calculate" class="MF_button" type="button" onclick="calculateMatrixFact()">Calculate
-                    Matrix
-                    Factorization</button>
+                    Matrix Factorization</button>
 
-                <p>
-                </p>
+                <p></p>
 
                 <table id="matrix_factorization" class="rec_table">
-                    <tr>
+                    <!-- <tr>
                         <th>User</th>
                         <th>Zombieland</th>
                         <th>Modern Times</th>
                         <th>The Grudge</th>
-                    </tr>
+                    </tr> -->
                 </table>
-                <p class="example_text">
-                    <i>How to read</i>: to decide what movie to watch look at the last row that represent the
-                    average of
-                    the
-                    predictive rating.
-                </p>
             </div>
 
             <p></p>
 
             <p>
-                While Matrix Factorization can produces some good results, this methods has the following main
-                disavantages:
+                While Matrix Factorization can produces some good results in a small amount of time, this methods has
+                the following main disavantages:
             <ul>
-                <li><b>Small feature space</b>: the only features that can be quried are just movie or user i.</li>
-                <li><b>The relevance of recommendation</b>: since Matrix Factorization it uses the dot product to
-                    recommend the item, the most popular items will be then recommended to everyone.</li>
-                <li><b>Cold start problem</b> as a techniques from the collaborative filtering class, the model is
-                    not
-                    able
-                    to predict a new item to the user is this was not in the training set.</li>
-                <li><b>Hard feature encoding</b> in order to generate the recommendation, we have to explicit
-                    provide
-                    the
-                    system with the user preference and item features.</li>
+                <li><b>Cold start problem</b>: the matrix can not handle fresh items, such as new movies or new users.
+                </li>
+                <li><b>The relevance of recommendation</b>: Matrix Factorization uses the dot product to
+                    recommend the items, if all the users have interact with the same item, the recommendation will
+                    focus on that item.</li>
+                <li><b>Hard feature encoding</b> in order to generate the recommendation, we have to explicitly
+                    provide the system with the user preference and item features.</li>
             </ul>
             </p>
 
@@ -612,70 +626,50 @@
 
             <p></p>
 
-
             <h3>An embedding approach on matrix factorization: EmbeddingMF</h3>
             <p>
                 In a real-world scenario, we do not explicitly know all the preferences of every user and all the
                 characteristics of a movie to make a optimal recommendation.
                 However, we can use gradient descent to learn the latent factors (implicit characteristics) for each
-                movie
-                and user based on user-movie ratings.
+                movie and user based on user-movie ratings.
                 Using the “Dot Product + Bias” approach, we first create two embedding matrices.
                 (1) A user embedding matrix (U) containing a user per row and n-factors (columns) representing the
-                user
-                features.
+                user features.
                 (2) A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific
-                movie
-                (row).
+                movie (row).
                 By setting the same amount of columns in each matrix, we can multiply the two embedding matrices
                 (UxMT).
                 Next, we can add the user and movie bias terms. This results in the rating for users and movies.
                 Since these latent factors are initialized with random numbers, the initial ratings that are
-                computed by
-                the
-                model differ largely from the ground truth but are minimized during training.
+                computed by the model differ largely from the ground truth but are minimized during training.
             </p>
             <p>
                 The model consists of a user matrix of size (n_users x 128) and a movie matrix of size (n_movies x
-                128)
-                and
-                a user bias (n_users) and a movie bias (n_movies). We randomly initialize the latent factors for
-                every
-                user
-                and movie with a mean of 0 and a standard deviation of 0.01. After the multiplication of users and
-                movies we
-                apply a sigmoid range that squeezes the results between 0 and 5.5 so the model can focus on learning
-                something within this range. We trained the model over 15 epochs using the MSELoss, a learning rate
-                of
-                0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
-
+                128) and a user bias (n_users) and a movie bias (n_movies). We randomly initialize the latent factors
+                for every user and movie with a mean of 0 and a standard deviation of 0.01. After the multiplication of
+                users and movies we apply a sigmoid range that squeezes the results between 0 and 5.5 so the model can
+                focus on learning something within this range. We trained the model over 15 epochs using the MSELoss, a
+                learning rate of 0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
             </p>
             <h3>Deep Learning Recommender System: DeepFM</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, including recommender
                 system.
                 The first model that generated state of the art (SOTA) results was Wide&Deep [5], a deep learning
-                model
-                made by Google in 2016. A complete timeline of SOTA model can be seen in the figure below. For the
-                goal
-                of
-                this article, we are going to consider as a deep learning model, the Factorization-Machine based
-                neural
-                network (DeepFM), developed by Huawei in 2017 [6].
+                model made by Google in 2016. A complete timeline of SOTA model can be seen in the figure below. For the
+                goal of this article, we are going to consider as a deep learning model, the Factorization-Machine based
+                neural network (DeepFM), developed by Huawei in 2017 [6].
             </p>
 
             <!-- <h3>DeepFM</h3> -->
             <p>
                 Architecturally DeepFM consists of two components, a Factorization Machine (FM) component and a deep
                 component that share the same input. For a feature <i>i</i>, a scale <i>w<sub>i</sub></i> is used to
-                weigh
-                its order-1 (linear) importance , a laten vector <i>V<sub>i</sub></i> is used to measure its impact
-                of
-                interactions with other features. The laten vector is then fed in the FM component to model order-2
-                (pairwise) feature interactions.
+                weigh its order-1 (linear) importance , a laten vector <i>V<sub>i</sub></i> is used to measure its
+                impact of interactions with other features. The laten vector is then fed in the FM component to model
+                order-2 (pairwise) feature interactions.
                 The result of this is then fed in the deep component to model the high-order feature interactions.
-                all
-                parameters are trained joyintly for the combined prediction that is represented by the following
+                all parameters are trained joyintly for the combined prediction that is represented by the following
                 formula:
             </p>
             <span class="katex-display">
@@ -709,11 +703,9 @@
             </p>
             <p>
                 <b>Factorization Machines</b> Are model class that combines the advantages of Support Vector
-                Machines
-                (SVM) with factorization models [7]. Factorization Machine are are a general predictor that model
-                all
-                interactions between variables using factorized parameters. By doing so, they are able to estimate
-                interactions even in problems with huge sparsisty as is the case in recommender systems.
+                Machines (SVM) with factorization models [7]. Factorization Machine are are a general predictor that
+                model all interactions between variables using factorized parameters. By doing so, they are able to
+                estimate interactions even in problems with huge sparsisty as is the case in recommender systems.
             </p>
 
             <p>
@@ -722,11 +714,9 @@
                 feature interactions. Two interesting feature of this deep learning structure are:
             <ol>
                 <li>While the lengths of different input field vectors can be different, thei embedding are of the
-                    same
-                    size.</li>
+                    same size.</li>
                 <li>The latent feature vectors, output of the FM, is now use as network weights which are learned
-                    and
-                    used to compress the input fields vector to the embedding vectors. </li>
+                    and used to compress the input fields vector to the embedding vectors. </li>
             </ol>
             </p>
 
@@ -737,29 +727,20 @@
             <h2>One recommender can not rule them all: <q>All models are wrong, but some are useful</q></h2>
             <p>
                 We have trained the two models described above, the EmbeddingFM and the DeepFM, with the task of
-                generating
-                a
-                recommendation to a test set of 100k entries. By plotting the distribution of the true and
-                predictive
-                rating, see figure below, it is possible to notice that the distribution of the DeepFM is skewed
-                towards
-                the
-                rating 3, while the one of the EmbeddingFM is skewed towards the 4 as the true ratings.
+                generating a recommendation to a test set of 100k entries. By plotting the distribution of the true and
+                predictive rating, see figure below, it is possible to notice that the distribution of the DeepFM is
+                skewed towards the rating 3, while the one of the EmbeddingFM is skewed towards the 4 as the true
+                ratings.
             </p>
             <div id="tester2" style="width:750px;height:700px;"></div>
             <figcaption>TODO</figcaption>
             <p></p>
             <p>
                 To better understand these results, we decide to validate our approaches using the Root Mean Squared
-                Error
-                (RMSE), one of the most used metrics in the Recommender System field. RMSE is typically used when
-                the
-                developer wants to evaluate a predicted score, like the predictive rating of a movie, and compare it
-                to
-                a
-                ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute
-                error.
-                Lower RMSE better is the recommendation accuracy [1, 8].
+                Error (RMSE), one of the most used metrics in the Recommender System field. RMSE is typically used when
+                the developer wants to evaluate a predicted score, like the predictive rating of a movie, and compare it
+                to a ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute
+                error. Lower RMSE better is the recommendation accuracy [1, 8].
             </p>
             <span class="katex-display">
                 <span class="katex">
@@ -954,6 +935,30 @@
         }
         e.onmouseout = function () {
             document.getElementById('popup4').style.display = 'none';
+        }
+
+        var e = document.getElementById('parent5');
+        e.onmouseover = function () {
+            document.getElementById('popup5').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup5').style.display = 'none';
+        }
+
+        var e = document.getElementById('parent6');
+        e.onmouseover = function () {
+            document.getElementById('popup6').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup6').style.display = 'none';
+        }
+
+        var e = document.getElementById('parent7');
+        e.onmouseover = function () {
+            document.getElementById('popup7').style.display = 'block';
+        }
+        e.onmouseout = function () {
+            document.getElementById('popup7').style.display = 'none';
         }
 
         function updateUserWeightComedy(slideAmount) {

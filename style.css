@@ -84,7 +84,11 @@ img {
     margin: 10px;
 }
 
-#parent #parent2 #parent3 #parent4 #popup #popup2 #popup3 #popup4 {
+#parent #parent2 #parent3 #parent4 #parent5 #parent6 #parent7 {
+    display: none;
+}
+
+#popup #popup2 #popup3 #popup4 #popup5 #popup6 #popup7 {
     display: none;
 }
 
@@ -94,7 +98,7 @@ img {
     text-align: left;
     line-height: 1.2rem;
     margin-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     margin-top: 10px;
 }
 
@@ -104,7 +108,7 @@ img {
     font-size: 1rem;
     line-height: 1.2rem;
     margin-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     margin-top: 10px;
 }
 
@@ -114,7 +118,7 @@ img {
     font-size: 1rem;
     line-height: 1.2rem;
     margin-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     margin-top: 10px;
 }
 
@@ -124,12 +128,43 @@ img {
     font-size: 1rem;
     line-height: 1.2rem;
     margin-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     margin-top: 10px;
 }
 
+#parent5:hover #popup5 {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-left: 10px;
+}
+
+#parent6:hover #popup6 {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-left: 10px;
+    padding-bottom: 10px;
+}
+
+#parent7:hover #popup7 {
+    display: block;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-left: 10px;
+    padding-bottom: 10px;
+}
+
+
 #user_feature tr:nth-child(5) {
-    background-color: #ccf1c2
+    background-color: #FFC3AA
+}
+
+#matrix_factorization tr:nth-child(6) {
+    background-color: #FFC3AA
 }
 
 
@@ -162,6 +197,35 @@ img {
 .column-rs {
     flex: 50%;
     text-align: center;
+}
+
+.column-umatrix {
+    flex: 50%;
+    margin-top: 42px;
+}
+
+.column-imatrix {
+    flex: 50%;
+    margin-top: 42px;
+    margin-right: 20px;
+}
+
+.column-rs-rmatrix {
+    flex: 50%;
+    text-align: center;
+    margin-left: 60px;
+}
+
+.column-rs-umatrix {
+    flex: 50%;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.column-rs-imatrix {
+    flex: 50%;
+    text-align: center;
+    margin-right: 20px;
 }
 
 .column-rs-cloud {
