@@ -138,12 +138,12 @@ img {
 }
 
 #left_caption_CF {
-    padding-top: 2px;
+    padding-top: 30px;
     align-self: flex-end;
 }
 
 #left_caption_CB {
-    padding-top: 2px;
+    padding-top: 100px;
     align-self: flex-end;
 }
 
@@ -180,6 +180,19 @@ img {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+} */
 
 .user_table {
     width: 90%;
