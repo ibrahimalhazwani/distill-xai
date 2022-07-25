@@ -1523,7 +1523,8 @@
             errorIbra: [0.94, 2.93, 1.11],
             type: 'scatter',
             mode: 'markers',
-            text: ['Return to Oz', "Who's That Girl?", 'Crimes and Misdemeanors'],
+            // text: [['Return to Oz', "Who's That Girl?", 'Crimes and Misdemeanors'], [4.1, 2.1, 3.9], [3.4, 2.4, 4.3]],
+            text: [['Return to Oz', 4.1, 3.4], ["Who's That Girl?", 2.1, 2.4], ['Crimes and Misdemeanors', 3.9, 4.3]],
             deepFM_pred: [4.1, 2.1, 3.9],
             embMF_pred: [3.4, 2.4, 4.3],
             textfont: {
@@ -1539,9 +1540,9 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'DeepFM predicted rating: %{deepFM_pred}<br>' +
-                'EmbeddingMF predicted rating: %{embMF_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'DeepFM predicted rating: %{text[1]}<br>' +
+                'EmbeddingMF predicted rating: %{text[2]}'
         };
 
         // trace for movie that the EmbeddingFM recommend and user liked
@@ -1550,9 +1551,7 @@
             y: [0.5, 0.7],
             type: 'scatter',
             mode: 'markers',
-            text: ['Pulp Fiction', ' Stand by Me'],
-            true_rating: [5, 5],
-            embMF_pred: [4.6, 4.3],
+            text: [['Pulp Fiction', 5, 4.6], [' Stand by Me', 5, 4.3]],
             error: [0.4, 0.7],
             textfont: {
                 color: ['red', 'orange', 'green'],
@@ -1567,9 +1566,9 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'True rating: %{true_rating}<br>' +
-                'EmbeddingMF predicted rating: %{embMF_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'EmbeddingMF predicted rating: %{text[2]}'
 
         };
         // trace for movies that the EmbeddingFM recommend (no overlap)
@@ -1578,9 +1577,7 @@
             y: [0.2, 0.75],
             type: 'scatter',
             mode: 'markers',
-            text: ['Network', 'Bonnie and Clyde'],
-            embMF_pred: [4.56, 4.54],
-            true_rating: [4, 3],
+            text: [['Network', 4.56, 4], ['Bonnie and Clyde', 4.54, 3]],
             error: [-0.56, -1.54],
             textfont: {
                 color: ['red', 'orange', 'green'],
@@ -1595,9 +1592,9 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'True rating: %{true_rating}<br>' +
-                'EmbeddingMF predicted rating: %{embMF_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[2]}<br>' +
+                'EmbeddingMF predicted rating: %{text[1]}'
 
         };
         // trace for movies that DeepFM has recommended no overlap
@@ -1606,9 +1603,7 @@
             y: [2, 2.5, 2.2],
             type: 'scatter',
             mode: 'markers',
-            text: ['Kingpin', 'Siren', 'Body Heat'],
-            true_rating: [4, 4, 4],
-            deepFM_pred: [4.63, 4.85, 4.61],
+            text: [['Kingpin', 4, 4.63], ['Siren', 4, 4.85], ['Body Heat', 4, 4.61]],
             error: [-0.63, -0.85, -0.61],
             textfont: {
                 color: ['red', 'orange', 'green'],
@@ -1623,9 +1618,9 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'True rating: %{true_rating}<br>' +
-                'DeepFM predicted rating: %{deepFM_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}'
 
         };
         // trace for movies that both systems have recommended but the user do not like
@@ -1634,10 +1629,7 @@
             y: [1.2],
             type: 'scatter',
             mode: 'markers',
-            text: ['Buffy the Vampire Slayer'],
-            deepFM_pred: [4.1],
-            embMF_pred: [3.4],
-            true_rating: [4],
+            text: [['Buffy the Vampire Slayer', 1, 4.54, 3.8]],
             error: [-2.80],
             errorIbra: [-3.54],
             textfont: {
@@ -1653,10 +1645,10 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'True rating: %{true_rating}' +
-                'DeepFM predicted rating: %{deepFM_pred}<br>' +
-                'EmbeddingMF predicted rating: %{embMF_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}<br>' +
+                'EmbeddingMF predicted rating: %{text[3]}'
 
         };
         // trace for movies that both recommender have recommended and the user has liked
@@ -1665,9 +1657,7 @@
             y: [1.3],
             type: 'scatter',
             mode: 'markers',
-            text: ['Frankenstein'],
-            deepFM_pred: [4.79],
-            embMF_pred: [3.36],
+            text: [['Frankenstein', 5, 4.79, 3.36]],
             error: [0.64],
             errorIbra: [0.21],
             textfont: {
@@ -1683,10 +1673,10 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'True rating: %{true_rating}<br>' +
-                'DeepFM predicted rating: %{deepFM_pred}<br>' +
-                'EmbeddingMF predicted rating: %{embMF_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}<br>' +
+                'EmbeddingMF predicted rating: %{text[3]}'
         };
         //movie that deepFM recommend and user likes
         var trace7 = {
@@ -1694,9 +1684,7 @@
             y: [1.5, 1.7, 1.54, 1.4],
             type: 'scatter',
             mode: 'markers',
-            text: ['Delicatessen', 'Watership Down', 'Clueless', "The Decline of Western Civilization"],
-            deepFM_pred: [4.58, 4.54, 4.7],
-            true_rating: [5, 5, 5],
+            text: [['Delicatessen', 5, 4.58], ['Watership Down', 5, 4.54], ['Clueless', 5, 4.54], ["The Decline of Western Civilization", 5, 4.7]],
             error: [0.41, 0.45, 0.46, 0.29],
             textfont: {
                 color: ['red', 'orange', 'green'],
@@ -1711,9 +1699,9 @@
                     width: 1
                 }
             },
-            hovertemplate: '<b>Movie title: %{text}</b><br><br>' +
-                'True rating: %{true_rating}<br>' +
-                'DeepFM predicted rating: %{deepFM_pred}'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}'
         };
 
         var layout = {
