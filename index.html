@@ -102,29 +102,22 @@
         </figcaption>
         <p></p>
         <p>If you have ever used an e-commerce service or a streaming platform, you have already seen at least
-            one of these: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. With
+            one of these: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. In
             this article, we will give you an introduction to Recommender Systems (RS), and illustrate how new
             deep-learning algorithmic techniques in this field work.
         </p>
+        
         <p>
-            First, we use a toy example to illustrate how Matrix Factorization a relatively simply designed
-            recommender system works. Then, we dive into two modern approaches: neural networks and deep learning
-            models (via Guo et al's DeepFM). We visualize and discuss the distributions of the ratings data used to
-            train these two models, focusing on how to use these visualizations to explain the differences in the
-            models' competence in predicting a user's rating of a movies they've seen. Following this article, we hope
-            that you will have some intuition and visual understanding of how RS work.
+            First, we illustrate how Matrix Factorization (MF), a relatively simply designed
+            recommender system, works. Then, we increase the sophistication of our approach, exploring  
+            the effect this has on the prediction accuracy of a model. 
+            
+            We explain differences in two models' competence in predicting a user's rating of movies they have seen
+            by leveraging various visualization strategies. Through this article, we hope
+            that you will gain intuition and visual understanding of how recommender systems work.
         </p>
-        <p>
-            Recommender Systems can be defined as software tools and techniques that provide suggestions for items
-            to interact with a given user [1]. Usually, and so especially on the web, recommendations are
-            personalized to the specific user interacting with the system. By <q><i>item</i></q>, we refer to
-            <i>what</i> the system is recommending to the user. This item could represent the next movie to watch, song
-            to listen to, the fastest path to a destination, or the best match for a particular job position (or your
-            next date!).
-        </p>
-        <p style="color: red;">TO EDIT (unclear how this relates to above): It is important to note that
-            non-personalized recommendations also exist, such as those you may have seen in print newspapers or
-            magazines.</p>
+        
+        
         <!--
             <d-cite key="ricci2011introduction">
                 <d-hover-box id="hover-box" style="display: none;">
@@ -149,21 +142,21 @@
         <h2>Recommender Systems: what are they?</h2>
 
         <!-- <img src='rs-workflow2.png' width="700px"> -->
-
         <p>
-            In order to generate recommendations, RS require several types of input data. Examples of these may
-            include users' preferences, items' characteristics, explicit feedback, implicit feedback, and essentially
-            can be any measurable information about either the items or the users the RS is interested in modeling.
+            Recommender Systems are defined as techniques that suggest items
+            for a given user to interact with [1]. Usually, and so especially on the web, recommendations are
+            personalized to the specific user interacting with the system. By <q><i>item</i></q>, we refer to
+            <i>what</i> the system is recommending to the user. This item could be the next movie you watch, song
+            you listen to, the fastest path to your next destination, or your next date!
+        </p>
+        <p>
+            The recommendation process can be divided into four steps: querying, retrieving, filtering, scoring, and
+            ranking.
         </p>
         <div class="example">
             <p></p>
-
             <p class="example_text">
-                The recommendation process can be devided in four steps: querying, retrieving, filtering, scoring, and
-                ranking.
-            </p>
-            <p class="example_text">
-                <u>How to interact</u>: mouse over the different steps to know more about them.
+                <i><b>This box is interactive!</b> Hover over the different steps below to learn more </i>
             </p>
             <div class="row">
                 <div class="column-rs">
@@ -192,7 +185,7 @@
                     <div id="parent">
                         <img src="avatar-rs-workflow.png" width="150px">
                         <div id="popup" style="display: None">
-                            The recommendation process starts when a user makes a query to an online platflorm.
+                            The recommendation process starts when a user makes a query to an online platflorm
                         </div>
                     </div>
                 </div>
@@ -200,7 +193,7 @@
                     <div id="parent2">
                         <img src="retrieve-rs-workflow.png" width="150px">
                         <div id="popup2" style="display: None">
-                            Based on the query the items are retrieval with no specific orde from the database.
+                            Items are retrieved based on the query. Their order is arbitrary.
                         </div>
                     </div>
                 </div>
@@ -208,8 +201,7 @@
                     <div id="parent3">
                         <img src="filter-rs-workflow.png" width="150px">
                         <div id="popup3" style="display: None">
-                            The elements retrieved are then filtered based on specific features of the items or the
-                            users.
+                            The items retrieved are filtered based on some set of preferences 
                         </div>
                     </div>
                 </div>
@@ -217,7 +209,8 @@
                     <div id="parent4">
                         <img src="ranking-rs-workflow.png" width="150px">
                         <div id="popup4" style="display: None">
-                            Finally, each item will be given a score and ranked based on it.
+                            Each item is given a score, and the item rankings are returned to the user. 
+                            The top item is the system's recommendation.
                         </div>
                     </div>
                 </div>
@@ -226,18 +219,36 @@
         </div>
         <p></p>
         <p>
-            The most accessible data are explicit ratings, which include explicit input from the user regarding
-            their level of interest in a product i.e. rating that the user gives to an item. Usually, explicit
-            feedback can be represented by a sparse matrix, since users are likely to rate only a small percentage of
-            entirety of items a dataset includes. We can't expect a single user to have seen every possible movie! But
-            we can learn about their similarity to other users, and thus try to predict how this user would feel <i>if
-                they were to watch</i> a new movie.
+            In order to generate recommendations, RS may accept input data like users' preferences, 
+            items' characteristics, explicit feedback, implicit feedback... Essentially,
+            any measurable information about the items or users the RS is interested in modeling. When computing
+            recommendations, this information is retrieved from a database and then stored in matrices. The matrix
+            data object optimizes a lot of the computation required to reach a recommendation. Why this happens is 
+            beyond the scope of this discussion, but you can read about this process in detail here. [TODO]
+        </p>
+        <p style="color: red;">
+            TODO: add citation for Chapter 2: 2.2 Matrices in MML, matrix multiplication and vector math for ML. 
+            https://mml-book.github.io/book/mml-book.pdf
         </p>
         <p>
-            When explicit feedback is not available, it is possible to use implicit feedback that reflects user
+            The most accessible data are explicit ratings, which include explicit input from the user regarding
+            their level of interest in a product, i.e. the rating a user gave to an item. Usually, explicit
+            feedback can be represented by a <i><q>sparse</q></i> matrix. A sparse matrix is characterized as 
+            a matrix where only a small number of fields have non-zero (or non-null) values. Since users are 
+            unlikely to rate more than a small number of items from the entirety of those available in a dataset,
+            querying explicit information results in sparse matrices. 
+        </p> 
+        <p>   
+            Of course, sparse matrices are
+            not sufficient for training a model, and it is unreasonable to expect a complete
+            dataset of explicit data. So, we learn the similarities a given user has with other users, 
+            and use these to predict how much they would like some <i>unseen</i> item.
+        </p>
+        <p>
+            While explicit feedback is preferable, it is also possible to use implicit feedback to reflect user
             behavior. Examples of implicit feedback include the browser history on a website, the number of
-            clicks made on a given page, or a user's pattern of mouse movement. As opposed to explicit feedback,
-            implicit feedback can be represented by a densely filled matrix, perhaps because we have more say in how
+            clicks made on a given page, and a user's pattern of mouse movement. As opposed to explicit feedback,
+            implicit feedback is represented by a densely filled matrix, because we (as researchers) can dictate how 
             this data is to be collected or organized.
         </p>
         <p>
@@ -253,8 +264,8 @@
                 <img src='CB.png' width="383px" height="470px">
             </div>
             <p>
-                <b>Content-based filtering</b> The main idea of content-based filtering is to generate a
-                recommendations using additional information about the given user and item, through what we
+                <b>Content-based filtering</b> generates a
+                recommendation using additional information about the given user and item, through what we
                 call <i>features</i>, which explain the observed interaction between a user and an item.
                 <!-- Content-based methods are less prone to the <i>Cold-Start Problem</i> because new items or new
                 users can be described using characteristics relating to them alone, rather than by describing them
@@ -272,8 +283,9 @@
                 <img src='CF.png' width="383px" height="408px">
             </div>
             <p>
-                <b>Collaborative filtering</b> The main idea of collaborative filtering is that past
-                user-item interaction, like providing ratings to movies watched in the past, is sufficient to detect
+                <b>Collaborative filtering:</b> generates a
+                recommendation by relying on past user-item interaction, like explicit feedback (ratings) for movies watched 
+                in the past. In CF, it is sufficient to detect
                 similar users and/or items, cluster them, and make new predictions based on the similarity existing
                 within a cluster [6].
                 <!-- The main issue with CF method is known as the <i>Cold-Start Problem</i>. -->
@@ -308,14 +320,14 @@
                 <th>Advantages</th>
                 <td>
                     <ul>
-                        <li>Does not need any data about the other users.</li>
-                        <li>Can recommend niche items.</li>
+                        <li>Does not require any data about the other users</li>
+                        <li>Can recommend items which are relevant to the user, but not the population <br>(<i><q>niche items</q></i>)</li>
                     </ul>
                 </td>
                 <td>
                     <ul>
-                        <li>Does not require domain knowledge.</li>
-                        <li>Help users to discover new interests.</li>
+                        <li>Does not require domain knowledge</li>
+                        <li>Helps users discover new interests</li>
                     </ul>
                 </td>
             </tr>
@@ -323,14 +335,13 @@
                 <th>Disadvantages</th>
                 <td>
                     <ul>
-                        <li>Requires a lot of domain knowledge.</li>
-                        <li>Makes recommendation only based on the existing interests of the user.</li>
+                        <li>Requires a lot of domain knowledge</li>
+                        <li>Makes recommendatios based only on the existing interests of the user <br>(no <i><q>niche items</q></i>)</li>
                     </ul>
                 </td>
                 <td>
                     <ul>
-                        <li>Can not handle fresh items or user (cold-start problem).</li>
-                        <li>Hard to include features beyond the query.</li>
+                        <li>Can not handle fresh items or users <br>(the <i><q>Cold-Start Problem</q></i>)</li>
                     </ul>
                 </td>
             </tr>
@@ -925,6 +936,11 @@
             </figcaption>
 
             <h2>Conclusion</h2>
+            <p style="color: red;">TO EDIT : the two models above actually result in
+                non-personalized recommendations, such as those you may have seen in print newspapers or
+                magazines. These recommendations rely solely on popular opinion of the population, 
+                rather than characteristics specific to a user.
+            </p>
             <p>
                 While recommender systems aims in generating a personalized experience on the web, the model are not
                 trained on a single user but on a group. With this article we have shows that ....
@@ -1547,6 +1563,8 @@
             drawChartDensity();
         }
 
+
+        //TODO: Fix labels on layout1, and the user ratings square on layout 2 (to user rating = 5)
         // Training Ratings Dist plot
         var drawRatingDensity = async () => {
             // User highlight: rgba(142, 181, 205, 0.4)
@@ -1782,7 +1800,7 @@
                     },
                     {//EmbeddingMF
                         showarrow: false,
-                        text: "<b>2.06</b>",
+                        text: "<b>3.8</b>",
                         x: 2.05,
                         xanchor: "right",
                         y: 36,
@@ -1793,7 +1811,7 @@
                     },
                     {//DeepFM
                         showarrow: false,
-                        text: "<b>2.4</b>",
+                        text: "<b>4.53</b>",
                         x: 2.39,
                         xanchor: "right",
                         y: 36,
