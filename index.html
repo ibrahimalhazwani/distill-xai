@@ -841,6 +841,8 @@
                 doing
                 so, we can see if the model suffer from some kind of bias or not.
             </p>
+            <div id="ratings1" style="width:750px;height:350px;"></div>
+            <div id="ratings2" style="width:750px;height:350px;"></div>
 
             <h2>Conclusion</h2>
             <p>
@@ -1228,6 +1230,9 @@
 
         TESTER = document.getElementById('tester');
         TESTER2 = document.getElementById('tester2');
+        PREDICTIONS1 = document.getElementById('ratings1');
+        PREDICTIONS2 = document.getElementById('ratings2');
+
         function unpack(row, key) {
             return row.map(function (row) { return row[key] });
         }
@@ -1463,6 +1468,207 @@
         if (document.getElementById('tester2')) {
             drawChartDensity();
         }
+
+        // Training Ratings Dist plot
+        var drawRatingDensity = async () => {
+            // User highlight: rgba(142, 181, 205, 0.4)
+            // Mean vertical marker: "#C97064"
+            
+            var config = { responsive: true, displayModeBar: false };
+            var layout1 = {
+                title: {
+                    text: "Distribution of Training Set Ratings : <br><i>Buffy the Vampire Slayer (top) vs. Who's That Girl? (bottom)</i>",
+                    font: {
+                        size: 20
+                    },
+                    xref: 'paper',
+                    x: 0.01,
+
+                },
+                
+                yaxis: {
+                    title: "<b>True Rating</b>"
+                },
+                showlegend: true,
+                legend: {
+                    "orientation": "h",
+                    x: 1,
+                    xanchor: 'right',
+                    y: 1
+                },
+                shapes: [
+
+                    //Unfilled Rectangle
+
+                    {
+                    type: 'rect',
+                    x0: 0.5,
+                    y0: 0,
+                    x1: 1.5,
+                    y1: 34.1,
+                    line: {
+                        color: 'rgba(142, 181, 205, 1)',
+                        width: 3
+                    }
+                    },
+                ],
+                annotations: [
+                    {
+                        showarrow: false,
+                        text: "<b>User Rating: 1</b>",
+                        x: 1,
+                        xanchor: "center",
+                        y: 46,
+                        font: {
+                            color: 'rgba(142, 181, 205, 1)', 
+            
+            
+                        }
+                    }
+                ],
+            }
+            var layout2 = {
+                title: {
+                    font: {
+                        size: 20
+                    },
+                    xref: 'paper',
+                    x: 0.01,
+
+                },
+                
+                yaxis: {
+                    title: "<b>True Rating</b>"
+                },
+                showlegend: true,
+                legend: {
+                    "orientation": "h",
+                    x: 1,
+                    xanchor: 'right',
+                    y: 1
+                },
+
+                shapes: [
+
+                    //Unfilled Rectangle
+
+                    {
+                    type: 'rect',
+                    name: "user rating",
+                    x0: 3.5,
+                    y0: 0,
+                    x1: 4.5,
+                    y1: 10.05,
+                    line: {
+                        color: 'rgba(142, 181, 205, 1)',
+                        width: 3
+                    }
+                    },
+                ],
+                annotations: [
+                    {
+                        showarrow: false,
+                        text: "<b>User Rating: 4</b>",
+                        x: 4,
+                        xanchor: "center",
+                        y: 12,
+                        font: {
+                            color: 'rgba(142, 181, 205, 1)', 
+            
+            
+                        }
+                    }
+                ],
+            }
+
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/user-hate-model-loved.csv",
+                
+            // 3264: Buffy the Vampire Slayer
+            // mean: 2.79
+            // user_rating = 1
+            // model_deepfm_rating = 4.53
+            // model_embeddingMF_rating = 3.8
+
+                function (rows) {
+                    return {
+                        rating: rows.rating
+                    }
+                }).then(
+                    function (rows) {
+                        var ratings = unpack(rows, 'rating')
+                        console.log(ratings)
+                        
+                        var movie_ratings_userhate = {
+                            name: 'Buffy the Vampire Slayer',
+                            x: ratings,
+                            type: "histogram",
+                            histnorm: "count",
+                            marginal: "rug",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //   
+                            //},
+                            marker: { color: 'rgba(103, 141, 88, 0.4)' },
+
+                        };
+                        if (document.getElementById("ratings1")) {
+                            Plotly.newPlot(PREDICTIONS1, [movie_ratings_userhate], layout1, config)
+
+                        }
+                    }
+                )
+
+                // 3391: Who's That Girl?
+                await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/user-loved-model-hate.csv",
+
+                // 3391: Who's That Girl?
+                // mean: 2.66
+                // model_deepfm_rating = 2.06
+                // model_embeddingMF_rating = 2.40
+                
+                function (rows) {
+                    return {
+                        rating: rows.rating
+                    }
+                }).then(
+                    function (rows) {
+                        var ratings = unpack(rows, 'rating')
+                        console.log(ratings)
+                        
+                        var movie_ratings_userlove = {
+                            name: 'Who\'s That Girl?',
+                            x: ratings,
+                            type: "histogram",
+                            histnorm: "count",
+                            marginal: "rug",
+                            //alignmentgroup: "1",
+                            //ybins:{
+                            //    end: 5,
+                            //    start: 1,
+                            //   
+                            //},
+                            marker: { color: 'rgba(103, 141, 88, 0.4)' },
+
+                        };
+                        if (document.getElementById("ratings2")) {
+                            Plotly.newPlot(PREDICTIONS2, [movie_ratings_userlove], layout2, config)
+        
+                        }
+
+                    }
+                    
+                )
+                
+                    
+
+        }
+
+        if (document.getElementById('ratings1') && (document.getElementById('ratings2')))  {
+            drawRatingDensity();
+        }
+        
 
         function map_to_range(number, in_min, in_max, out_min, out_max) {
             return (((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min);
