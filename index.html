@@ -888,7 +888,13 @@
                 so, we can see if the model suffer from some kind of bias or not.
             </p>
             <div id="ratings1" style="width:750px;height:350px;"></div>
+            <figcaption class="centered">
+                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each model 
+            </figcaption>
             <div id="ratings2" style="width:750px;height:350px;"></div>
+            <figcaption class="centered">
+                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each model 
+            </figcaption>
 
             <h2>Conclusion</h2>
             <p>
@@ -1302,7 +1308,7 @@
                         console.log(x)
                         console.log(y)
                         var errors_nn = {
-                            name: 'Embeddings Only',
+                            name: 'EmbeddingMF',
                             x: x,
                             y: y,
                             type: "scatter",
@@ -1316,7 +1322,7 @@
                         };
                         var layout = {
                             title: {
-                                text: "Distribution of Root Mean Squared Errors: <br><i>Embeddings Only vs. DeepFM</i>",
+                                text: "Distribution of Root Mean Squared Errors: <br><i>EmbeddingMF vs. DeepFM</i>",
                                 font: {
                                     size: 20
                                 },
@@ -1427,7 +1433,7 @@
                             },
                         };
                         var embeddings_ratings = {
-                            name: 'Embeddings Only (Predicted Rating)',
+                            name: 'EmbeddingMF (Predicted Rating)',
                             x: y2,
                             type: "histogram",
                             histnorm: "density",
@@ -1442,7 +1448,7 @@
                         };
                         var layout = {
                             title: {
-                                text: "Distribution of Ratings by Model: <br><i>True vs. Embeddings Only vs. DeepFM</i>",
+                                text: "Distribution of Ratings by Model: <br><i>True vs. EmbeddingMF vs. DeepFM</i>",
                                 font: {
                                     size: 20
                                 },
@@ -1543,8 +1549,11 @@
                     y: 1
                 },
                 shapes: [
-
-                    //Unfilled Rectangle
+                // 3264: Buffy the Vampire Slayer
+                // mean: 2.79
+                // user_rating = 1
+                // model_deepfm_rating = 4.53
+                // model_embeddingMF_rating = 3.8
 
                     {
                         type: 'rect',
@@ -1557,6 +1566,42 @@
                             width: 3
                         }
                     },
+                    {   //training
+                        type: 'line',
+                        x0: 2.79,
+                        y0: 0,
+                        x1: 2.79,
+                        y1: 175,
+                        line: {
+                          color: 'rgba(103, 141, 88, 0.6)',
+                          width: 2,
+                          dash: 'dashdot'
+                        }
+                    },
+                    {   //EmbeddingMF
+                        type: 'line',
+                        x0: 3.8,
+                        y0: 0,
+                        x1: 3.8,
+                        y1: 175,
+                        line: {
+                          color: 'rgba(57, 45, 50, 0.6)',
+                          width: 2,
+                          dash: 'dashdot'
+                        }
+                    },
+                    {   //DeepFM
+                        type: 'line',
+                        x0: 4.53,
+                        y0: 0,
+                        x1: 4.53,
+                        y1: 175,
+                        line: {
+                          color: 'rgba(244, 159, 10, 0.6)',
+                          width: 2,
+                          dash: 'dashdot'
+                        }
+                    },
                 ],
                 annotations: [
                     {
@@ -1566,14 +1611,48 @@
                         xanchor: "center",
                         y: 46,
                         font: {
-                            color: 'rgba(142, 181, 205, 1)',
-
-
+                            color: 'rgba(142, 181, 205, 0.8)',
+                        }
+                    },
+                    {
+                        showarrow: false,
+                        text: "<b>2.79</b><br>Training<br>Mean",
+                        x: 2.8,
+                        xanchor: "left",
+                        y: 108,
+                        yanchor: "bottom",
+                        align: "left",
+                        font: {
+                            color: 'rgba(103, 141, 88, 0.8)',
+                        }
+                    },
+                    {//EmbeddingMF
+                        showarrow: false,
+                        text: "<b>2.06</b>",
+                        x: 3.7,
+                        xanchor: "right",
+                        y: 154,
+                        yanchor: "right",
+                        font: {
+                            color: 'rgba(57, 45, 50, 0.6)',
+                        }
+                    },
+                    {//DeepFM
+                        showarrow: false,
+                        text: "<b>2.4</b>",
+                        x: 4.43,
+                        xanchor: "right",
+                        y: 154,
+                        yanchor: "right",
+                        font: {
+                            color: 'rgba(244, 159, 10, 0.6)',
                         }
                     }
+
                 ],
             }
             var layout2 = {
+
                 title: {
                     font: {
                         size: 20
@@ -1595,8 +1674,10 @@
                 },
 
                 shapes: [
-
-                    //Unfilled Rectangle
+                // 3391: Who's That Girl?
+                // mean: 2.66
+                // model_deepfm_rating = 2.06
+                // model_embeddingMF_rating = 2.40
 
                     {
                         type: 'rect',
@@ -1606,10 +1687,47 @@
                         x1: 4.5,
                         y1: 10.05,
                         line: {
-                            color: 'rgba(142, 181, 205, 1)',
+                            color: 'rgba(142, 181, 205, 0.6)',
                             width: 4
                         }
                     },
+                    {
+                        type: 'line',
+                        x0: 2.66,
+                        y0: 0,
+                        x1: 2.66,
+                        y1: 40,
+                        line: {
+                          color: 'rgba(103, 141, 88, 0.6)',
+                          width: 2
+                        }
+                    },
+
+                    {   //EmbeddingMF
+                        type: 'line',
+                        x0: 2.06,
+                        y0: 0,
+                        x1: 2.06,
+                        y1: 40,
+                        line: {
+                          color: 'rgba(57, 45, 50, 0.6)',
+                          width: 2,
+                          dash: 'dashdot'
+                        }
+                    },
+                    {   //DeepFM
+                        type: 'line',
+                        x0: 2.40,
+                        y0: 0,
+                        x1: 2.40,
+                        y1: 40,
+                        line: {
+                          color: 'rgba(244, 159, 10, 0.6)',
+                          width: 2,
+                          dash: 'dashdot'
+                        }
+                    },
+
                 ],
                 annotations: [
                     {
@@ -1619,9 +1737,43 @@
                         xanchor: "center",
                         y: 12,
                         font: {
-                            color: 'rgba(142, 181, 205, 1)',
+                            color: 'rgba(142, 181, 205, 0.8)',
 
 
+                        }
+                    },
+                    {
+                        showarrow: false,
+                        text: "<b>2.66</b><br>Training<br>Mean",
+                        x: 2.7 ,
+                        xanchor: "left",
+                        y: 38,
+                        yanchor: "top",
+                        align: "left",
+                        font: {
+                            color: 'rgba(103, 141, 88, 0.8)',
+                        }
+                    },
+                    {//EmbeddingMF
+                        showarrow: false,
+                        text: "<b>2.06</b>",
+                        x: 2.05,
+                        xanchor: "right",
+                        y: 36,
+                        yanchor: "right",
+                        font: {
+                            color: 'rgba(57, 45, 50, 0.6)',
+                        }
+                    },
+                    {//DeepFM
+                        showarrow: false,
+                        text: "<b>2.4</b>",
+                        x: 2.39,
+                        xanchor: "right",
+                        y: 36,
+                        yanchor: "right",
+                        font: {
+                            color: 'rgba(244, 159, 10, 0.6)',
                         }
                     }
                 ],
@@ -1649,13 +1801,6 @@
                             x: ratings,
                             type: "histogram",
                             histnorm: "count",
-                            marginal: "rug",
-                            //alignmentgroup: "1",
-                            //ybins:{
-                            //    end: 5,
-                            //    start: 1,
-                            //   
-                            //},
                             marker: { color: 'rgba(103, 141, 88, 0.4)' },
 
                         };
@@ -1688,15 +1833,10 @@
                             x: ratings,
                             type: "histogram",
                             histnorm: "count",
-                            marginal: "rug",
-                            //alignmentgroup: "1",
-                            //ybins:{
-                            //    end: 5,
-                            //    start: 1,
-                            //   
-                            //},
                             marker: { color: 'rgba(103, 141, 88, 0.4)' },
-
+                            
+                            
+                            
                         };
                         if (document.getElementById("ratings2")) {
                             Plotly.newPlot(PREDICTIONS2, [movie_ratings_userlove], layout2, config)
