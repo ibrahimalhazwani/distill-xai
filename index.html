@@ -64,7 +64,6 @@
                 </p>
                 <p class="author">
                     Gabriela Morgenshtern
-
                 </p>
                 <p class="affiliation">
                     University of Zurich
@@ -106,6 +105,7 @@
             one of these: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. With
             this article, we will give you an introduction to Recommender Systems (RS), and illustrate how new
             deep-learning algorithmic techniques in this field work.
+        </p>
         <p>
             First, we use a toy example to illustrate how Matrix Factorization a relatively simply designed
             recommender system works. Then, we dive into two modern approaches: neural networks and deep learning
@@ -113,7 +113,7 @@
             train these two models, focusing on how to use these visualizations to explain the differences in the
             models' competence in predicting a user's rating of a movies they've seen. Following this article, we hope
             that you will have some intuition and visual understanding of how RS work.
-
+        </p>
         <p>
             Recommender Systems can be defined as software tools and techniques that provide suggestions for items
             to interact with a given user [1]. Usually, and so especially on the web, recommendations are
@@ -121,11 +121,10 @@
             <i>what</i> the system is recommending to the user. This item could represent the next movie to watch, song
             to listen to, the fastest path to a destination, or the best match for a particular job position (or your
             next date!).
+        </p>
         <p style="color: red;">TO EDIT (unclear how this relates to above): It is important to note that
             non-personalized recommendations also exist, such as those you may have seen in print newspapers or
             magazines.</p>
-
-
         <!--
             <d-cite key="ricci2011introduction">
                 <d-hover-box id="hover-box" style="display: none;">
@@ -164,7 +163,7 @@
                 ranking.
             </p>
             <p class="example_text">
-                <u>How to use it</u>: mouse over the different steps to know more about them.
+                <u>How to interact</u>: mouse over the different steps to know more about them.
             </p>
             <div class="row">
                 <div class="column-rs">
@@ -341,6 +340,21 @@
                 An interpretable collaborative filtering recommender system: Matrix Factorization
             </h2>
             <div class="example">
+                <p class="example-text">
+                    <u>How to interact</u>: over to each of the different matrixes to learn what information they stores
+                    and how can be used to calculate the dot product.
+                </p>
+                <div class="row">
+                    <div class="column-rmatrix-text">
+                        <figcaption>Rating matrix</figcaption>
+                    </div>
+                    <div class="column-umatrix-text">
+                        <figcaption>User matrix</figcaption>
+                    </div>
+                    <div class="column-imatrix-text">
+                        <figcaption>Item matrix</figcaption>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="column">
                         <div id="parent5">
@@ -471,14 +485,14 @@
                     based on the Matrix Factorization techniques described above.
                 </p>
                 <p class="example_text">
-                    <u>How to use</u>: adjust your preferences on the movie genres (comedy and horror) and then
+                    <u>How to interact</u>: adjust your preferences on the movie genres (comedy and horror) and then
                     click on <q>Calculate Matrix Factorization</q> to see how your preferences are alligned with the one
                     of your friends.
                 </p>
                 <p class="example_text">
                     <u>How to read the results</u>: to facilitate the decision of which movie to watch, you just need to
-                    look at the
-                    last row of the Matrix Factorization that represent the average of the predictive rating.
+                    look at the last row of the Matrix Factorization that represent the average of the predictive
+                    rating.
                 </p>
                 <div class="row">
                     <div class="column"></div>
@@ -586,6 +600,8 @@
                 <li><b>Unstructured</b> like keywords, colors, material, etc.</li>
             </ul>
 
+            <p>TO DO: add why we moved from the embedding only to deepFM</p>
+
             <!-- <div class="example">
             <p></p>
             <p class="example_text">
@@ -666,24 +682,26 @@
 
             <!-- <h3>DeepFM</h3> -->
             <p>
-                Architecturally DeepFM consists of two components, a Factorization Machine (FM) component and a deep
+                Architecturally, DeepFM consists of two components: a Factorization Machine (FM) component and a deep
                 component that share the same input. For a feature <i>i</i>, a scale <i>w<sub>i</sub></i> is used to
                 weigh its order-1 (linear) importance , a laten vector <i>V<sub>i</sub></i> is used to measure its
                 impact of interactions with other features. The laten vector is then fed in the FM component to model
                 order-2 (pairwise) feature interactions.
-                The result of this is then fed in the deep component to model the high-order feature interactions.
-                all parameters are trained joyintly for the combined prediction that is represented by the following
-                formula:
+                The result, <i>y<sub>FM</sub></i> , is then fed in the deep component to model the high-order
+                feature interactions.
+                All parameters are trained joyintly for the combined prediction <i>y</i> represented by the
+                following formula:
             </p>
             <div class="row">
                 <div class="column">
                 </div>
                 <div class="column">
-                    <img src="deepfm-formula.png" height="20px">
+                    <img src="deepfm-formula.png" height="170px">
                 </div>
                 <div class="column">
                 </div>
             </div>
+            <figcaption class="centered">DeepFM output formula.</figcaption>
             <!-- <span class="katex-display">
                 <span class="katex">
                     <span class="katex-mathmk">
@@ -710,9 +728,9 @@
                     </span>
                 </span>
             </span> -->
-            <p>
+            <!-- <p>
                 A visual representation of the architecture is shown in the image above.
-            </p>
+            </p> -->
             <p>
                 <b>Factorization Machines</b> Are model class that combines the advantages of Support Vector
                 Machines (SVM) with factorization models [7]. Factorization Machine are are a general predictor that
@@ -802,13 +820,9 @@
             </span> -->
             <p>
                 By plotting the RMSE of the two models it is possible to notice that both the two models described
-                above
-                present a high RMSE value at the two extremes (prediction rating of 1 or 2 and rating of 5). While
-                the
-                error
-                on rating 1 and 2 can be explained considering that <q>people are more willing to share positive
-                    experiences
-                    than negative ones</q> [9].
+                above present a high RMSE value at the two extremes (prediction rating of 1 or 2 and rating of 5). While
+                the error on rating 1 and 2 can be explained considering that <q>people are more willing to share
+                    positive experiences than negative ones</q> [9].
             </p>
 
             <div id="tester" style="width:750px;height:700px;"></div>
@@ -817,22 +831,17 @@
             <p>
                 We define a perfect recommendation systems as system that will recommend only movies that the
                 user will 100% like and rate as 5. The above plot, on the contrary, it shows that both models are
-                not
-                perfect in recommending that kind of movies. Based on this evidence and our definition of perfect
+                not perfect in recommending that kind of movies. Based on this evidence and our definition of perfect
                 recommender system, we decide to use the explain by example methodology to explain how the two
-                models
-                generate the movie recommendations for a user that are predicted with a rating of 5.
+                models generate the movie recommendations for a user that are predicted with a rating of 5.
             </p>
             <p>
 
             </p>
             <p>
                 To support this direction, we are going to use a custom Venn Diagram with three sets: true rating
-                (movie
-                rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted
-                ratings
-                from
-                the DeepFM model.
+                (movie rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted
+                ratings from the DeepFM model.
             </p>
             <p>
                 SOMETHING MISSING HERE
@@ -895,34 +904,32 @@
             <p>
                 Of the above plot, what it is interesting to notice are the two movie in the bottom left of the true
                 rating set and the two movies in the intersection between the two movies. The first movies represent
-                movies
-                that the user has liked and rate 5 but both models will not recommend to the user. The latter ones, are
-                movies that both models think that the user will like and rate 5 but in reality the users will not like.
+                movies that the user has liked and rate 5 but both models will not recommend to the user. The latter
+                ones, are movies that both models think that the user will like and rate 5 but in reality the users will
+                not like.
             </p>
             <p>
                 We can explore more in details these cases where the movies recommended and the user preferences do
-                not
-                overlap, we can plot the rating distribution on the training data together with the user rating. By
-                doing
-                so, we can see if the model suffer from some kind of bias or not.
+                not overlap, we can plot the rating distribution on the training data together with the user rating. By
+                doing so, we can see if the model suffer from some kind of bias or not.
             </p>
             <div id="ratings1" style="width:750px;height:350px;"></div>
             <figcaption class="centered">
-                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each model 
+                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each
+                model.
             </figcaption>
             <div id="ratings2" style="width:750px;height:350px;"></div>
             <figcaption class="centered">
-                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each model 
+                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each
+                model.
             </figcaption>
 
             <h2>Conclusion</h2>
             <p>
                 While recommender systems aims in generating a personalized experience on the web, the model are not
-                trained
-                on a single user but on a group. With this article we have shows that ....
+                trained on a single user but on a group. With this article we have shows that ....
                 Thanks to this explnation we tried to show that if the focus shift from data/model centric to more
-                human
-                centric the models are not really generate personalized recommendations.
+                human centric the models are not really generate personalized recommendations.
             </p>
     </d-article>
 
@@ -1568,11 +1575,11 @@
                     y: 1
                 },
                 shapes: [
-                // 3264: Buffy the Vampire Slayer
-                // mean: 2.79
-                // user_rating = 1
-                // model_deepfm_rating = 4.53
-                // model_embeddingMF_rating = 3.8
+                    // 3264: Buffy the Vampire Slayer
+                    // mean: 2.79
+                    // user_rating = 1
+                    // model_deepfm_rating = 4.53
+                    // model_embeddingMF_rating = 3.8
 
                     {
                         type: 'rect',
@@ -1592,9 +1599,9 @@
                         x1: 2.79,
                         y1: 175,
                         line: {
-                          color: 'rgba(103, 141, 88, 0.6)',
-                          width: 2,
-                          dash: 'dashdot'
+                            color: 'rgba(103, 141, 88, 0.6)',
+                            width: 2,
+                            dash: 'dashdot'
                         }
                     },
                     {   //EmbeddingMF
@@ -1604,9 +1611,9 @@
                         x1: 3.8,
                         y1: 175,
                         line: {
-                          color: 'rgba(57, 45, 50, 0.6)',
-                          width: 2,
-                          dash: 'dashdot'
+                            color: 'rgba(57, 45, 50, 0.6)',
+                            width: 2,
+                            dash: 'dashdot'
                         }
                     },
                     {   //DeepFM
@@ -1616,9 +1623,9 @@
                         x1: 4.53,
                         y1: 175,
                         line: {
-                          color: 'rgba(244, 159, 10, 0.6)',
-                          width: 2,
-                          dash: 'dashdot'
+                            color: 'rgba(244, 159, 10, 0.6)',
+                            width: 2,
+                            dash: 'dashdot'
                         }
                     },
                 ],
@@ -1693,10 +1700,10 @@
                 },
 
                 shapes: [
-                // 3391: Who's That Girl?
-                // mean: 2.66
-                // model_deepfm_rating = 2.06
-                // model_embeddingMF_rating = 2.40
+                    // 3391: Who's That Girl?
+                    // mean: 2.66
+                    // model_deepfm_rating = 2.06
+                    // model_embeddingMF_rating = 2.40
 
                     {
                         type: 'rect',
@@ -1717,8 +1724,8 @@
                         x1: 2.66,
                         y1: 40,
                         line: {
-                          color: 'rgba(103, 141, 88, 0.6)',
-                          width: 2
+                            color: 'rgba(103, 141, 88, 0.6)',
+                            width: 2
                         }
                     },
 
@@ -1729,9 +1736,9 @@
                         x1: 2.06,
                         y1: 40,
                         line: {
-                          color: 'rgba(57, 45, 50, 0.6)',
-                          width: 2,
-                          dash: 'dashdot'
+                            color: 'rgba(57, 45, 50, 0.6)',
+                            width: 2,
+                            dash: 'dashdot'
                         }
                     },
                     {   //DeepFM
@@ -1741,9 +1748,9 @@
                         x1: 2.40,
                         y1: 40,
                         line: {
-                          color: 'rgba(244, 159, 10, 0.6)',
-                          width: 2,
-                          dash: 'dashdot'
+                            color: 'rgba(244, 159, 10, 0.6)',
+                            width: 2,
+                            dash: 'dashdot'
                         }
                     },
 
@@ -1764,7 +1771,7 @@
                     {
                         showarrow: false,
                         text: "<b>2.66</b><br>Training<br>Mean",
-                        x: 2.7 ,
+                        x: 2.7,
                         xanchor: "left",
                         y: 38,
                         yanchor: "top",
@@ -1853,9 +1860,9 @@
                             type: "histogram",
                             histnorm: "count",
                             marker: { color: 'rgba(103, 141, 88, 0.4)' },
-                            
-                            
-                            
+
+
+
                         };
                         if (document.getElementById("ratings2")) {
                             Plotly.newPlot(PREDICTIONS2, [movie_ratings_userlove], layout2, config)
@@ -1943,7 +1950,7 @@
         // trace for movies that the EmbeddingFM recommend (no overlap)
         var trace3 = {
             x: [2, 2.5],
-            y: [0.2, 0.75],
+            y: [0.2, 0.55],
             type: 'scatter',
             mode: 'markers',
             text: [['Network', 4.56, 4], ['Bonnie and Clyde', 4.54, 3]],

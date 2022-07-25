@@ -47,8 +47,8 @@ distill-header svg {
         padding: 28px 0;
     }
 
-    
-    
+
+
 }
 
 distill-header svg path {
@@ -210,10 +210,26 @@ img {
     margin-top: 42px;
 }
 
+.column-rmatrix-text {
+    flex: 50%;
+    margin-left: 110px;
+}
+
+
+.column-umatrix-text {
+    flex: 50%;
+    margin-left: 80px;
+}
+
 .column-imatrix {
     flex: 50%;
     margin-top: 42px;
     margin-right: 20px;
+}
+
+.column-imatrix-text {
+    flex: 50%;
+    margin-left: 20px;
 }
 
 .column-rs-rmatrix {
