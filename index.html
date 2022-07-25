@@ -1561,7 +1561,7 @@
                     y1: 10.05,
                     line: {
                         color: 'rgba(142, 181, 205, 1)',
-                        width: 3
+                        width: 4
                     }
                     },
                 ],
@@ -1668,8 +1668,8 @@
         if (document.getElementById('ratings1') && (document.getElementById('ratings2')))  {
             drawRatingDensity();
         }
-        
 
+        // venn diagram
         function map_to_range(number, in_min, in_max, out_min, out_max) {
             return (((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min);
         }
@@ -1679,16 +1679,18 @@
         var out_min = -0.25
         var out_max = 0.25
 
-
-
+        // trace for movies that the user likes
         var trace1 = {
-            x: [0.4, 0.7, 1, 1, 0.7, 0.4],
-            y: [0.65, 0.7, 1, 1.5, 1, 1.2],
-            error: [0.98, 1, 0.72, 0.73, 0.78, 0.69],
-            errorIbra: [1.6, 0.8, 0.74, 0.4, 0.85, 0.7],
+            x: [0.6, 0.7, 0.8],
+            y: [0.7, 1.4, 0.4],
+            error: [1.58, 2.60, 0.71],
+            errorIbra: [0.94, 2.93, 1.11],
             type: 'scatter',
             mode: 'markers',
-            text: ['Donnie Brasco', 'Big Carnival', 'Grifters, The', "You Can't Take It With You", "Year My Voice Broke", "Breaker Morant"],
+            // text: [['Return to Oz', "Who's That Girl?", 'Crimes and Misdemeanors'], [4.1, 2.1, 3.9], [3.4, 2.4, 4.3]],
+            text: [['Return to Oz', 4.1, 3.4], ["Who's That Girl?", 2.1, 2.4], ['Crimes and Misdemeanors', 3.9, 4.3]],
+            deepFM_pred: [4.1, 2.1, 3.9],
+            embMF_pred: [3.4, 2.4, 4.3],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1702,15 +1704,19 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'DeepFM predicted rating: %{text[1]}<br>' +
+                'EmbeddingMF predicted rating: %{text[2]}'
         };
+
+        // trace for movie that the EmbeddingFM recommend and user liked
         var trace2 = {
-            x: [1.2, 1.5, 1.3, 1.5],
-            y: [0.5, 0.7, 1, 0.3],
+            x: [1.2, 1.5,],
+            y: [0.5, 0.7],
             type: 'scatter',
             mode: 'markers',
-            text: ['Almost Famous', 'Insider, The', 'Manchurian Candidate, The', '39 Steps, The'],
-            error: [0.11, 0.29, 0.34, 0.39],
+            text: [['Pulp Fiction', 5, 4.6], [' Stand by Me', 5, 4.3]],
+            error: [0.4, 0.7],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1724,15 +1730,19 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'EmbeddingMF predicted rating: %{text[2]}'
+
         };
+        // trace for movies that the EmbeddingFM recommend (no overlap)
         var trace3 = {
-            x: [2, 2.5, 2.5],
-            y: [0.2, 0.75, 0.3],
+            x: [2, 2.5],
+            y: [0.2, 0.75],
             type: 'scatter',
             mode: 'markers',
-            text: ['Palm Beach Story, The', 'Henry V', 'Last Emperor, The'],
-            error: [-0.65, -0.59, -1.59],
+            text: [['Network', 4.56, 4], ['Bonnie and Clyde', 4.54, 3]],
+            error: [-0.56, -1.54],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1746,15 +1756,19 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[2]}<br>' +
+                'EmbeddingMF predicted rating: %{text[1]}'
+
         };
+        // trace for movies that DeepFM has recommended no overlap
         var trace4 = {
-            x: [2, 2.2],
-            y: [2, 2.5],
+            x: [2, 2.2, 2.6],
+            y: [2, 2.5, 2.2],
             type: 'scatter',
             mode: 'markers',
-            text: ['Terminator, The', 'French Connection, The'],
-            error: [-0.85, -0.85],
+            text: [['Kingpin', 4, 4.63], ['Siren', 4, 4.85], ['Body Heat', 4, 4.61]],
+            error: [-0.63, -0.85, -0.61],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1768,17 +1782,20 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
-        };
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}'
 
+        };
+        // trace for movies that both systems have recommended but the user do not like
         var trace5 = {
-            x: [2.2, 2.4],
-            y: [1.2, 1.25],
+            x: [2.2],
+            y: [1.2],
             type: 'scatter',
             mode: 'markers',
-            text: ['My Fair Lady', 'Touch of Evil'],
-            error: [-0.63, -0.56],
-            errorIbra: [-0.86, -1],
+            text: [['Buffy the Vampire Slayer', 1, 4.54, 3.8]],
+            error: [-2.80],
+            errorIbra: [-3.54],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1792,17 +1809,21 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
-        };
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}<br>' +
+                'EmbeddingMF predicted rating: %{text[3]}'
 
+        };
+        // trace for movies that both recommender have recommended and the user has liked
         var trace6 = {
             x: [1.7],
             y: [1.3],
             type: 'scatter',
             mode: 'markers',
-            text: ['L.A. Confidential'],
-            error: [0.34],
-            errorIbra: [0.3],
+            text: [['Frankenstein', 5, 4.79, 3.36]],
+            error: [0.64],
+            errorIbra: [0.21],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1816,16 +1837,19 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}<br>' +
+                'EmbeddingMF predicted rating: %{text[3]}'
         };
-
+        //movie that deepFM recommend and user likes
         var trace7 = {
-            x: [1.5, 1.23, 1.69, 1.4, 1.4],
-            y: [1.5, 1.7, 1.65, 1.4, 1.76],
+            x: [1.5, 1.23, 1.69, 1.4],
+            y: [1.5, 1.7, 1.54, 1.4],
             type: 'scatter',
             mode: 'markers',
-            text: ['Bread and Chocolate', 'Shane', 'Last Picture, The', 'Repulsion', 'Children of a Lesser God'],
-            error: [-0.13, -0.03, 0.06, 0.2, 0.24],
+            text: [['Delicatessen', 5, 4.58], ['Watership Down', 5, 4.54], ['Clueless', 5, 4.54], ["The Decline of Western Civilization", 5, 4.7]],
+            error: [0.41, 0.45, 0.46, 0.29],
             textfont: {
                 color: ['red', 'orange', 'green'],
                 size: 12,
@@ -1839,11 +1863,13 @@
                     width: 1
                 }
             },
-            hoverinfo: 'text'
+            hovertemplate: '<b>Movie title: %{text[0]}</b><br><br>' +
+                'True rating: %{text[1]}<br>' +
+                'DeepFM predicted rating: %{text[2]}'
         };
 
         var layout = {
-            title: 'True & Predicted Ratings for User 4169',
+            title: 'True & Predicted Ratings for User 1680',
             annotations: [
                 {
                     x: 0.4,
@@ -1904,6 +1930,8 @@
                 showgrid: false,
                 zeroline: false
             },
+            plot_bgcolor: "rgba(0,0,0,0)",
+            paper_bgcolor: "rgba(0,0,0,0)",
             showlegend: false,
             shapes: [
                 {

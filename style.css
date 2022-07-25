@@ -47,7 +47,8 @@ distill-header svg {
         padding: 28px 0;
     }
 
-    distill-header .logo {}
+    
+    
 }
 
 distill-header svg path {
@@ -160,11 +161,11 @@ img {
 
 
 #user_feature tr:nth-child(5) {
-    background-color: #FFC3AA
+    background-color: #8EB5CD
 }
 
 #matrix_factorization tr:nth-child(6) {
-    background-color: #FFC3AA
+    background-color: #8EB5CD
 }
 
 
@@ -192,6 +193,11 @@ img {
 
 .column {
     flex: 50%;
+}
+
+.column-text {
+    flex: 50%;
+    margin-right: 30px;
 }
 
 .column-rs {
@@ -281,7 +287,7 @@ th {
     margin-left: 30%;
 }
 
-.occupation {
+.mf-list .occupation {
     margin-left: 10px;
 }
 
