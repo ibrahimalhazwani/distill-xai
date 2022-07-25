@@ -345,6 +345,9 @@
                     <div class="column">
                         <div id="parent5">
                             <img src="rating-matrix.png" width="300px">
+                            <div id="popup5" style="display: None">The <b>rating matrix</b> stores the dot product of
+                                the
+                                two single matrixes.</div>
                         </div>
                     </div>
                     <div class="column-umatrix">
@@ -672,7 +675,16 @@
                 all parameters are trained joyintly for the combined prediction that is represented by the following
                 formula:
             </p>
-            <span class="katex-display">
+            <div class="row">
+                <div class="column">
+                </div>
+                <div class="column">
+                    <img src="deepfm-formula.png" height="20px">
+                </div>
+                <div class="column">
+                </div>
+            </div>
+            <!-- <span class="katex-display">
                 <span class="katex">
                     <span class="katex-mathmk">
                         <math>
@@ -697,7 +709,7 @@
                         </math>
                     </span>
                 </span>
-            </span>
+            </span> -->
             <p>
                 A visual representation of the architecture is shown in the image above.
             </p>
@@ -742,7 +754,16 @@
                 to a ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute
                 error. Lower RMSE better is the recommendation accuracy [1, 8].
             </p>
-            <span class="katex-display">
+            <div class="row">
+                <div class="column">
+                </div>
+                <div class="column">
+                    <img src="rmse-formula.png" height="50px">
+                </div>
+                <div class="column">
+                </div>
+            </div>
+            <!-- <span class="katex-display">
                 <span class="katex">
                     <span class="katex-mathmk">
                         <math>
@@ -778,7 +799,7 @@
                         </math>
                     </span>
                 </span>
-            </span>
+            </span> -->
             <p>
                 By plotting the RMSE of the two models it is possible to notice that both the two models described
                 above
@@ -849,7 +870,7 @@
                         <img src="deepfm-error1.png" width="100px">
                     </div>
                     <div class="column-text">
-                        <p>The model over estimate the rating that the user will give.</p>
+                        <p>The model under estimate the rating that the user will give.</p>
                     </div>
                 </div>
                 <div class="row">
@@ -860,25 +881,23 @@
                         <img src="deepfm-error2.png" width="100px">
                     </div>
                     <div class="column-text">
-                        <p>The model under estimate the rating that the user will give.</p>
+                        <p>The model over estimate the rating that the user will give.</p>
                     </div>
                 </div>
                 </p>
                 <p class="example_text">
-                    <u>How to interact:</u> Lay over one of the point to discover what is the movie name and the
-                    predicted score.
+                    <u>How to interact:</u> Lay over one of the point to discover what is the movie name, the
+                    true rating, and the predicted scores from the model(s).
                 </p>
                 <div id='myDiv'></div>
             </div>
             <p></p>
             <p>
                 Of the above plot, what it is interesting to notice are the two movie in the bottom left of the true
-                rating
-                set and the two movies in the intersection between the two movies. The first movies represent movies
-                that
-                the user has liked and rate 5 but both models will not recommend to the user. The latter ones, are
+                rating set and the two movies in the intersection between the two movies. The first movies represent
                 movies
-                that both models think that the user will like and rate 5 but in reality the users will not like.
+                that the user has liked and rate 5 but both models will not recommend to the user. The latter ones, are
+                movies that both models think that the user will like and rate 5 but in reality the users will not like.
             </p>
             <p>
                 We can explore more in details these cases where the movies recommended and the user preferences do
