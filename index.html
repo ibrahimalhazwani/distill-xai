@@ -816,14 +816,60 @@
             <p>
                 SOMETHING MISSING HERE
             </p>
+            <div class="row">
+                <div class="centered">
+                    <img src="how-to-venn.png" height="450px">
+                </div>
+            </div>
+            <figcaption class="centered">
+                Description of the different areas of the Venn Diagram.
+            </figcaption>
+
+            <p></p>
             <div class="example">
                 <p class="example_text">
-                    How to read and interact with the Veen Diagram.
-                    circle legend simple or use mouse over to highlight the different segments with what they mean.
-                    How to read the intersections same img simple or using some mouse-over.
+                    <u>How to read:</u> the movies are represented by dot in the different sets of the Venn Diagram. The
+                    line that starts from the center represent the error that has been made.
+                <div class="row">
+                    <div class="column example_text">
+                        <p class="example_text"><b>EmbeddingFM</b></p>
+                    </div>
+                    <div class="column">
+                        <p class="example_text"><b>DeepFM</b></p>
+                    </div>
+                    <div class="column">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column example_text">
+                        <img src="embeddingfm-error1.png" width="100px">
+                    </div>
+                    <div class="column example_text">
+                        <img src="deepfm-error1.png" width="100px">
+                    </div>
+                    <div class="column-text">
+                        <p>The model over estimate the rating that the user will give.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column example_text">
+                        <img src="embeddingfm-error2.png" width="100px">
+                    </div>
+                    <div class="column example_text">
+                        <img src="deepfm-error2.png" width="100px">
+                    </div>
+                    <div class="column-text">
+                        <p>The model under estimate the rating that the user will give.</p>
+                    </div>
+                </div>
                 </p>
+                <p class="example_text">
+                    <u>How to interact:</u> Lay over one of the point to discover what is the movie name and the
+                    predicted score.
+                </p>
+                <div id='myDiv'></div>
             </div>
-            <div id='myDiv'></div>
             <p></p>
             <p>
                 Of the above plot, what it is interesting to notice are the two movie in the bottom left of the true
@@ -1473,7 +1519,7 @@
         var drawRatingDensity = async () => {
             // User highlight: rgba(142, 181, 205, 0.4)
             // Mean vertical marker: "#C97064"
-            
+
             var config = { responsive: true, displayModeBar: false };
             var layout1 = {
                 title: {
@@ -1485,7 +1531,7 @@
                     x: 0.01,
 
                 },
-                
+
                 yaxis: {
                     title: "<b>True Rating</b>"
                 },
@@ -1501,15 +1547,15 @@
                     //Unfilled Rectangle
 
                     {
-                    type: 'rect',
-                    x0: 0.5,
-                    y0: 0,
-                    x1: 1.5,
-                    y1: 34.1,
-                    line: {
-                        color: 'rgba(142, 181, 205, 1)',
-                        width: 3
-                    }
+                        type: 'rect',
+                        x0: 0.5,
+                        y0: 0,
+                        x1: 1.5,
+                        y1: 34.1,
+                        line: {
+                            color: 'rgba(142, 181, 205, 1)',
+                            width: 3
+                        }
                     },
                 ],
                 annotations: [
@@ -1520,9 +1566,9 @@
                         xanchor: "center",
                         y: 46,
                         font: {
-                            color: 'rgba(142, 181, 205, 1)', 
-            
-            
+                            color: 'rgba(142, 181, 205, 1)',
+
+
                         }
                     }
                 ],
@@ -1536,7 +1582,7 @@
                     x: 0.01,
 
                 },
-                
+
                 yaxis: {
                     title: "<b>True Rating</b>"
                 },
@@ -1553,16 +1599,16 @@
                     //Unfilled Rectangle
 
                     {
-                    type: 'rect',
-                    name: "user rating",
-                    x0: 3.5,
-                    y0: 0,
-                    x1: 4.5,
-                    y1: 10.05,
-                    line: {
-                        color: 'rgba(142, 181, 205, 1)',
-                        width: 4
-                    }
+                        type: 'rect',
+                        name: "user rating",
+                        x0: 3.5,
+                        y0: 0,
+                        x1: 4.5,
+                        y1: 10.05,
+                        line: {
+                            color: 'rgba(142, 181, 205, 1)',
+                            width: 4
+                        }
                     },
                 ],
                 annotations: [
@@ -1573,21 +1619,21 @@
                         xanchor: "center",
                         y: 12,
                         font: {
-                            color: 'rgba(142, 181, 205, 1)', 
-            
-            
+                            color: 'rgba(142, 181, 205, 1)',
+
+
                         }
                     }
                 ],
             }
 
             await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/user-hate-model-loved.csv",
-                
-            // 3264: Buffy the Vampire Slayer
-            // mean: 2.79
-            // user_rating = 1
-            // model_deepfm_rating = 4.53
-            // model_embeddingMF_rating = 3.8
+
+                // 3264: Buffy the Vampire Slayer
+                // mean: 2.79
+                // user_rating = 1
+                // model_deepfm_rating = 4.53
+                // model_embeddingMF_rating = 3.8
 
                 function (rows) {
                     return {
@@ -1597,7 +1643,7 @@
                     function (rows) {
                         var ratings = unpack(rows, 'rating')
                         console.log(ratings)
-                        
+
                         var movie_ratings_userhate = {
                             name: 'Buffy the Vampire Slayer',
                             x: ratings,
@@ -1620,14 +1666,14 @@
                     }
                 )
 
-                // 3391: Who's That Girl?
-                await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/user-loved-model-hate.csv",
+            // 3391: Who's That Girl?
+            await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/user-loved-model-hate.csv",
 
                 // 3391: Who's That Girl?
                 // mean: 2.66
                 // model_deepfm_rating = 2.06
                 // model_embeddingMF_rating = 2.40
-                
+
                 function (rows) {
                     return {
                         rating: rows.rating
@@ -1636,7 +1682,7 @@
                     function (rows) {
                         var ratings = unpack(rows, 'rating')
                         console.log(ratings)
-                        
+
                         var movie_ratings_userlove = {
                             name: 'Who\'s That Girl?',
                             x: ratings,
@@ -1654,18 +1700,18 @@
                         };
                         if (document.getElementById("ratings2")) {
                             Plotly.newPlot(PREDICTIONS2, [movie_ratings_userlove], layout2, config)
-        
+
                         }
 
                     }
-                    
+
                 )
-                
-                    
+
+
 
         }
 
-        if (document.getElementById('ratings1') && (document.getElementById('ratings2')))  {
+        if (document.getElementById('ratings1') && (document.getElementById('ratings2'))) {
             drawRatingDensity();
         }
 
