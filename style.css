@@ -207,7 +207,7 @@ img {
 
 .column-umatrix {
     flex: 50%;
-    margin-top: 42px;
+    margin-top: 23px;
 }
 
 .column-rmatrix-text {
@@ -223,7 +223,7 @@ img {
 
 .column-imatrix {
     flex: 50%;
-    margin-top: 20px;
+    margin-top: 27px;
     margin-right: 20px;
 }
 
@@ -257,6 +257,11 @@ img {
 }
 
 .example {
+    background-color: rgba(57, 45, 50, 0.03);
+    border-radius: 10px;
+}
+
+.example-rs {
     background-color: rgba(57, 45, 50, 0.03);
     border-radius: 10px;
 }

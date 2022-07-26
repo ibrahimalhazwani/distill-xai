@@ -68,7 +68,7 @@
                 <p class="affiliation">
                     University of Zurich
                 </p>
-                
+
                 <p class="author">
                     Menna El-Assady
                 </p>
@@ -154,7 +154,7 @@
             The recommendation process can be divided into four steps: querying, retrieving, filtering, scoring, and
             ranking.
         </p>
-        <div class="example">
+        <div class="example-rs">
             <p></p>
             <p class="example_text">
                 <i><b>This box is interactive!</b> Hover over the different steps below to learn more </i>
@@ -350,17 +350,17 @@
             <h2>
                 An interpretable collaborative filtering recommender system: Matrix Factorization
             </h2>
-            
+
             <p></p>
 
             <p>
                 Matrix Factorization (MF) is a class of collaborative filtering techniques [3]. In
                 its most simplistic form, Matrix Factorization characterizes both the items and the users by a vector of
-                factors (<i>matrices</i>), which then generate latent features (<i><q>embeddings</q></i>) 
-                when they are multiplied together (<i><q>into the matrix dot product</q></i>). 
+                factors (<i>matrices</i>), which then generate latent features (<i><q>embeddings</q></i>)
+                when they are multiplied together (<i><q>into the matrix dot product</q></i>).
             </p>
             <p>
-                This method has become popular because it offers flexibility for modeling real-life scenarios 
+                This method has become popular because it offers flexibility for modeling real-life scenarios
                 while maintaining robust scalability and predictive accuracy [2]. Moreover,
                 since it is based on pure math, it can be classified as an <i>interpretable</i> recommendation method!
                 With MF, we are able to track exactly how our input data is transformed by the model
@@ -369,9 +369,9 @@
             <div class="example">
                 <p class="example_text">
                     <i><b>This box is interactive!</b> Hover over the matrices below to learn how they are
-                         used to calculate the dot product (and make a recommendation)</i>
+                        used to calculate the dot product (and make a recommendation)</i>
                 </p>
-                
+
                 <div class="row">
                     <div class="column-rmatrix-text">
                         <figcaption>Rating matrix</figcaption>
@@ -404,7 +404,7 @@
                     <div class="column-imatrix">
                         <div id="parent7">
                             <img src="item-matrix.png" width="150px">
-                            <div id="popup7" style="display: None">The <b>item matrix</b> stores the items' feature 
+                            <div id="popup7" style="display: None">The <b>item matrix</b> stores the items' feature
                                 scores. Here, each of the 4 items contains 2 features.
                             </div>
                         </div>
@@ -498,7 +498,7 @@
             <div class="example">
                 <p></p>
                 <p class="example_text">
-                    <i><b>This box is interactive!</b> Adjust your preferences through the movie genre sliders 
+                    <i><b>This box is interactive!</b> Adjust your preferences through the movie genre sliders
                         for comedy and horror, and then click on <q>Calculate Matrix Factorization</q> to see how
                         your preferences align with those of your friends'</i>
                 </p>
@@ -581,8 +581,9 @@
 
                 <p class="example_text">
                     <i><b>How to read the results</b>: to help you decide which movie to watch, you just
-                    look at the last row of the Matrix Factorization results. This row represents each movie's average 
-                    predictive rating within your group.</i>
+                        look at the last row of the Matrix Factorization results. This row represents each movie's
+                        average
+                        predictive rating within your group.</i>
                 </p>
 
                 <table id="matrix_factorization" class="rec_table">
@@ -601,7 +602,8 @@
                 While Matrix Factorization can produce good results in a short time, this method also
                 features some disavantages:
             <ul>
-                <li><b>Cold start problem</b>: The matrix can not handle fresh items, such as new movies or new users [TODO: REF].
+                <li><b>Cold start problem</b>: The matrix can not handle fresh items, such as new movies or new users
+                    [TODO: REF].
                 </li>
                 <li><b>Recommendation relevance</b>: Matrix Factorization uses the dot product to
                     recommend items. If all users have interacted and liked the same item, the recommendation will
@@ -628,29 +630,30 @@
 
             <h3>An embedding approach on matrix factorization: EmbeddingMF</h3>
             <p>
-                Building on top of our previous approach, matrix factorization, we learn the latent factors (implicit characteristics) for each movie and user, based on user-movie ratings. Learning these characteristics 
+                Building on top of our previous approach, matrix factorization, we learn the latent factors (implicit
+                characteristics) for each movie and user, based on user-movie ratings. Learning these characteristics
                 can be done through approached like gradient descent [TODO: REF].
             </p>
-            <p>    
+            <p>
                 Using the <i><q>EmbeddingMF</q></i> approach, which includes a bias term on top of our existing
                 dot product, we first create two embedding matrices:
-                <ol>
-                    <li>
-                        A user embedding matrix <i>U</i> containing a user per row and n-factors (columns) representing the
-                        user features.
-                    </li>
-                    <li>
-                        A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific
-                        movie (row).
-                    </li>
-                </ol>
-                
-                
-                By setting the same amount of columns in each matrix, we can multiply the two embedding matrices
-                (UxMT).
-                Next, we can add the user and movie bias terms. This results in the rating for users and movies.
-                Since these latent factors are initialized with random numbers, the initial ratings that are
-                computed by the model differ largely from the ground truth but are minimized during training.
+            <ol>
+                <li>
+                    A user embedding matrix <i>U</i> containing a user per row and n-factors (columns) representing the
+                    user features.
+                </li>
+                <li>
+                    A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific
+                    movie (row).
+                </li>
+            </ol>
+
+
+            By setting the same amount of columns in each matrix, we can multiply the two embedding matrices
+            (UxMT).
+            Next, we can add the user and movie bias terms. This results in the rating for users and movies.
+            Since these latent factors are initialized with random numbers, the initial ratings that are
+            computed by the model differ largely from the ground truth but are minimized during training.
             </p>
             <p>
                 The model consists of a user matrix of size (n_users x 128) and a movie matrix of size (n_movies x
@@ -906,9 +909,9 @@
                 Dashed lines in <b>brown (DeepFM)</b> and <b>yellow (EmbeddingMF)</b> reflect the prediction of each
                 model for <b>User 1680</b>
             </figcaption>
-            <br/>
+            <br />
             <div id="ratings2" style="width:750px;height:350px;"></div>
-            
+
 
             <h2>Conclusion</h2>
             <p style="color: red;">TO EDIT : the two models above actually result in
@@ -2108,7 +2111,7 @@
                     ax: -30,
                     ay: -30
                 },
-                
+
                 {
                     x: 2,
                     y: -0.4,
