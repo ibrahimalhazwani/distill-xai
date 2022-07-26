@@ -57,17 +57,18 @@
                     University of Zurich and UZH Digital Society Initiative
                 </p>
                 <p class="author">
-                    Yves Rutishauser
-                </p>
-                <p class="affiliation">
-                    University of Zurich
-                </p>
-                <p class="author">
                     Gabriela Morgenshtern
                 </p>
                 <p class="affiliation">
                     University of Zurich
                 </p>
+                <p class="author">
+                    Yves Rutishauser
+                </p>
+                <p class="affiliation">
+                    University of Zurich
+                </p>
+                
                 <p class="author">
                     Menna El-Assady
                 </p>
@@ -359,8 +360,8 @@
                 when they are multiplied together (<i><q>into the matrix dot product</q></i>). 
             </p>
             <p>
-                This method has become popular because it offers flexibility for modeling real-life scenarios [2]
-                while maintaining robust scalability and predictive accuracy. Moreover,
+                This method has become popular because it offers flexibility for modeling real-life scenarios 
+                while maintaining robust scalability and predictive accuracy [2]. Moreover,
                 since it is based on pure math, it can be classified as an <i>interpretable</i> recommendation method!
                 With MF, we are able to track exactly how our input data is transformed by the model
                 when making a recommendation.
@@ -504,8 +505,8 @@
                 <p class="example_text">
                     Let's consider the following example: you are planning a movie night with your friends Anna,
                     Jonny, and Kimi. You know that Anna likes both horror movies and comedy, Jonny has a strong
-                    preference for comedy, and Kimi prefers horror movies but also enjoys watching comedy from time to
-                    time. To find the best movie that everyone will enjoy, you are going to use a recommender system
+                    preference for comedy, and Kimi prefers horror movies, but also enjoys comedy once in a while.
+                    To find a movie that everyone will enjoy, you are going to use a recommender system
                     based on the Matrix Factorization techniques described above.
                 </p>
                 <div class="row">
@@ -597,85 +598,54 @@
             <p></p>
 
             <p>
-                While Matrix Factorization can produces some good results in a small amount of time, this methods has
-                the following main disavantages:
+                While Matrix Factorization can produce good results in a short time, this method also
+                features some disavantages:
             <ul>
-                <li><b>Cold start problem</b>: the matrix can not handle fresh items, such as new movies or new users.
+                <li><b>Cold start problem</b>: The matrix can not handle fresh items, such as new movies or new users [TODO: REF].
                 </li>
-                <li><b>The relevance of recommendation</b>: Matrix Factorization uses the dot product to
-                    recommend the items, if all the users have interact with the same item, the recommendation will
+                <li><b>Recommendation relevance</b>: Matrix Factorization uses the dot product to
+                    recommend items. If all users have interacted and liked the same item, the recommendation will
                     focus on that item.</li>
-                <li><b>Hard feature encoding</b> in order to generate the recommendation, we have to explicitly
-                    provide the system with the user preference and item features.</li>
+                <li><b>Hard feature encoding</b>: In order to generate a recommendation, we have to explicitly
+                    provide the system with user preferences and item features.</li>
             </ul>
             </p>
 
             <h2>Modern Recommender Systems</h2>
             <p>
-                Modern recommender systems have to consider many features that can be:
+                Modern recommender systems consider many features:
             </p>
             <ul>
-                <li><b>Categorical</b> like userID, itemID, brand, genre, language, etc.;</li>
-                <li><b>Numerical</b> like price, delivery time, number of reviews, avg of the reviews, etc.;</li>
-                <li><b>Unstructured</b> like keywords, colors, material, etc.</li>
+                <li><b>Categorical</b>: userID, itemID, item brand, genre, language, etc.</li>
+                <li><b>Numerical</b>: price, delivery time, number of reviews, average of the reviews, etc.</li>
+                <li><b>Unstructured</b>: keywords, colors, material, review text, etc.</li>
             </ul>
 
-            <p>TO DO: add why we moved from the embedding only to deepFM</p>
-
-            <!-- <div class="example">
-            <p></p>
-            <p class="example_text">
-                Before diving in discovering how modern recommender systems are able to generate recommendation,
-                choose your occupation and one movie from the list. We will use these two information to first generate
-                a movie recommendation for you and then to show how your profile is mapped in a user-desing space.
+            <p>In a real-world scenario, we would not explicitly know all the preferences of every user and all the
+                characteristics of every item. This hinders our ability to make optimal recommendations. How might we
+                resolve this?
             </p>
-            <label for="occupation" class="occupation">Choose your occupation:</label>
-            <select name="occupation" id="occupation">
-                <option value="Academic">Academic</option>
-                <option value="Artist">Artist</option>
-                <option value="Clerical">Clerical</option>
-                <option value="College/Grad student">College/Grad student</option>
-                <option value="Customer service">Customer service</option>
-                <option value="Doctor/Nurse">Doctor/Nurse</option>
-                <option value="Executive/Managerial">Executive/Managerial</option>
-                <option value="Farmer">Farmer</option>
-                <option value="Homemaker">Homemaker</option>
-                <option value="K-12 student">K-12 student</option>
-                <option value="Lawyer">Lawyer</option>
-                <option value="Other">Other</option>
-                <option value="Programmer">Programmer</option>
-                <option value="Retired">Retired</option>
-                <option value="Sales/Marketing">Sales/Marketing</option>
-                <option value="Scientist">Scientist</option>
-                <option value="Self-employed">Self-employed</option>
-                <option value="Technician/Engineer">Technician/Engineer</option>
-                <option value="Tradesman/Craftsman">Tradesman/Craftsman</option>
-                <option value="Unemployed">Unemployed</option>
-                <option value="Writer">Writer</option>
-            </select>
-            <br>
-            <form id="movieForm" autocomplete="off">
-                <div class="autocomplete">
-                    <label for="movie" class="movie">Choose one movie that you have watched:</label>
-                    <input id="movieInput" type="text" name="movie" placeholder="Select a movie">
-                </div>
-            </form>
-            <p></p>
-        </div> -->
-
-            <p></p>
 
             <h3>An embedding approach on matrix factorization: EmbeddingMF</h3>
             <p>
-                In a real-world scenario, we do not explicitly know all the preferences of every user and all the
-                characteristics of a movie to make a optimal recommendation.
-                However, we can use gradient descent to learn the latent factors (implicit characteristics) for each
-                movie and user based on user-movie ratings.
-                Using the “Dot Product + Bias” approach, we first create two embedding matrices.
-                (1) A user embedding matrix (U) containing a user per row and n-factors (columns) representing the
-                user features.
-                (2) A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific
-                movie (row).
+                Building on top of our previous approach, matrix factorization, we learn the latent factors (implicit characteristics) for each movie and user, based on user-movie ratings. Learning these characteristics 
+                can be done through approached like gradient descent [TODO: REF].
+            </p>
+            <p>    
+                Using the <i><q>EmbeddingMF</q></i> approach, which includes a bias term on top of our existing
+                dot product, we first create two embedding matrices:
+                <ol>
+                    <li>
+                        A user embedding matrix <i>U</i> containing a user per row and n-factors (columns) representing the
+                        user features.
+                    </li>
+                    <li>
+                        A movie embedding matrix (M) where a row contains n-factors (columns) that describe a specific
+                        movie (row).
+                    </li>
+                </ol>
+                
+                
                 By setting the same amount of columns in each matrix, we can multiply the two embedding matrices
                 (UxMT).
                 Next, we can add the user and movie bias terms. This results in the rating for users and movies.
@@ -690,6 +660,7 @@
                 focus on learning something within this range. We trained the model over 15 epochs using the MSELoss, a
                 learning rate of 0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
             </p>
+            <p>TO DO: add why we moved from the embedding only to deepFM</p>
             <h3>Deep Learning Recommender System: DeepFM</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, including recommender
@@ -1640,7 +1611,7 @@
                         x0: 2.79,
                         y0: 0,
                         x1: 2.79,
-                        y1: 175,
+                        y1: 185,
                         line: {
                             color: 'rgba(103, 141, 88, 0.6)',
                             width: 2,
@@ -1652,7 +1623,7 @@
                         x0: 4.53,
                         y0: 0,
                         x1: 4.53,
-                        y1: 175,
+                        y1: 185,
                         line: {
                             color: 'rgba(57, 45, 50, 0.6)',
                             width: 2,
@@ -1664,7 +1635,7 @@
                         x0: 3.8,
                         y0: 0,
                         x1: 3.8,
-                        y1: 175,
+                        y1: 185,
                         line: {
                             color: 'rgba(244, 159, 10, 0.6)',
                             width: 2,
@@ -1678,7 +1649,7 @@
                         text: "<b>User Rating: 1</b>",
                         x: 1,
                         xanchor: "center",
-                        y: 46,
+                        y: 45,
                         font: {
                             color: 'rgba(142, 181, 205, 0.8)',
                         }
@@ -1688,7 +1659,7 @@
                         text: "<b>2.79</b><br>Training<br>Mean",
                         x: 2.8,
                         xanchor: "left",
-                        y: 108,
+                        y: 114,
                         yanchor: "bottom",
                         align: "left",
                         font: {
@@ -1698,9 +1669,9 @@
                     {//EmbeddingMF
                         showarrow: false,
                         text: "<b>3.8</b>",
-                        x: 3.7,
+                        x: 3.79,
                         xanchor: "right",
-                        y: 154,
+                        y: 160,
                         yanchor: "right",
                         font: {
                             color: 'rgba(244, 159, 10, 0.6)',
@@ -1709,9 +1680,9 @@
                     {//DeepFM
                         showarrow: false,
                         text: "<b>4.53</b>",
-                        x: 4.43,
+                        x: 4.52,
                         xanchor: "right",
-                        y: 154,
+                        y: 160,
                         yanchor: "right",
                         font: {
                             color: 'rgba(57, 45, 50, 0.6)',
@@ -1769,7 +1740,8 @@
                         y1: 40,
                         line: {
                             color: 'rgba(103, 141, 88, 0.6)',
-                            width: 2
+                            width: 2,
+                            dash: 'dashdot'
                         }
                     },
 
@@ -1805,7 +1777,7 @@
                         text: "<b>User Rating: 5</b>",
                         x: 5,
                         xanchor: "center",
-                        y: 4,
+                        y: 3.5,
                         font: {
                             color: 'rgba(142, 181, 205, 0.8)',
 
@@ -1821,7 +1793,7 @@
                         yanchor: "top",
                         align: "left",
                         font: {
-                            color: 'rgba(103, 141, 88, 0.8)',
+                            color: 'rgba(103, 141, 88, 0.6)',
                         }
                     },
                     {//EmbeddingMF
@@ -2132,17 +2104,7 @@
                     ax: -30,
                     ay: -30
                 },
-                // {
-                //   x: 1.5,
-                //   y: -0.4,
-                //   xref: 'x',
-                //   yref: 'y',
-                //   text: 'Falsely recommended by Model',
-                //   showarrow: true,
-                //   arrowhead: 3,
-                //   ax: -50,
-                //   ay: 50
-                // },
+                
                 {
                     x: 2,
                     y: -0.4,
