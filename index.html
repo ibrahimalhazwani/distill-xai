@@ -932,14 +932,12 @@
             </p>
             <div id="ratings1" style="width:750px;height:350px;"></div>
             <figcaption class="centered">
-                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each
-                model.
+                Dashed lines in <b>brown (DeepFM)</b> and <b>yellow (EmbeddingMF)</b> reflect the prediction of each
+                model for <b>User 1680</b>
             </figcaption>
+            <br/>
             <div id="ratings2" style="width:750px;height:350px;"></div>
-            <figcaption class="centered">
-                Dashed vertical lines in brown (DeepFM) and yellow (EmbeddingMF) reflect the mean prediction of each
-                model.
-            </figcaption>
+            
 
             <h2>Conclusion</h2>
             <p style="color: red;">TO EDIT : the two models above actually result in
@@ -1600,7 +1598,7 @@
             var config = { responsive: true, displayModeBar: false };
             var layout1 = {
                 title: {
-                    text: "Distribution of Training Set Ratings : <br><i>Buffy the Vampire Slayer (top) vs. Who's That Girl? (bottom)</i>",
+                    text: "<i>Buffy the Vampire Slayer</i>: Distribution of Training Set Ratings",
                     font: {
                         size: 20
                     },
@@ -1612,7 +1610,7 @@
                 yaxis: {
                     title: "<b>True Rating</b>"
                 },
-                showlegend: true,
+                showlegend: false,
                 legend: {
                     "orientation": "h",
                     x: 1,
@@ -1725,6 +1723,7 @@
             var layout2 = {
 
                 title: {
+                    text: "<i>Who's That Girl?</i>  Distribution of Training Set Ratings",
                     font: {
                         size: 20
                     },
@@ -1736,7 +1735,7 @@
                 yaxis: {
                     title: "<b>True Rating</b>"
                 },
-                showlegend: true,
+                showlegend: false,
                 legend: {
                     "orientation": "h",
                     x: 1,
