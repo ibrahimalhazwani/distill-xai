@@ -161,11 +161,11 @@ img {
 
 
 #user_feature tr:nth-child(5) {
-    background-color: #8EB5CD
+    background-color: rgba(142, 181, 205, 0.5)
 }
 
 #matrix_factorization tr:nth-child(6) {
-    background-color: #8EB5CD
+    background-color: rgba(142, 181, 205, 0.5)
 }
 
 
