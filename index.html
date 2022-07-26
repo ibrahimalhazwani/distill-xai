@@ -106,18 +106,18 @@
             this article, we will give you an introduction to Recommender Systems (RS), and illustrate how new
             deep-learning algorithmic techniques in this field work.
         </p>
-        
+
         <p>
             First, we illustrate how Matrix Factorization (MF), a relatively simply designed
-            recommender system, works. Then, we increase the sophistication of our approach, exploring  
-            the effect this has on the prediction accuracy of a model. 
-            
+            recommender system, works. Then, we increase the sophistication of our approach, exploring
+            the effect this has on the prediction accuracy of a model.
+
             We explain differences in two models' competence in predicting a user's rating of movies they have seen
             by leveraging various visualization strategies. Through this article, we hope
             that you will gain intuition and visual understanding of how recommender systems work.
         </p>
-        
-        
+
+
         <!--
             <d-cite key="ricci2011introduction">
                 <d-hover-box id="hover-box" style="display: none;">
@@ -201,7 +201,7 @@
                     <div id="parent3">
                         <img src="filter-rs-workflow.png" width="150px">
                         <div id="popup3" style="display: None">
-                            The items retrieved are filtered based on some set of preferences 
+                            The items retrieved are filtered based on some set of preferences
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
                     <div id="parent4">
                         <img src="ranking-rs-workflow.png" width="150px">
                         <div id="popup4" style="display: None">
-                            Each item is given a score, and the item rankings are returned to the user. 
+                            Each item is given a score, and the item rankings are returned to the user.
                             The top item is the system's recommendation.
                         </div>
                     </div>
@@ -219,36 +219,32 @@
         </div>
         <p></p>
         <p>
-            In order to generate recommendations, RS may accept input data like users' preferences, 
+            In order to generate recommendations, RS may accept input data like users' preferences,
             items' characteristics, explicit feedback, implicit feedback... Essentially,
             any measurable information about the items or users the RS is interested in modeling. When computing
             recommendations, this information is retrieved from a database and then stored in matrices. The matrix
-            data object optimizes a lot of the computation required to reach a recommendation. Why this happens is 
-            beyond the scope of this discussion, but you can read about this process in detail here. [TODO]
-        </p>
-        <p style="color: red;">
-            TODO: add citation for Chapter 2: 2.2 Matrices in MML, matrix multiplication and vector math for ML. 
-            https://mml-book.github.io/book/mml-book.pdf
+            data object optimizes a lot of the computation required to reach a recommendation. Why this happens is
+            beyond the scope of this discussion, but you can read about this process in detail here [10].
         </p>
         <p>
             The most accessible data are explicit ratings, which include explicit input from the user regarding
             their level of interest in a product, i.e. the rating a user gave to an item. Usually, explicit
-            feedback can be represented by a <i><q>sparse</q></i> matrix. A sparse matrix is characterized as 
-            a matrix where only a small number of fields have non-zero (or non-null) values. Since users are 
+            feedback can be represented by a <i><q>sparse</q></i> matrix. A sparse matrix is characterized as
+            a matrix where only a small number of fields have non-zero (or non-null) values. Since users are
             unlikely to rate more than a small number of items from the entirety of those available in a dataset,
-            querying explicit information results in sparse matrices. 
-        </p> 
-        <p>   
+            querying explicit information results in sparse matrices.
+        </p>
+        <p>
             Of course, sparse matrices are
             not sufficient for training a model, and it is unreasonable to expect a complete
-            dataset of explicit data. So, we learn the similarities a given user has with other users, 
+            dataset of explicit data. So, we learn the similarities a given user has with other users,
             and use these to predict how much they would like some <i>unseen</i> item.
         </p>
         <p>
             While explicit feedback is preferable, it is also possible to use implicit feedback to reflect user
             behavior. Examples of implicit feedback include the browser history on a website, the number of
             clicks made on a given page, and a user's pattern of mouse movement. As opposed to explicit feedback,
-            implicit feedback is represented by a densely filled matrix, because we (as researchers) can dictate how 
+            implicit feedback is represented by a densely filled matrix, because we (as researchers) can dictate how
             this data is to be collected or organized.
         </p>
         <p>
@@ -283,9 +279,8 @@
                 <img src='CF.png' width="383px" height="408px">
             </div>
             <p>
-                <b>Collaborative filtering:</b> generates a
-                recommendation by relying on past user-item interaction, like explicit feedback (ratings) for movies watched 
-                in the past. In CF, it is sufficient to detect
+                <b>Collaborative filtering:</b> generates a recommendation by relying on past user-item interaction,
+                like explicit feedback (ratings) for movies watched in the past. In CF, it is sufficient to detect
                 similar users and/or items, cluster them, and make new predictions based on the similarity existing
                 within a cluster [6].
                 <!-- The main issue with CF method is known as the <i>Cold-Start Problem</i>. -->
@@ -307,8 +302,9 @@
                 methods, which is going to be decribed later, is called Matrix Factorization (MF).This issue is known as the cold-start problem. The main downside of this method is knwon as cold-start problem.-->
 
         <p></p>
-        <p style="color: red;">
-            WRITE SOMETHING HERE
+        <p>
+            The table below summarized the advantages and disavantages of the two models. For a more in depth
+            analysis of the two method, look at the following papers [11, 12, 13].
         </p>
         <table>
             <tr>
@@ -321,7 +317,8 @@
                 <td>
                     <ul>
                         <li>Does not require any data about the other users</li>
-                        <li>Can recommend items which are relevant to the user, but not the population <br>(<i><q>niche items</q></i>)</li>
+                        <li>Can recommend items which are relevant to the user, but not the population <br>(<i><q>niche
+                                    items</q></i>)</li>
                     </ul>
                 </td>
                 <td>
@@ -336,7 +333,8 @@
                 <td>
                     <ul>
                         <li>Requires a lot of domain knowledge</li>
-                        <li>Makes recommendatios based only on the existing interests of the user <br>(no <i><q>niche items</q></i>)</li>
+                        <li>Makes recommendatios based only on the existing interests of the user <br>(no <i><q>niche
+                                    items</q></i>)</li>
                     </ul>
                 </td>
                 <td>
@@ -346,14 +344,15 @@
                 </td>
             </tr>
         </table>
+
         <div>
             <h2>
                 An interpretable collaborative filtering recommender system: Matrix Factorization
             </h2>
             <div class="example">
                 <p class="example-text">
-                    <u>How to interact</u>: over to each of the different matrixes to learn what information they stores
-                    and how can be used to calculate the dot product.
+                    <i>Hover to each of the different matrixes to learn what information they stores
+                        and how can be used to calculate the dot product.</i>
                 </p>
                 <div class="row">
                     <div class="column-rmatrix-text">
@@ -371,8 +370,7 @@
                         <div id="parent5">
                             <img src="rating-matrix.png" width="300px">
                             <div id="popup5" style="display: None">The <b>rating matrix</b> stores the dot product of
-                                the
-                                two single matrixes.</div>
+                                the two single matrixes.</div>
                         </div>
                     </div>
                     <div class="column-umatrix">
@@ -761,10 +759,6 @@
             </ol>
             </p>
 
-            <p style="color: red;">
-                TODO: add figure about DeepFM architecture.
-            </p>
-
             <h2>One recommender can not rule them all: <q>All models are wrong, but some are useful</q></h2>
             <p>
                 We have trained the two models described above, the EmbeddingFM and the DeepFM, with the task of
@@ -781,13 +775,13 @@
                 Error (RMSE), one of the most used metrics in the Recommender System field. RMSE is typically used when
                 the developer wants to evaluate a predicted score, like the predictive rating of a movie, and compare it
                 to a ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute
-                error. Lower RMSE better is the recommendation accuracy [1, 8].
+                error. Lower RMSE better translate in a better recommendation accuracy [1, 8].
             </p>
             <div class="row">
                 <div class="column">
                 </div>
                 <div class="column">
-                    <img src="rmse-formula.png" height="50px">
+                    <img src="rmse-formula.png" height="170px">
                 </div>
                 <div class="column">
                 </div>
@@ -835,8 +829,9 @@
                 the error on rating 1 and 2 can be explained considering that <q>people are more willing to share
                     positive experiences than negative ones</q> [9].
             </p>
-
-            <div id="tester" style="width:750px;height:700px;"></div>
+            <div class="example">
+                <div id="tester" style="width:750px;height:700px;"></div>
+            </div>
             <figcaption>TODO</figcaption>
             <p></p>
             <p>
@@ -855,7 +850,7 @@
                 ratings from the DeepFM model.
             </p>
             <p>
-                SOMETHING MISSING HERE
+                WRITE SOMETHING HERE
             </p>
             <div class="row">
                 <div class="centered">
@@ -906,8 +901,8 @@
                 </div>
                 </p>
                 <p class="example_text">
-                    <u>How to interact:</u> Lay over one of the point to discover what is the movie name, the
-                    true rating, and the predicted scores from the model(s).
+                    <i>Hover one of the point to discover what is the movie name, the
+                        true rating, and the predicted scores from the model(s)</i>
                 </p>
                 <div id='myDiv'></div>
             </div>
@@ -938,7 +933,7 @@
             <h2>Conclusion</h2>
             <p style="color: red;">TO EDIT : the two models above actually result in
                 non-personalized recommendations, such as those you may have seen in print newspapers or
-                magazines. These recommendations rely solely on popular opinion of the population, 
+                magazines. These recommendations rely solely on popular opinion of the population,
                 rather than characteristics specific to a user.
             </p>
             <p>
@@ -989,6 +984,23 @@
         </p>
         <p>
             [9] 2018 Customer Experience, https://www.sitel.com/report/2018-cx-index/
+        </p>
+        <p>
+            [10] Deisenroth, Marc Peter, A. Aldo Faisal, and Cheng Soon Ong. Mathematics for machine learning. Cambridge
+            University Press, 2020.
+        </p>
+        <p>
+            [11] Pazzani, Michael J., and Daniel Billsus. "Content-based recommendation systems." The adaptive web.
+            Springer, Berlin, Heidelberg, 2007. 325-341.
+        </p>
+        <p>
+            [12] Sharma, Ritu, Dinesh Gopalani, and Yogesh Meena. "Collaborative filtering-based recommender system:
+            Approaches and research challenges." 2017 3rd international conference on computational intelligence &
+            communication technology (CICT). IEEE, 2017.
+        </p>
+        <p>
+            [13] Hannon, John, Mike Bennett, and Barry Smyth. "Recommending twitter users to follow using content and
+            collaborative filtering approaches." Proceedings of the fourth ACM conference on Recommender systems. 2010.
         </p>
         <h3>Reuse</h3>
         <p>
@@ -1378,6 +1390,8 @@
                             yaxis: {
                                 title: "<b>RMSE</b>"
                             },
+                            plot_bgcolor: "rgba(0,0,0,0)",
+                            paper_bgcolor: "rgba(0,0,0,0)",
                             showlegend: true,
                             legend: {
                                 "orientation": "h",
@@ -1504,6 +1518,8 @@
                             yaxis: {
                                 title: "<b>Count</b>"
                             },
+                            plot_bgcolor: "rgba(0,0,0,0)",
+                            paper_bgcolor: "rgba(0,0,0,0)",
                             showlegend: true,
                             legend: {
                                 "orientation": "h",
@@ -1878,9 +1894,6 @@
                             type: "histogram",
                             histnorm: "count",
                             marker: { color: 'rgba(103, 141, 88, 0.4)' },
-
-
-
                         };
                         if (document.getElementById("ratings2")) {
                             Plotly.newPlot(PREDICTIONS2, [movie_ratings_userlove], layout2, config)
@@ -1890,9 +1903,6 @@
                     }
 
                 )
-
-
-
         }
 
         if (document.getElementById('ratings1') && (document.getElementById('ratings2'))) {
