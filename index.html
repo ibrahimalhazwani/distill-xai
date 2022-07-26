@@ -579,9 +579,9 @@
                 <p></p>
 
                 <p class="example_text">
-                    <i><b>How to read the results</b>: to help you decide which movie to watch, you just need to
-                    look at the last row of the Matrix Factorization results. This row represents the average 
-                    predictive rating amongst your group.</i>
+                    <i><b>How to read the results</b>: to help you decide which movie to watch, you just
+                    look at the last row of the Matrix Factorization results. This row represents each movie's average 
+                    predictive rating within your group.</i>
                 </p>
 
                 <table id="matrix_factorization" class="rec_table">
@@ -1621,10 +1621,10 @@
                 },
                 shapes: [
                     // 3264: Buffy the Vampire Slayer
-                    // mean: 2.79
+                    // mean: 2.79, 'rgba(103, 141, 88, 0.6)',
                     // user_rating = 1
-                    // model_deepfm_rating = 4.53
-                    // model_embeddingMF_rating = 3.8
+                    // model_deepfm_rating = 4.53, 'rgba(57, 45, 50, 0.6)',
+                    // model_embeddingMF_rating = 3.8,  'rgba(244, 159, 10, 0.6)',
 
                     {
                         type: 'rect',
@@ -1649,11 +1649,11 @@
                             dash: 'dashdot'
                         }
                     },
-                    {   //EmbeddingMF
+                    {   //DeepFM
                         type: 'line',
-                        x0: 3.8,
+                        x0: 4.53,
                         y0: 0,
-                        x1: 3.8,
+                        x1: 4.53,
                         y1: 175,
                         line: {
                             color: 'rgba(57, 45, 50, 0.6)',
@@ -1661,11 +1661,11 @@
                             dash: 'dashdot'
                         }
                     },
-                    {   //DeepFM
+                    {   //EmbeddingMF
                         type: 'line',
-                        x0: 4.53,
+                        x0: 3.8,
                         y0: 0,
-                        x1: 4.53,
+                        x1: 3.8,
                         y1: 175,
                         line: {
                             color: 'rgba(244, 159, 10, 0.6)',
@@ -1699,24 +1699,24 @@
                     },
                     {//EmbeddingMF
                         showarrow: false,
-                        text: "<b>2.06</b>",
+                        text: "<b>3.8</b>",
                         x: 3.7,
                         xanchor: "right",
                         y: 154,
                         yanchor: "right",
                         font: {
-                            color: 'rgba(57, 45, 50, 0.6)',
+                            color: 'rgba(244, 159, 10, 0.6)',
                         }
                     },
                     {//DeepFM
                         showarrow: false,
-                        text: "<b>2.4</b>",
+                        text: "<b>4.53</b>",
                         x: 4.43,
                         xanchor: "right",
                         y: 154,
                         yanchor: "right",
                         font: {
-                            color: 'rgba(244, 159, 10, 0.6)',
+                            color: 'rgba(57, 45, 50, 0.6)',
                         }
                     }
 
@@ -1753,10 +1753,10 @@
                     {
                         type: 'rect',
                         name: "user rating",
-                        x0: 3.5,
+                        x0: 4.5,
                         y0: 0,
-                        x1: 4.5,
-                        y1: 10.05,
+                        x1: 5.5,
+                        y1: 1.05,
                         line: {
                             color: 'rgba(142, 181, 205, 0.6)',
                             width: 4
@@ -1803,10 +1803,10 @@
                 annotations: [
                     {
                         showarrow: false,
-                        text: "<b>User Rating: 4</b>",
-                        x: 4,
+                        text: "<b>User Rating: 5</b>",
+                        x: 5,
                         xanchor: "center",
-                        y: 12,
+                        y: 4,
                         font: {
                             color: 'rgba(142, 181, 205, 0.8)',
 
@@ -1827,7 +1827,7 @@
                     },
                     {//EmbeddingMF
                         showarrow: false,
-                        text: "<b>3.8</b>",
+                        text: "<b>2.06</b>",
                         x: 2.05,
                         xanchor: "right",
                         y: 36,
@@ -1838,7 +1838,7 @@
                     },
                     {//DeepFM
                         showarrow: false,
-                        text: "<b>4.53</b>",
+                        text: "<b>2.4</b>",
                         x: 2.39,
                         xanchor: "right",
                         y: 36,
