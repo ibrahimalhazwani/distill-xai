@@ -348,7 +348,7 @@
 
         <div>
             <h2>
-                Matrix Factorization: Interpretable collaborative filtering 
+                Matrix Factorization: Interpretable collaborative filtering
             </h2>
 
             <p></p>
@@ -603,7 +603,7 @@
                 features some disavantages:
             <ul>
                 <li><b>Cold start problem</b>: The matrix cannot handle fresh items, such as new movies or new users
-                    [TODO: REF].
+                    [14].
                 </li>
                 <li><b>Recommendation relevance</b>: Matrix Factorization uses the dot product to
                     recommend items. If all users have interacted and liked the same item, the recommendation will
@@ -623,7 +623,8 @@
                 <li><b>Unstructured</b>: keywords, colors, material, review text, etc.</li>
             </ul>
 
-            <p>In a real-world scenario, we likely would not have explicit data on the preferences of every user and the features of every item. This hinders our ability to make optimal recommendations. How might we
+            <p>In a real-world scenario, we likely would not have explicit data on the preferences of every user and the
+                features of every item. This hinders our ability to make optimal recommendations. How might we
                 resolve this?
             </p>
 
@@ -631,32 +632,35 @@
             <p>
                 Building on top of our previous approach, Matrix Factorization, we learn the latent factors (implicit
                 characteristics) for each movie and user, based on user-movie ratings. Learning these characteristics
-                can be done through approached like gradient descent [TODO: REF].
+                can be done through approached like gradient descent [16].
             </p>
             <p>
                 We will use the <i><q>EmbeddingMF</q></i> approach, which includes a bias term on top of our existing
                 dot product. We start by creating two embedding matrices:
             <ol>
                 <li>
-                    A user embedding matrix <i>U</i>, containing one user per row, and <i>n</i> user features as columns. 
+                    A user embedding matrix <i>U</i>, containing one user per row, and <i>n</i> user features as
+                    columns.
                     <br>
                     <i>For a set of 100 users and 200 features, U will have dimensions of (100, 200)</i>
                 </li>
                 <li>
-                    A movie embedding matrix <i>M</i>, containing one movie per row, and <i>n</i> movie features as columns.
+                    A movie embedding matrix <i>M</i>, containing one movie per row, and <i>n</i> movie features as
+                    columns.
                     <br>
                     <i>For a set of 100 movies and 200 features, M will have dimensions of (100, 200)</i>
                 </li>
             </ol>
 
-
-            Having the same number of columns in each matrix allows us to multiply the two embedding matrices
-            (<i>U</i> x <i>M^T</i>) [TODO: superscript formatting].
-            Next, we add bias terms to each user and each movie. Adding bias to our matrix product results in 
-            a matrix representing predictive user ratings for all the movies in our dataset.
-            Since these latent factors (features) are initialized by random numbers (independently and identically distributed Normal samples), the initial ratings that are
-            computed by the model differ largely from the ground truth. During training, the difference 
-            between our latent factors and the ground truth is minimized.
+            <p>
+                Having the same number of columns in each matrix allows us to multiply the two embedding matrices
+                (<i>U</i> x <i>M<sup>T</sup></i> ).
+                Next, we add bias terms to each user and each movie. Adding bias to our matrix product results in
+                a matrix representing predictive user ratings for all the movies in our dataset.
+                Since these latent factors (features) are initialized by random numbers (independently and identically
+                distributed Normal samples), the initial ratings that are
+                computed by the model differ largely from the ground truth. During training, the difference
+                between our latent factors and the ground truth is minimized.
             </p>
             <p>
                 The model consists of a user matrix of size (n_users x 128) and a movie matrix of size (n_movies x
@@ -666,7 +670,11 @@
                 focus on learning something within this range. We trained the model over 15 epochs using the MSELoss, a
                 learning rate of 0.005, and a weight decay of 0.1 which helps to prevent the model from overfitting.
             </p>
-            <p>TO DO: add why we moved from the embedding only to deepFM</p>
+            <p style="color: red;">
+                The EmbeddingFM was able to generate good recommendations with an average validation error of 0.71. The
+                dataset, Movielens 1M, used to train and the model contains metadata as: the user occupation, user age,
+                and location. How can use some or all of these metadatas?
+            </p>
             <h3>DeepFM: A deep learning factorization machine</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, including recommender
@@ -699,46 +707,17 @@
                 </div>
             </div>
             <figcaption class="centered">DeepFM output formula.</figcaption>
-            <!-- <span class="katex-display">
-                <span class="katex">
-                    <span class="katex-mathmk">
-                        <math>
-                            <semantics>
-                                <mrow>
-                                    <mi>y</mi>
-                                    <mo>=</mo>
-                                    <mi>sigmoid</mi>
-                                    <mo>(</mo>
-                                    <msub>
-                                        <mi>y</mi>
-                                        <mi>FM</mi>
-                                    </msub>
-                                    <mo>+</mo>
-                                    <msub>
-                                        <mi>y</mi>
-                                        <mi>DNN</mi>
-                                    </msub>
-                                    <mo>)</mo>
-                                </mrow>
-                            </semantics>
-                        </math>
-                    </span>
-                </span>
-            </span> -->
-            <!-- <p>
-                A visual representation of the architecture is shown in the image above.
-            </p> -->
+            <p></p>
             <p>
-                <b>Factorization Machines</b> Are model class that combines the advantages of Support Vector
+                <b>Factorization Machines</b>: Are model class that combines the advantages of Support Vector
                 Machines (SVM) with factorization models [7]. Factorization Machine are are a general predictor that
                 model all interactions between variables using factorized parameters. By doing so, they are able to
                 estimate interactions even in problems with huge sparsisty as is the case in recommender systems.
             </p>
 
             <p>
-                <b>Deep component</b> The deep component is a feed-forward neural network which is used to learn
-                high-order
-                feature interactions. Two interesting feature of this deep learning structure are:
+                <b>Deep component</b>: The deep component is a feed-forward neural network which is used to learn
+                high-order feature interactions. Two interesting feature of this deep learning structure are:
             <ol>
                 <li>While the lengths of different input field vectors can be different, thei embedding are of the
                     same size.</li>
@@ -750,13 +729,13 @@
             <h2>One recommender cannot rule them all</h2>
             <div class="quote">
                 <h3>
-                    <q>All models are wrong, but some are useful [TODO: REF (in comments)]</q>
+                    <blockquote><q>All models are wrong, but some are useful.</q> [15] </br>
+                        <h6>- George Box, 1976</h6>
+                    </blockquote>
+
                 </h3>
-                <h6>- George Box, 1976</h6>
-                <!-- Box, George E. P. (1976), "Science and statistics" (PDF), Journal of the American Statistical Association, 71 (356): 791–799, doi:10.1080/01621459.1976.10480949. -->
             </div>
 
-            
             <p>
                 We have trained the two models described above, the EmbeddingFM and the DeepFM, with the task of
                 generating a recommendation to a test set of 100k entries. By plotting the distribution of the true and
@@ -766,8 +745,10 @@
 
                 [TODO: add mean ratings of all models in this and error plot]
             </p>
-            <div id="tester2" style="width:750px;height:700px;"></div>
-            <figcaption>TODO</figcaption>
+            <div class="example">
+                <div id="tester2" style="width:750px;height:700px;"></div>
+            </div>
+            <figcaption class="centered">TODO</figcaption>
             <p></p>
             <p>
                 To better understand these results, we decide to validate our approaches using the Root Mean Squared
@@ -785,43 +766,7 @@
                 <div class="column">
                 </div>
             </div>
-            <!-- <span class="katex-display">
-                <span class="katex">
-                    <span class="katex-mathmk">
-                        <math>
-                            <semantics>
-                                <mrow>
-                                    <mi>RMSE</mi>
-                                    <mo>=</mo>
-                                    <mo>&#8730</mo>
-                                    <mo>\frac{1}{R}</mo>
-                                    <msub>
-                                        <mo>&#8721</mo>
-                                        <msub>
-                                            <mi>r</mi>
-                                            <mi>ui</mi>
-                                        </msub>
-                                    </msub>
-                                    <mo>(</mo>
-                                    <msub>
-                                        <mi>r</mi>
-                                        <mi>ui</mi>
-                                    </msub>
-                                    <mo>-</mo>
-                                    <msub>
-                                        <mi>r</mi>
-                                        <mi>ui</mi>
-                                    </msub>
-                                    <msup>
-                                        <mo>)</mo>
-                                        <mi>2</mi>
-                                    </msup>
-                                </mrow>
-                            </semantics>
-                        </math>
-                    </span>
-                </span>
-            </span> -->
+
             <p>
                 By plotting the RMSE of the two models it is possible to notice that both the two models described
                 above present a high RMSE value at the two extremes (prediction rating of 1 or 2 and rating of 5). While
@@ -841,14 +786,11 @@
                 models generate the movie recommendations for a user that are predicted with a rating of 5.
             </p>
             <p>
-
-            </p>
-            <p>
                 To support this direction, we are going to use a custom Venn Diagram with three sets: true rating
                 (movie rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted
                 ratings from the DeepFM model.
             </p>
-            <p>
+            <p style="color: red;">
                 WRITE SOMETHING HERE
             </p>
             <div class="row">
@@ -862,9 +804,15 @@
 
             <p></p>
             <div class="example">
+                <p class="example_text" style="color: red;">
+                    Let's consider the following user: Xiao. He is 25-34 years old writer who lives in the West Coast.
+                    We have retrieved the top 10ish movies that both models would recommend to himand some movies that
+                    he liked and rate 5 but the models have not recommended to him.
+                </p>
                 <p class="example_text">
-                    <u>How to read:</u> the movies are represented by dot in the different sets of the Venn Diagram. The
-                    line that starts from the center represent the error that has been made.
+                    <i><b>This box is interactive!</b> the movies are represented by dot in the different sets of the
+                        Venn Diagram. The line that starts from the center represent the error that has been made.</i>
+                </p>
                 <div class="row">
                     <div class="column example_text">
                         <p class="example_text"><b>EmbeddingFM</b></p>
@@ -873,7 +821,6 @@
                         <p class="example_text"><b>DeepFM</b></p>
                     </div>
                     <div class="column">
-
                     </div>
                 </div>
                 <div class="row">
@@ -898,7 +845,7 @@
                         <p>The model over estimate the rating that the user will give.</p>
                     </div>
                 </div>
-                </p>
+                <p></p>
                 <p class="example_text">
                     <i>Hover one of the point to discover what is the movie name, the
                         true rating, and the predicted scores from the model(s)</i>
@@ -1002,6 +949,14 @@
         <p>
             [14] Lika, Blerina, Kostas Kolomvatsos, and Stathes Hadjiefthymiades. "Facing the cold start problem in
             recommender systems." Expert systems with applications 41.4 (2014): 2065-2073.
+        </p>
+        <p>
+            [15] Box, George E. P. (1976), "Science and statistics" (PDF), Journal of the American Statistical
+            Association, 71 (356): 791-799, doi:10.1080/01621459.1976.10480949.
+        </p>
+        <p>
+            [16] Ruder, Sebastian. "An overview of gradient descent optimization algorithms." arXiv preprint
+            arXiv:1609.04747 (2016).
         </p>
         <h3>Reuse</h3>
         <p>
