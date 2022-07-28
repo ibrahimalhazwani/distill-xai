@@ -740,11 +740,13 @@
             </div>
 
             <p>
-                We have trained EmbeddingMF and the DeepFM for the task of generating recommendations with a train/test set split of 
-                900k/100k entries of users' movie ratings [TODO: movielens ref]. 
+                We have trained EmbeddingMF and the DeepFM for the task of generating recommendations with a train/test
+                set split of
+                900k/100k entries of users' movie ratings [TODO: movielens ref].
                 By plotting the distribution of the true and
                 predictive ratings below, we note that that the distribution of the DeepFM is
-                very narrow and highly dense around a rating of 3.2, while that of EmbeddingFM has a density focused around 3.7. 
+                very narrow and highly dense around a rating of 3.2, while that of EmbeddingFM has a density focused
+                around 3.7.
                 What is surprising here are the mean predictive ratings, which despite quite differing density shapes
                 are, in fact, very close to each other&mdash; and to the training mean.
             </p>
@@ -756,10 +758,13 @@
             <p></p>
             <p>
                 To better understand these results, we validate our models using the Root Mean Squared
-                Error (RMSE), the standard metric for validation in the recommender systems research. RMSE is typically used when
+                Error (RMSE), the standard metric for validation in the recommender systems research. RMSE is typically
+                used when
                 we want to evaluate a predicted score, such as the predictive rating of a movie, and compare it
-                to a ground truth (true rating). Compared to other metrics, RMSE penalizes more harshly a larger absolute
-                error, giving you a measure of how concentrated your data is around the curve you have fit through your model. 
+                to a ground truth (true rating). Compared to other metrics, RMSE penalizes more harshly a larger
+                absolute
+                error, giving you a measure of how concentrated your data is around the curve you have fit through your
+                model.
                 Lower RMSE translates to better recommendation accuracy [1, 8].
             </p>
             <div class="row">
@@ -777,28 +782,34 @@
             </div>
 
             <p>
-                By plotting the RMSE of the two models we notice that both EmbeddingMF and DeepFM present a high RMSE value at the two extremes:
-                predicted ratings of 1 to 2 and of 5. The error on the lower rating extreme might be explained by considering that <q>people are more willing to share
-                positive experiences than negative ones</q>, and so as a result we tend to train more around positive ratings than negative ones [9]. How might we explain 
+                By plotting the RMSE of the two models we notice that both EmbeddingMF and DeepFM present a high RMSE
+                value at the two extremes:
+                predicted ratings of 1 to 2 and of 5. The error on the lower rating extreme might be explained by
+                considering that <q>people are more willing to share
+                    positive experiences than negative ones</q>, and so as a result we tend to train more around
+                positive ratings than negative ones [9]. How might we explain
                 the upper extreme?
             </p>
             <div class="example">
                 <div id="tester" style="width:750px;height:700px;"></div>
             </div>
             <figcaption class="centered">
-                RMSE of EmbeddingMF and DeepFM, both featuring large RMSE values at the two extremes of true ratings (x axis)
+                RMSE of EmbeddingMF and DeepFM, both featuring large RMSE values at the two extremes of true ratings (x
+                axis)
             </figcaption>
             <p></p>
             <p>
                 We define a perfect recommendation system as one which will recommend to users only movies they will
-                be likely to give a rating of 5 (as a proxy for a high level of enjoyment of the recommendation). 
-                The above plot shows that both the systems we have experiemented with, while more competent than prediting the low rating of a movie, are
-                not particularly perfect under our defined criterium. 
-                
+                be likely to give a rating of 5 (as a proxy for a high level of enjoyment of the recommendation).
+                The above plot shows that both the systems we have experiemented with, while more competent than
+                prediting the low rating of a movie, are
+                not particularly perfect under our defined criterium.
+
                 We dig deeper into this concerning finding by exploring how our two
-                models generated movie recommendations for Xiao, as example user. Explore with us by examining the Venn diagram below.
+                models generated movie recommendations for Xiao, as example user. Explore with us by examining the Venn
+                diagram below.
             </p>
-            
+
             <div class="row">
                 <div class="centered">
                     <img src="how-to-venn.png" height="600px">
@@ -813,15 +824,18 @@
             <div class="example">
                 <p class="example_text">
                     <i><b>This box is interactive!</b> The movies are represented by dots in the different sets of the
-                        Venn Diagram. The line that starts from the center of the circle represents the error (RMSE) that the model made in
+                        Venn Diagram. The line that starts from the center of the circle represents the error (RMSE)
+                        that the model made in
                         generating the rating prediction. Hover one a point to discover the movie's name, its
                         true rating, and its predicted scores from the model(s)</i>
                 </p>
                 <p class="example_text">
                     Let's consider Xiao. He is a your writer, between 25-34 years old, living in the West
-                    Coast (USA). We want to better understand his preferences and what the two recommenders should and have
+                    Coast (USA). We want to better understand his preferences and what the two recommenders should and
+                    have
                     recommended to him. To this end, we have retrieved the top 10 movies from both the recommendation
-                    models, and a set movies that Xiao himself has ranked 5. We examine the intersections of these result sets by 
+                    models, and a set movies that Xiao himself has ranked 5. We examine the intersections of these
+                    result sets by
                     visualizing them in a Venn diagram, as described in our annotated legend above.
                 </p>
                 <div class="row">
@@ -861,9 +875,12 @@
             </div>
             <p></p>
             <p>
-                Interesting to note in the above diagram are two movies with particularly large radii, located in the top left of the true
-                rating set, and in the intersection between the two models. The former movie is one that, in truth, the user has liked and rated 5, but 
-                neither of the models decided to recommend. The latter movie is one that both models predicted that the user would like,
+                Interesting to note in the above diagram are two movies with particularly large radii, located in the
+                top left of the true
+                rating set, and in the intersection between the two models. The former movie is one that, in truth, the
+                user has liked and rated 5, but
+                neither of the models decided to recommend. The latter movie is one that both models predicted that the
+                user would like,
                 but in truth, the user has rated 1! How did this happen?
             </p>
             <p>
@@ -1330,7 +1347,7 @@
                             line: { shape: 'spline' },
                             fill: 'tozeroy',
                             fillcolor: 'rgba(57, 45, 50, 0.3)',
-                            marker: { color: 'rgba(57, 45, 50, 1)'},
+                            marker: { color: 'rgba(57, 45, 50, 1)' },
                             hovertemplate: '<b>RMSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
 
