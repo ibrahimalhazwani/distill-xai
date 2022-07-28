@@ -650,6 +650,7 @@
             <h3>DeepFM: A deep learning factorization machine</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, and recommender
+<<<<<<< HEAD
                 systems are no exception.
                 The first deep learning model generating state of the art (SOTA) results was Wide&Deep, published by
                 Cheng et al. of Google Inc. in 2016 [5]. For the
@@ -668,8 +669,17 @@
                     model represents can be seen as an upgrade of both the two models described above.
                 </li>
             </ul>
+=======
+                systems are no exception. In this section we consider the factorization machine (FM)-based
+                neural network DeepFM, a deep learning recommender system developed by Guo et. al. for Huawei in 2017 [6].
+                DeepFM accepts a shared input of raw features to both of its components, the FM and neural network, without any feature engineering.
+                We choose DeepFM for our next recommendation system progression as machine factorization is a mathematical approach combining
+                matrix factorization with regression. Considering our matrix factorization starting point, DeepFM can be seen as an upgrade to both the 
+                two models we explored above.
+>>>>>>> 7b122bf7797a107804344a02c04047523ff3c3a4
             </p>
 
+            <!-- <h3>DeepFM</h3> -->
             <p>
                 Architecturally, DeepFM consists of two components that share the same input: a Factorization Machine
                 (FM),
@@ -728,6 +738,7 @@
                 Our training of DeepFM concluded in a validation error of 0.7553, comparable to our implementation of
                 EmbeddingMF.
             </p>
+<<<<<<< HEAD
 
             <p style="color: red">
             <ul>
@@ -742,6 +753,8 @@
                 </li>
             </ul>
             </p>
+=======
+>>>>>>> 7b122bf7797a107804344a02c04047523ff3c3a4
 
             <h2>One recommender cannot rule them all</h2>
             <div class="quote">
