@@ -8,12 +8,20 @@
 
     <head>
         <script src="https://distill.pub/template.v2.js"></script>
+
+        <!-- Load external math library -->
         <script src="https://cdnjs.com/libraries/mathjs"></script>
         <script src="https://unpkg.com/mathjs@10.6.3/lib/browser/math.js"></script>
 
+        <!-- Load plotly and D3 -->
         <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
         <script src="plotly-2.12.1.min.js"></script>
         <script src="https://d3js.org/d3.v5.min.js"></script>
+
+        <!-- Load Material Design Style -->
+        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
+            rel="stylesheet">
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
         <!-- Load CSS file. -->
         <link rel="stylesheet" href="style.css">
@@ -98,8 +106,9 @@
             <img src='rs-timeline.png' width="700px" height="187px">
         </div>
         <figcaption class="centered">
-            Timeline of recommender systems. Highlighted are the two methods described in this article. A clear
-            distinction between pre and post deep learning era is on the year 2012.
+            Timeline of recommender systems techniques. The green line highlight the different techniques that the
+            article will describe. Specifically, with the green solid line we have the two techniques available in the
+            literature. With the dashed green line we have identify our custom model that connects the other two models.
         </figcaption>
         <p></p>
         <p>If you have ever used an e-commerce service or a streaming platform, you have already seen at least
@@ -522,7 +531,8 @@
                     </tr>
                 </table>
 
-                <button id="MF_calculate" class="MF_button" type="button" onclick="calculateMatrixFact()">Calculate
+                <button id="MF_calculate" class="mdc-button mdc-button--raised mdc-ripple-upgraded MF_button"
+                    type="button" onclick="calculateMatrixFact()">Calculate
                     Matrix Factorization</button>
 
                 <p></p>
@@ -584,7 +594,15 @@
             </p>
             <p>
                 We will use the <i><q>EmbeddingMF</q></i> approach, which includes a bias term on top of our existing
-                dot product. We start by creating two embedding matrices:
+                dot product.
+            </p>
+            <div class="row">
+                <img src="ebeddingMF-figure.png" width="600px">
+            </div>
+            <figcaption class="centered">TODO</figcaption>
+            <p></p>
+            <p>
+                We start by creating two embedding matrices:
             <ol>
                 <li>
                     A user embedding matrix <i>U</i>, containing one user per row, and <i>n</i> user features as
@@ -599,6 +617,7 @@
                     <i>E.g. For a set of 100 movies and 200 features, M will have dimensions of (100, 200)</i>
                 </li>
             </ol>
+            </p>
 
             <p>
                 Having the same number of columns in each matrix makes the dimensions favourable for multiplying the two embedding matrices
@@ -679,7 +698,6 @@
                     <blockquote><q>All models are wrong, but some are useful.</q> [15] </br>
                         <h6>- George Box, 1976</h6>
                     </blockquote>
-
                 </h3>
             </div>
 
