@@ -599,8 +599,8 @@
             <div class="row">
                 <img src="ebeddingMF-figure.png" width="600px">
             </div>
-            <figcaption class="centered">TODO</figcaption>
-            <p></p>
+            <figcaption class="centered">Augmented MF computation required for EmbeddingMF. Note the addition of the bias term (in yellow).</figcaption>
+            <br>
             <p>
                 We start by creating two embedding matrices:
             <ol>
@@ -630,7 +630,7 @@
                 between our latent factors and the ground truth is minimized.
             </p>
             <p style="color: red;">
-                TODO: Reference <br>
+                TODO: Add Medium Reference (@Ibra: get from Yves) <br>
                 The model consists of a user matrix of dimensions <i>(n_users x 128 features)</i>, a movie matrix of dimensions <i>(n_movies x 128 features)</i>, a user bias vector of length <i>[n_users]</i>, and a movie bias vector <i>of length [n_movies]</i>. We randomly initialize the latent factors
                 for every user and movie with i.i.d samples from a Normal of mean 0 and standard deviation of 0.01. After the multiplication of
                 users and movies, we apply a sigmoid range transformation that squeezes the results to values between 0 and 5.5. We chose to use 5.5 so that the distribution 
@@ -1337,7 +1337,7 @@
                             //    start: 1,
                             //    size:5
                             //},
-                            marker: { color: "rgba(103, 141, 88, 0.5)" },
+                            marker: { color: "rgba(103, 141, 88, 0.8)" },
                             hoverlabel: {
                                 namelength: 15
                             },
@@ -1353,7 +1353,7 @@
                             //    start: 1,
                             //    
                             //},
-                            marker: { color: "#392d32" },
+                            marker: { color: "rgba(57, 45, 50, 0.9)" },
 
                         };
                         var layout = {
@@ -1383,6 +1383,18 @@
                             },
                             barmode: "overlay",
                             shapes: [
+                            {   //Training mean: 3.579944
+                                type: 'line',
+                                x0: 3.58,
+                                y0: 0,
+                                x1: 3.58,
+                                y1: 50*1000,
+                                line: {
+                                    color: 'rgba(103, 141, 88, 0.8)',
+                                    width: 2,
+                                    dash: 'dashdot'
+                                }
+                            },
                             {   //DeepFM 3.596508
                                 type: 'line',
                                 x0: 3.6,
@@ -1409,9 +1421,27 @@
                             }
                             ],
                             annotations: [
+                            
+                                { //Training data
+                                    showarrow: false,
+                                    text: "<b>Mean rating: 3.58</b>",
+                                    x: 3.61,
+                                    xanchor: "left",
+                                    y: 18*1000,
+                                    yanchor: "bottom",
+                                    align: "left",
+                                    font: {
+                                        color: '#47613d',
+                                    },
+                                    align: 'center',
+                                    
+                                    borderpad: 2,
+                                    bgcolor: '#98b78b',
+                                    opacity: 0.9,
+                                },
                                 {//EmbeddingMF
                                     showarrow: false,
-                                    text: "<b>3.54</b>",
+                                    text: "<b>Mean rating: 3.54</b>",
                                     x: 3.54,
                                     xanchor: "left",
                                     y: 85*1000,
@@ -1422,16 +1452,16 @@
                                 },
                                 {//DeepFM
                                     showarrow: false,
-                                    text: "<b>3.6</b>",
+                                    text: "<b>Mean rating: 3.6</b>",
                                     x: 3.6,
                                     xanchor: "left",
                                     y: 67*1000,
                                     yanchor: "right",
                                     font: {
-                                        color: 'rgba(57, 45, 50, 0.8)',
+                                        color: 'rgba(57, 45, 50, 1)',
                                     }
-                                }
-                            ]
+                                },
+                            ],
 
                         };
                         var config = { responsive: true, displayModeBar: false };
@@ -1466,7 +1496,7 @@
                             //    start: 1,
                             //   
                             //},
-                            marker: { color: 'rgba(244, 159, 10, 0.6)' },
+                            marker: { color: 'rgba(244, 159, 10, 0.7)' },
 
                         };
 
