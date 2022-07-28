@@ -892,10 +892,32 @@
                 Dashed lines in <b>brown (DeepFM)</b> and <b>yellow (EmbeddingMF)</b> reflect the prediction of each
                 model for <b>Xiao (User 1680)</b>
             </figcaption>
+            
             <br />
             <div id="ratings2" style="width:750px;height:350px;"></div>
-
-
+            <p> Looking at these (true) ratings distributions, we notice a skew and an elongated tail to each histogram. In the case of <i>Buffy</i>,
+                the distribution leans left and the models' mean predictions are fairly high. Despite the fact
+                that we know Xiao hated <i>Buffy</i>, this suggests that, on average, users enjoyed it. <i>Who's That Girl?</i> shows us the opposite trend,
+                with the added observation that the mean predicted ratings of EmbeddingMF and DeepFM deviate much less from the training set's mean rating, 
+                likely because of its substantially lower number of ratings (88 in total to <i>Buffy's</i> 465). What might have caused this?
+            </p>
+           <p>
+            Maybe some characterists of Xiao's were overlooked, making him an outlier in these rating sets? Let us see the user trends:
+          
+            <h4><i>Buffy the Vampire Slayer</i></h4>
+            <ul>
+                <li>Reported gender breakdown: male 351, female 114</li>
+                <li>Reported user occupations (top 3): 79 college/grad student, 36 executive/managerial, 21 writers </li>
+                <li>Reported age brackets (top 3): 197 (25-34), 127 (18-24), 68 (35-44)</li>
+            </ul>
+            <h4><i>Who's That Girl?</i></h4>
+            <ul>
+                <li>Reported gender breakdown: male 52, female 36</li>
+                <li>Reported user occupations (top 3): 15 college/grad student, 9 executive/managerial and sales/marketing, 3 writers </li>
+                <li>Reported age brackets (top 3): 45 (25-34), 20 (18-24), 17 (35-44)</li>
+            </ul>
+           </p>
+            
             <h2>Conclusion</h2>
 
             <p> Why didn't Xiao like the movies DeepFM and EmbeddingMF recommended to him?
@@ -904,8 +926,7 @@
                 metadata, are not the correct sources of information for predicting what our user may like to watch?
                 Xiao was so similar to the demographics
                 of the users who enjoyed <i>Buffy the Vampire Slayer</i>, yet his true rating for this movie was 1. What
-                aspects of <i>Buffy</i> were responsible
-                for Xiao's dislike?
+                aspects of <i>Buffy</i> were responsible for Xiao's dislike?
             </p>
             <p>
                 How we might learn the answer to this question, and how we might collect data for recalibrating
