@@ -594,7 +594,15 @@
             </p>
             <p>
                 We will use the <i><q>EmbeddingMF</q></i> approach, which includes a bias term on top of our existing
-                dot product. We start by creating two embedding matrices:
+                dot product.
+            </p>
+            <div class="row">
+                <img src="ebeddingMF-figure.png" width="600px">
+            </div>
+            <figcaption class="centered">TODO</figcaption>
+            <p></p>
+            <p>
+                We start by creating two embedding matrices:
             <ol>
                 <li>
                     A user embedding matrix <i>U</i>, containing one user per row, and <i>n</i> user features as
@@ -609,6 +617,7 @@
                     <i>For a set of 100 movies and 200 features, M will have dimensions of (100, 200)</i>
                 </li>
             </ol>
+            </p>
 
             <p>
                 Having the same number of columns in each matrix allows us to multiply the two embedding matrices
@@ -690,7 +699,6 @@
                     <blockquote><q>All models are wrong, but some are useful.</q> [15] </br>
                         <h6>- George Box, 1976</h6>
                     </blockquote>
-
                 </h3>
             </div>
 
