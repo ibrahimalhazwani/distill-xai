@@ -858,11 +858,7 @@
 
 
             <h2>Conclusion</h2>
-            <p style="color: red;">TO EDIT [@Ibra: Do we still want this? ]: the two models above actually result in
-                non-personalized recommendations, such as those you may have seen in print newspapers or
-                magazines. These recommendations rely solely on popular opinion of the population,
-                rather than characteristics specific to a user.
-            </p>
+            
             <p> Why didn't Xiao like the movies DeepFM and EmbeddingMF recommended to him?
                 A system is rarely aware of what it does not know, and is limited by the data it is provided for training. What if these features, this 
                 metadata, are not the correct sources of information for predicting what our user may like to watch? Xiao was so similar to the demographics 
@@ -1365,7 +1361,7 @@
                             //    start: 1,
                             //    
                             //},
-                            marker: { color: "rgba(57, 45, 50, 0.9)" },
+                            marker: { color: 'rgba(244, 159, 10, 0.7)' },
 
                         };
                         var layout = {
@@ -1426,7 +1422,7 @@
                                 x1: 3.54,
                                 y1: 95*1000,
                                 line: {
-                                    color: 'rgba(244, 159, 10, 0.8)',
+                                    color: 'rgba(244, 159, 10, 0.6)',
                                     width: 2,
                                     dash: 'dashdot'
                                 }
@@ -1445,11 +1441,10 @@
                                     font: {
                                         color: '#47613d',
                                     },
-                                    align: 'center',
-                                    
-                                    borderpad: 2,
-                                    bgcolor: '#98b78b',
-                                    opacity: 0.9,
+                                    //align: 'center',  
+                                    //borderpad: 2,
+                                    //bgcolor: '#98b78b',
+                                    //opacity: 0.9,
                                 },
                                 {//EmbeddingMF
                                     showarrow: false,
@@ -1508,12 +1503,13 @@
                             //    start: 1,
                             //   
                             //},
-                            marker: { color: 'rgba(244, 159, 10, 0.7)' },
+                            marker: { color:"rgba(57, 45, 50, 0.8)" },
 
                         };
 
                         if (document.getElementById("tester2")) {
-                            Plotly.addTraces(TESTER2, deepfm_ratings, 2)
+                            Plotly.addTraces(TESTER2, deepfm_ratings, 0)
+                            Plotly.moveTraces(TESTER2, -1, 0)
 
                         }
 
