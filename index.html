@@ -125,7 +125,7 @@
 
             We explain differences in two models' competence in predicting a user's rating of movies they have seen
             by leveraging various visualization strategies. We do so by training our two models using the MovieLens 1M
-            dataset, selecting different sets of features (columns) per model [TODO: MovieLens 1M ref]. Through this
+            dataset, selecting different sets of features (columns) per model [18]. Through this
             article, we hope to give you an intuition and visual understanding of how recommender systems work.
         </p>
 
@@ -441,6 +441,7 @@
                 <div class="column">
                 </div>
             </div>
+            <p></p>
             <div class="centered">
                 <figcaption>Matrix Factorization formula.</figcaption>
             </div>
@@ -592,6 +593,7 @@
             <div class="row">
                 <img src="ebeddingMF-figure.png" width="600px">
             </div>
+            <p></p>
             <figcaption class="centered">Augmented MF computation required for EmbeddingMF. Note the addition of the
                 bias term (in yellow).</figcaption>
             <br>
@@ -651,42 +653,49 @@
             <p>
                 The adoption of deep learning models has been on the rise in every domain, and recommender
                 systems are no exception. In this section we consider the factorization machine (FM)-based
-                neural network DeepFM, a deep learning recommender system developed by Guo et. al. for Huawei in 2017 [6].
-                DeepFM accepts a shared input of raw features to both of its components, the FM and neural network, without any feature engineering.
-                We choose DeepFM for our next recommendation system progression as machine factorization is a mathematical approach combining
-                matrix factorization with regression. Considering our matrix factorization starting point, DeepFM can be seen as an upgrade to both the 
+                neural network DeepFM, a deep learning recommender system developed by Guo et. al. for Huawei in 2017
+                [6].
+                DeepFM accepts a shared input of raw features to both of its components, the FM and neural network,
+                without any feature engineering.
+                We choose DeepFM for our next recommendation system progression as machine factorization is a
+                mathematical approach combining
+                matrix factorization with regression. Considering our matrix factorization starting point, DeepFM can be
+                seen as an upgrade to both the
                 two models we explored above.
             </p>
 
             <!-- <h3>DeepFM</h3> -->
             <p>
-                Architecturally, DeepFM consists of two components that share the same input: a Factorization Machine (FM),
-                and a deep component. 
+                Architecturally, DeepFM consists of two components that share the same input: a Factorization Machine
+                (FM),
+                and a deep component.
             </p>
             <p>
                 <b>Factorization Machines (FM)</b>: A model class combining the advantages of Support Vector
                 Machines with factorization models [7]. Factorization Machines are a general predictor,
                 modeling all interactions between variables using factorized parameters. FMs are a powerful strategy
-                to use when designing recommender systems, as they are able to estimate interactions even in 
+                to use when designing recommender systems, as they are able to estimate interactions even in
                 highly sparse data contexts.
             </p>
 
             <p>
                 <b>Deep component</b>: The deep component is a feed-forward neural network, used to learn
-                high-order feature interactions. 
-                    For a given feature <i>i</i>, a weight <i>w<sub>i</sub></i> is used to
-                    weigh its order-1 (linear) importance, and a latent vector <i>V<sub>i</sub></i> is used to measure the
-                    impact of its interactions with other features. The latent vector is then fed to the FM component to model
-                    order-2 (pairwise) feature interactions. The result, <i>y<sub>FM</sub></i> , is then fed to the deep 
-                    component, to model the high-order feature interactions.
+                high-order feature interactions.
+                For a given feature <i>i</i>, a weight <i>w<sub>i</sub></i> is used to
+                weigh its order-1 (linear) importance, and a latent vector <i>V<sub>i</sub></i> is used to measure the
+                impact of its interactions with other features. The latent vector is then fed to the FM component to
+                model
+                order-2 (pairwise) feature interactions. The result, <i>y<sub>FM</sub></i> , is then fed to the deep
+                component, to model the high-order feature interactions.
             </p>
             <p>
                 Of note are two interesting features of the deep learning structure of DeepFM:
             <ol>
                 <li>Although the lengths of the input vectors may be different, their embeddings are of the
                     same size</li>
-                <li>The outputs of the FM, our latent feature vectors, are used as network weights (rather than a 
-                    random initialization). These are then learned and used to compress the input vector to the embedding vector dimensions. </li>
+                <li>The outputs of the FM, our latent feature vectors, are used as network weights (rather than a
+                    random initialization). These are then learned and used to compress the input vector to the
+                    embedding vector dimensions. </li>
             </ol>
             All parameters are trained jointly, and the combined prediction <i>y</i> is represented by the
             following formula:
@@ -700,17 +709,21 @@
                 <div class="column">
                 </div>
             </div>
-            
-            <figcaption class="centered">DeepFM output formula.</figcaption>
             <p></p>
-            
-            <p style="color: RED;">
-                TODO: @Ibra Refs and proofread for accuracy<br>
-                Our DeepFM model considers users and their occupation, and movies and their genres, additional 
+            <div class="centered">
+                <figcaption>Mathematical formula to describe the output of the DeepFM model.</figcaption>
+            </div>
+            <p></p>
+
+            <p>
+                Our DeepFM model considers users, movies and their genres, and the users' occupation as an additional
                 information not included in EmbeddingMF.
-                The FM outputs a latent vector of dimensions <i>(128,128)</i>, the same number of features as EmbeddingMF.
-                We trained the model over 100 epochs, with a batch size of 2048, using MSELoss, and a dropout rate of 0.5 [TODO: Ref DeepFM article]. 
-                Our training of DeepFM concluded in a validation error of 0.7553, comparable to our implementation of EmbeddingMF.
+                The FM outputs a latent vector of dimensions <i>(128,128)</i>, the same number of features as
+                EmbeddingMF.
+                We trained the model over 100 epochs, with a batch size of 2048, using MSELoss, and a dropout rate of
+                0.5 [6].
+                Our training of DeepFM concluded in a validation error of 0.7553, comparable to our implementation of
+                EmbeddingMF.
             </p>
 
             <h2>One recommender cannot rule them all</h2>
@@ -718,7 +731,8 @@
                 <h3>
                     <blockquote><q>All models are wrong, but some are useful.</q> <br>
 
-                        <h6>- George Box, 1976<d-cite key="box1976science"></d-cite>
+                        <h6>- George Box, 1976, [15]
+                            <!-- <d-cite key="box1976science"></d-cite> -->
                         </h6>
 
                     </blockquote>
@@ -757,6 +771,10 @@
                 <div class="column">
                 </div>
             </div>
+            <p></p>
+            <div class="centered">
+                <figcaption>Root Mean Square Error formula.</figcaption>
+            </div>
 
             <p>
                 By plotting the RMSE of the two models we notice that both EmbeddingMF and DeepFM present a high RMSE value at the two extremes:
@@ -768,7 +786,7 @@
                 <div id="tester" style="width:750px;height:700px;"></div>
             </div>
             <figcaption class="centered">
-                RMSE of EmbeddingMF and DeepFM, both featuring high error values at the two extremes of ratings
+                RMSE of EmbeddingMF and DeepFM, both featuring large RMSE values at the two extremes of true ratings (x axis)
             </figcaption>
             <p></p>
             <p>
@@ -780,9 +798,7 @@
                 We dig deeper into this concerning finding by exploring how our two
                 models generated movie recommendations for Xiao, as example user. Explore with us by examining the Venn diagram below.
             </p>
-            <p>
-                To support this direction, we are going to use a custom Venn Diagram with three sets: 
-            </p>
+            
             <div class="row">
                 <div class="centered">
                     <img src="how-to-venn.png" height="600px">
@@ -796,17 +812,17 @@
             <p></p>
             <div class="example">
                 <p class="example_text">
-                    <i><b>This box is interactive!</b> the movies are represented by dot in the different sets of the
-                        Venn Diagram. The line that starts from the center represent the error that has been made.</i>
+                    <i><b>This box is interactive!</b> The movies are represented by dots in the different sets of the
+                        Venn Diagram. The line that starts from the center of the circle represents the error (RMSE) that the model made in
+                        generating the rating prediction. Hover one a point to discover the movie's name, its
+                        true rating, and its predicted scores from the model(s)</i>
                 </p>
                 <p class="example_text">
-                    Let's consider the following user called Xiao. He is a 25-34 years old writer who lives in the West
-                    Coast (USA). To better understand his preferences and what the two recommenders should and have
-                    recommend him to watch next we decided to retrieved the top10 movies from both the recommendation
-                    models and a set movies that he has ranked 5. Since the prediction rating is a continuos value,
-                    from 1 to 5, we have decided to consider only the movies that has an error, defined as true rating -
-                    predicted rating less or equal to 0.6. By intersecting the different results it was then possible to
-                    fill the Venn diagram interesection describe above.
+                    Let's consider Xiao. He is a your writer, between 25-34 years old, living in the West
+                    Coast (USA). We want to better understand his preferences and what the two recommenders should and have
+                    recommended to him. To this end, we have retrieved the top 10 movies from both the recommendation
+                    models, and a set movies that Xiao himself has ranked 5. We examine the intersections of these result sets by 
+                    visualizing them in a Venn diagram, as described in our annotated legend above.
                 </p>
                 <div class="row">
                     <div class="column example_text">
@@ -826,7 +842,7 @@
                         <img src="deepfm-error1.png" width="100px">
                     </div>
                     <div class="column-text">
-                        <p>The model under estimate the rating that the user will give.</p>
+                        <p>The model underestimated the user's rating</p>
                     </div>
                 </div>
                 <div class="row">
@@ -837,33 +853,27 @@
                         <img src="deepfm-error2.png" width="100px">
                     </div>
                     <div class="column-text">
-                        <p>The model over estimate the rating that the user will give.</p>
+                        <p>The model overestimated the user's rating</p>
                     </div>
                 </div>
                 <p></p>
-                <p class="example_text">
-                    <i>Hover one of the point to discover what is the movie name, the
-                        true rating, and the predicted scores from the model(s)</i>
-                </p>
                 <div id='myDiv'></div>
             </div>
             <p></p>
             <p>
-                Of the above plot, what it is interesting to notice are the two movie in the bottom left of the true
-                rating set and the two movies in the intersection between the two movies. The first movies represent
-                movies that the user has liked and rate 5 but both models will not recommend to the user. The latter
-                ones, are movies that both models think that the user will like and rate 5 but in reality the users will
-                not like.
+                Interesting to note in the above diagram are two movies with particularly large radii, located in the top left of the true
+                rating set, and in the intersection between the two models. The former movie is one that, in truth, the user has liked and rated 5, but 
+                neither of the models decided to recommend. The latter movie is one that both models predicted that the user would like,
+                but in truth, the user has rated 1! How did this happen?
             </p>
             <p>
-                We can explore more in details these cases where the movies recommended and the user preferences do
-                not overlap, we can plot the rating distribution on the training data together with the user rating. By
-                doing so, we can see if the model suffer from some kind of bias or not.
+                We want to further explore these cases, where the movies recommended and the user preferences do
+                not overlap, so that we can determine if any sort of bias might be plaguing our models.
             </p>
             <div id="ratings1" style="width:750px;height:350px;"></div>
             <figcaption class="centered">
                 Dashed lines in <b>brown (DeepFM)</b> and <b>yellow (EmbeddingMF)</b> reflect the prediction of each
-                model for <b>User 1680</b>
+                model for <b>Xiao (User 1680)</b>
             </figcaption>
             <br />
             <div id="ratings2" style="width:750px;height:350px;"></div>
@@ -907,10 +917,6 @@
     </d-article>
 
     <d-appendix>
-        <h3>Acknowledgments</h3>
-        <p>Text</p>
-        <h3>Further Reading</h3>
-        <p>text</p>
         <h3>References</h3>
         <d-citation-list>
             <h3 id="references">References</h3>
@@ -989,6 +995,10 @@
         </p>
         <p>
             [17] https://towardsdatascience.com/various-implementations-of-collaborative-filtering-100385c6dfe0
+        </p>
+        <p>
+            [18] F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM
+            Transactions on Interactive Intelligent Systems (TiiS) 5, 4: 19:1–19:19. https://doi.org/10.1145/2827872
         </p>
         <h3>Reuse</h3>
         <p>
@@ -1257,8 +1267,8 @@
                             mode: "lines+markers",
                             line: { shape: 'spline' },
                             fill: 'tozeroy',
-                            fillcolor: 'rgba(57, 45, 50, 0.3)',
-                            marker: { color: "#392d32" },
+                            fillcolor: 'rgba(244, 159, 10, 0.55)',
+                            marker: { color: 'rgba(244, 159, 10, 1)' },
                             hovertemplate: '<b>RMSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
                         };
@@ -1319,8 +1329,8 @@
                             mode: "lines+markers",
                             line: { shape: 'spline' },
                             fill: 'tozeroy',
-                            fillcolor: 'rgba(244, 159, 10, 0.6)',
-                            marker: { color: "#F49F0A" },
+                            fillcolor: 'rgba(57, 45, 50, 0.3)',
+                            marker: { color: 'rgba(57, 45, 50, 1)'},
                             hovertemplate: '<b>RMSE: %{y:.2f}</b>' +
                                 '<br>True Rating: %{x}<br>'
 
