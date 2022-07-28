@@ -742,8 +742,10 @@
             <div class="quote">
                 <h3>
                     <blockquote><q>All models are wrong, but some are useful.</q> <br>
-                        <h6>- George Box, 1976, [15]</h6>
-                        <dt-cite key="box1976science" />
+
+                        <h6>- George Box, 1976<d-cite key="box1976science"></d-cite>
+                        </h6>
+
                     </blockquote>
                 </h3>
             </div>
@@ -929,18 +931,17 @@
         <h3>Further Reading</h3>
         <p>text</p>
         <h3>References</h3>
-        <script type="text/bibliography">
-            @article{box1976science,
-                title={Science and statistics},
-                author={Box, George EP},
-                journal={Journal of the American Statistical Association},
-                volume={71},
-                number={356},
-                pages={791--799},
-                year={1976},
-                publisher={Taylor \& Francis}
-              }
-        </script>
+        <d-citation-list>
+            <h3 id="references">References</h3>
+            <ol id="references-list" class="references">
+                <li id="box1976science">
+                    <span class="title">Science and statistics</span>
+                    &ensp;<a href="https://doi.org/10.2307/2286841">Journal of the American Statistical Association,
+                        vol. 71, no. 356, 1976, pp. 791-99</a><br>
+                    Box, George EP, 1976.
+                </li>
+            </ol>
+        </d-citation-list>
         <p>
             [1] Ricci, Francesco, Lior Rokach, and Bracha Shapira. "Introduction to recommender systems handbook."
             Recommender systems handbook. Springer, Boston, MA, 2011. 1-35.
@@ -1016,6 +1017,7 @@
         </p>
 
     </d-appendix>
+
 
     <script>
 
@@ -1440,7 +1442,7 @@
                                     x0: 3.58,
                                     y0: 0,
                                     x1: 3.58,
-                                    y1: 50 * 1000,
+                                    y1: 91 * 1000,
                                     line: {
                                         color: 'rgba(103, 141, 88, 0.8)',
                                         width: 2,
@@ -1452,9 +1454,9 @@
                                     x0: 3.6,
                                     y0: 0,
                                     x1: 3.6,
-                                    y1: 70 * 1000,
+                                    y1: 91 * 1000,
                                     line: {
-                                        color: 'rgba(57, 45, 50, 0.8)',
+                                        color: 'rgba(57, 45, 50, 0.6)',
                                         width: 2,
                                         dash: 'dashdot'
                                     }
@@ -1464,7 +1466,7 @@
                                     x0: 3.54,
                                     y0: 0,
                                     x1: 3.54,
-                                    y1: 95 * 1000,
+                                    y1: 91 * 1000,
                                     line: {
                                         color: 'rgba(244, 159, 10, 0.6)',
                                         width: 2,
@@ -1493,12 +1495,12 @@
                                 {//EmbeddingMF
                                     showarrow: false,
                                     text: "<b>Mean rating: 3.54</b>",
-                                    x: 3.54,
+                                    x: 3.6,
                                     xanchor: "left",
-                                    y: 85 * 1000,
+                                    y: 65 * 1000,
                                     yanchor: "right",
                                     font: {
-                                        color: 'rgba(244, 159, 10, 1)',
+                                        color: '#e29309',
                                     }
                                 },
                                 {//DeepFM
@@ -1506,7 +1508,7 @@
                                     text: "<b>Mean rating: 3.6</b>",
                                     x: 3.6,
                                     xanchor: "left",
-                                    y: 67 * 1000,
+                                    y: 85 * 1000,
                                     yanchor: "right",
                                     font: {
                                         color: 'rgba(57, 45, 50, 1)',
@@ -2324,4 +2326,5 @@
         Plotly.newPlot('myDiv', data, layout, { displayModeBar: false });
 
     </script>
+
 </body>
