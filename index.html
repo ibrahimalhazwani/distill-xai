@@ -726,11 +726,13 @@
             </div>
 
             <p>
-                We have trained the two models described above, the EmbeddingFM and the DeepFM, with the task of
-                generating a recommendation to a test set of 100k entries. By plotting the distribution of the true and
-                predictive rating, see figure below, it is possible to notice that the distribution of the DeepFM is
-                skewed towards the rating 3, while the one of the EmbeddingFM is skewed towards the 4 as the true
-                ratings.
+                We have trained EmbeddingMF and the DeepFM for the task of generating recommendations with a train/test set split of 
+                900k/100k entries of users' movie ratings [TODO: movielens ref]. 
+                By plotting the distribution of the true and
+                predictive ratings below, we note that that the distribution of the DeepFM is
+                very narrow and highly dense around a rating of 3.2, while that of EmbeddingFM has a density focused around 3.7. 
+                What is surprising here are the mean predictive ratings, which despite quite differing density shapes
+                are, in fact, very close to each other&mdash; and to the training mean.
             </p>
             <div class="example">
                 <div id="tester2" style="width:750px;height:700px;"></div>
@@ -739,11 +741,12 @@
                 across all movies</figcaption>
             <p></p>
             <p>
-                To better understand these results, we decide to validate our approaches using the Root Mean Squared
-                Error (RMSE), one of the most used metrics in the Recommender System field. RMSE is typically used when
-                the developer wants to evaluate a predicted score, like the predictive rating of a movie, and compare it
-                to a ground truth (true rating). Compared to other metrics, RMSE but more emphasis on larger absolute
-                error. Lower RMSE better translate in a better recommendation accuracy [1, 8].
+                To better understand these results, we validate our models using the Root Mean Squared
+                Error (RMSE), the standard metric for validation in the recommender systems research. RMSE is typically used when
+                we want to evaluate a predicted score, such as the predictive rating of a movie, and compare it
+                to a ground truth (true rating). Compared to other metrics, RMSE penalizes more harshly a larger absolute
+                error, giving you a measure of how concentrated your data is around the curve you have fit through your model. 
+                Lower RMSE translates to better recommendation accuracy [1, 8].
             </p>
             <div class="row">
                 <div class="column">
@@ -756,27 +759,29 @@
             </div>
 
             <p>
-                By plotting the RMSE of the two models it is possible to notice that both the two models described
-                above present a high RMSE value at the two extremes (prediction rating of 1 or 2 and rating of 5). While
-                the error on rating 1 and 2 can be explained considering that <q>people are more willing to share
-                    positive experiences than negative ones</q> [9].
+                By plotting the RMSE of the two models we notice that both EmbeddingMF and DeepFM present a high RMSE value at the two extremes:
+                predicted ratings of 1 to 2 and of 5. The error on the lower rating extreme might be explained by considering that <q>people are more willing to share
+                positive experiences than negative ones</q>, and so as a result we tend to train more around positive ratings than negative ones [9]. How might we explain 
+                the upper extreme?
             </p>
             <div class="example">
                 <div id="tester" style="width:750px;height:700px;"></div>
             </div>
-            <figcaption>TODO</figcaption>
+            <figcaption class="centered">
+                RMSE of EmbeddingMF and DeepFM, both featuring high error values at the two extremes of ratings
+            </figcaption>
             <p></p>
             <p>
-                We define a perfect recommendation systems as system that will recommend only movies that the
-                user will 100% like and rate as 5. The above plot, on the contrary, it shows that both models are
-                not perfect in recommending that kind of movies. Based on this evidence and our definition of perfect
-                recommender system, we decide to use the explain by example methodology to explain how the two
-                models generate the movie recommendations for a user that are predicted with a rating of 5.
+                We define a perfect recommendation system as one which will recommend to users only movies they will
+                be likely to give a rating of 5 (as a proxy for a high level of enjoyment of the recommendation). 
+                The above plot shows that both the systems we have experiemented with, while more competent than prediting the low rating of a movie, are
+                not particularly perfect under our defined criterium. 
+                
+                We dig deeper into this concerning finding by exploring how our two
+                models generated movie recommendations for Xiao, as example user. Explore with us by examining the Venn diagram below.
             </p>
             <p>
-                To support this direction, we are going to use a custom Venn Diagram with three sets: true rating
-                (movie rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted
-                ratings from the DeepFM model.
+                To support this direction, we are going to use a custom Venn Diagram with three sets: 
             </p>
             <div class="row">
                 <div class="centered">
@@ -784,7 +789,8 @@
                 </div>
             </div>
             <figcaption class="centered">
-                Description of the different areas of the Venn Diagram.
+                Description of the different areas of the Venn Diagram, which examines 3 sets of movies: true ratings
+                (movies rated 5 by the users), EmbeddingMF predicted ratings, and DeepFM predicted ratings.
             </figcaption>
 
             <p></p>
