@@ -727,9 +727,8 @@
             <h2>One recommender cannot rule them all</h2>
             <div class="quote">
                 <h3>
-                    <blockquote><q>All models are wrong, but some are useful.</q> <br>
-                        <h6>- George Box, 1976</h6>
-                        <dt-cite key="box1976science" />
+                    <blockquote><q>All models are wrong, but some are useful.</q> </br>
+                        <h6>- George Box, 1976, [15]</h6>
                     </blockquote>
                 </h3>
             </div>
@@ -746,8 +745,7 @@
             <div class="example">
                 <div id="tester2" style="width:750px;height:700px;"></div>
             </div>
-            <figcaption class="centered">Distribution and mean of the predictive models' and training data's ratings
-                across all movies</figcaption>
+            <figcaption class="centered">TODO</figcaption>
             <p></p>
             <p>
                 To better understand these results, we decide to validate our approaches using the Root Mean Squared
@@ -882,44 +880,39 @@
 
 
             <h2>Conclusion</h2>
-            <<<<<<< HEAD=======>>>>>>> f2bd5b42eadd6f0454fda6d45968e75263e93213
-                <p> Why didn't Xiao like the movies DeepFM and EmbeddingMF recommended to him?
-                    A system is rarely aware of what it does not know, and is limited by the data it is provided for
-                    training. What if these features, this
-                    metadata, are not the correct sources of information for predicting what our user may like to watch?
-                    Xiao was so similar to the demographics
-                    of the users who enjoyed <i>Buffy the Vampire Slayer</i>, yet his true rating for this movie was 1.
-                    What
-                    aspects of <i>Buffy</i> were responsible
-                    for Xiao's dislike?
-                </p>
-                <p>
-                    How we might learn the answer to this question, and how we might collect data for recalibrating
-                    recommender models to specific user needs, are open questions in
-                    the field of recommender systems research. While recommender systems aim to generate a personalized
-                    experience on the web, models are trained
-                    on a group of users with similar characteristics, not on a single user and their individual
-                    opinions.
-                    Through exploration of Xiao's top recommendations, we have seen that
-                    the features we have used for characterizing user similarities may not be sufficient for making good
-                    recommendations. Such exploration has allowed us
-                    insight, beyond model fit and validation losses, into the fact that there are some features out
-                    there,
-                    missing from our models, that
-                    can make our recommendations into the personalized experience we seek.
-                </p>
-                <p>
-                    What do we ask users to learn these niche recommendations? How do we collect, or compute, such
-                    abstract
-                    data representations?
-                    The discovery of machine-recommended content that speaks to, and connects with us on a personal
-                    level
-                    may require moving beyond a <i>one-model-fits-all-users</i> approach.
-                    Calibrating our models per-user, through specific user feedback and desires, could be the key to
-                    reaching our personalized recommendation dreams&mdash;
-                    and finally answering that one <i>infuriating</i> question: <br><br><i><b>What should we watch
-                            tonight?</b></i>
-                </p>
+
+            <p> Why didn't Xiao like the movies DeepFM and EmbeddingMF recommended to him?
+                A system is rarely aware of what it does not know, and is limited by the data it is provided for
+                training. What if these features, this
+                metadata, are not the correct sources of information for predicting what our user may like to watch?
+                Xiao was so similar to the demographics
+                of the users who enjoyed <i>Buffy the Vampire Slayer</i>, yet his true rating for this movie was 1. What
+                aspects of <i>Buffy</i> were responsible
+                for Xiao's dislike?
+            </p>
+            <p>
+                How we might learn the answer to this question, and how we might collect data for recalibrating
+                recommender models to specific user needs, are open questions in
+                the field of recommender systems research. While recommender systems aim to generate a personalized
+                experience on the web, models are trained
+                on a group of users with similar characteristics, not on a single user and their individual opinions.
+                Through exploration of Xiao's top recommendations, we have seen that
+                the features we have used for characterizing user similarities may not be sufficient for making good
+                recommendations. Such exploration has allowed us
+                insight, beyond model fit and validation losses, into the fact that there are some features out there,
+                missing from our models, that
+                can make our recommendations into the personalized experience we seek.
+            </p>
+            <p>
+                What do we ask users to learn these niche recommendations? How do we collect, or compute, such abstract
+                data representations?
+                The discovery of machine-recommended content that speaks to, and connects with us on a personal level
+                may require moving beyond a <i>one-model-fits-all-users</i> approach.
+                Calibrating our models per-user, through specific user feedback and desires, could be the key to
+                reaching our personalized recommendation dreams&mdash;
+                and finally answering that one <i>infuriating</i> question: <br><br><i><b>What should we watch
+                        tonight?</b></i>
+            </p>
 
     </d-article>
 
@@ -929,18 +922,6 @@
         <h3>Further Reading</h3>
         <p>text</p>
         <h3>References</h3>
-        <script type="text/bibliography">
-            @article{box1976science,
-                title={Science and statistics},
-                author={Box, George EP},
-                journal={Journal of the American Statistical Association},
-                volume={71},
-                number={356},
-                pages={791--799},
-                year={1976},
-                publisher={Taylor \& Francis}
-              }
-        </script>
         <p>
             [1] Ricci, Francesco, Lior Rokach, and Bracha Shapira. "Introduction to recommender systems handbook."
             Recommender systems handbook. Springer, Boston, MA, 2011. 1-35.
@@ -1405,7 +1386,7 @@
                             //    start: 1,
                             //    
                             //},
-                            marker: { color: 'rgba(244, 159, 10, 0.7)' },
+                            marker: { color: "rgba(57, 45, 50, 0.9)" },
 
                         };
                         var layout = {
@@ -1466,52 +1447,54 @@
                                     x1: 3.54,
                                     y1: 95 * 1000,
                                     line: {
-                                        color: 'rgba(244, 159, 10, 0.6)',
+                                        color: 'rgba(244, 159, 10, 0.8)',
                                         width: 2,
                                         dash: 'dashdot'
                                     }
-                                },
-                                annotations: [
+                                }
+                            ],
+                            annotations: [
 
-                                    { //Training data
-                                        showarrow: false,
-                                        text: "<b>Mean rating: 3.58</b>",
-                                        x: 3.61,
-                                        xanchor: "left",
-                                        y: 18 * 1000,
-                                        yanchor: "bottom",
-                                        align: "left",
-                                        font: {
-                                            color: '#47613d',
-                                        },
-                                        //align: 'center',  
-                                        //borderpad: 2,
-                                        //bgcolor: '#98b78b',
-                                        //opacity: 0.9,
+                                { //Training data
+                                    showarrow: false,
+                                    text: "<b>Mean rating: 3.58</b>",
+                                    x: 3.61,
+                                    xanchor: "left",
+                                    y: 18 * 1000,
+                                    yanchor: "bottom",
+                                    align: "left",
+                                    font: {
+                                        color: '#47613d',
                                     },
-                                    {//EmbeddingMF
-                                        showarrow: false,
-                                        text: "<b>Mean rating: 3.54</b>",
-                                        x: 3.54,
-                                        xanchor: "left",
-                                        y: 85 * 1000,
-                                        yanchor: "right",
-                                        font: {
-                                            color: 'rgba(244, 159, 10, 1)',
-                                        }
-                                    },
-                                    {//DeepFM
-                                        showarrow: false,
-                                        text: "<b>Mean rating: 3.6</b>",
-                                        x: 3.6,
-                                        xanchor: "left",
-                                        y: 67 * 1000,
-                                        yanchor: "right",
-                                        font: {
-                                            color: 'rgba(57, 45, 50, 1)',
-                                        }
-                                    },
-                                ],
+                                    align: 'center',
+
+                                    borderpad: 2,
+                                    bgcolor: '#98b78b',
+                                    opacity: 0.9,
+                                },
+                                {//EmbeddingMF
+                                    showarrow: false,
+                                    text: "<b>Mean rating: 3.54</b>",
+                                    x: 3.54,
+                                    xanchor: "left",
+                                    y: 85 * 1000,
+                                    yanchor: "right",
+                                    font: {
+                                        color: 'rgba(244, 159, 10, 1)',
+                                    }
+                                },
+                                {//DeepFM
+                                    showarrow: false,
+                                    text: "<b>Mean rating: 3.6</b>",
+                                    x: 3.6,
+                                    xanchor: "left",
+                                    y: 67 * 1000,
+                                    yanchor: "right",
+                                    font: {
+                                        color: 'rgba(57, 45, 50, 1)',
+                                    }
+                                },
+                            ],
 
                         };
                         var config = { responsive: true, displayModeBar: false };
@@ -1546,13 +1529,12 @@
                             //    start: 1,
                             //   
                             //},
-                            marker: { color: "rgba(57, 45, 50, 0.8)" },
+                            marker: { color: 'rgba(244, 159, 10, 0.7)' },
 
                         };
 
                         if (document.getElementById("tester2")) {
-                            Plotly.addTraces(TESTER2, deepfm_ratings, 0)
-                            Plotly.moveTraces(TESTER2, -1, 0)
+                            Plotly.addTraces(TESTER2, deepfm_ratings, 2)
 
                         }
 
