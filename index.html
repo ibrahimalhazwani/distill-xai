@@ -123,7 +123,9 @@
             the effect this has on the prediction accuracy of a model.
 
             We explain differences in two models' competence in predicting a user's rating of movies they have seen
-            by leveraging various visualization strategies. We do so by training our two models using the MovieLens 1M dataset, selecting different sets of features (columns) per model [TODO: MovieLens 1M ref]. Through this article, we hope
+            by leveraging various visualization strategies. We do so by training our two models using the MovieLens 1M
+            dataset, selecting different sets of features (columns) per model [TODO: MovieLens 1M ref]. Through this
+            article, we hope
             to give you an intuition and visual understanding of how recommender systems work.
         </p>
 
@@ -599,7 +601,8 @@
             <div class="row">
                 <img src="ebeddingMF-figure.png" width="600px">
             </div>
-            <figcaption class="centered">Augmented MF computation required for EmbeddingMF. Note the addition of the bias term (in yellow).</figcaption>
+            <figcaption class="centered">Augmented MF computation required for EmbeddingMF. Note the addition of the
+                bias term (in yellow).</figcaption>
             <br>
             <p>
                 We start by creating two embedding matrices:
@@ -620,27 +623,39 @@
             </p>
 
             <p>
-                Having the same number of columns in each matrix makes the dimensions favourable for multiplying the two embedding matrices
+                Having the same number of columns in each matrix makes the dimensions favourable for multiplying the two
+                embedding matrices
                 (<i>U</i> x <i>M<sup>T</sup></i> ).
-                After multiplication, we add bias terms to each user and each movie. Adding bias to our matrix product results in
+                After multiplication, we add bias terms to each user and each movie. Adding bias to our matrix product
+                results in
                 a matrix representing predictive user ratings for all the movies in our dataset.
                 Since these latent factors (features) are initialized by random numbers (independently and identically
                 distributed Normal samples, <i>i.i.d</i>), the initial ratings that are
-                computed by the model will likely differ significantly from the ground truth. During training, the difference
+                computed by the model will likely differ significantly from the ground truth. During training, the
+                difference
                 between our latent factors and the ground truth is minimized.
             </p>
             <p style="color: red;">
                 TODO: Add Medium Reference (@Ibra: get from Yves) <br>
-                The model consists of a user matrix of dimensions <i>(n_users x 128 features)</i>, a movie matrix of dimensions <i>(n_movies x 128 features)</i>, a user bias vector of length <i>[n_users]</i>, and a movie bias vector <i>of length [n_movies]</i>. We randomly initialize the latent factors
-                for every user and movie with i.i.d samples from a Normal of mean 0 and standard deviation of 0.01. After the multiplication of
-                users and movies, we apply a sigmoid range transformation that squeezes the results to values between 0 and 5.5. We chose to use 5.5 so that the distribution 
-                of the error for those movies whose true rating is 5 is not always negative. This allows the model to learn values only within this 
-                range for its predicted ratings. We trained the model over 15 epochs using the Mean Squared Error loss (MSELoss), a
-                learning rate of 0.005, and a weight decay of 0.1 [TODO: Ref to medium article]. Since these hyperparameters gave us robust results, we did not tune them further.</p>
+                The model consists of a user matrix of dimensions <i>(n_users x 128 features)</i>, a movie matrix of
+                dimensions <i>(n_movies x 128 features)</i>, a user bias vector of length <i>[n_users]</i>, and a movie
+                bias vector <i>of length [n_movies]</i>. We randomly initialize the latent factors
+                for every user and movie with i.i.d samples from a Normal of mean 0 and standard deviation of 0.01.
+                After the multiplication of
+                users and movies, we apply a sigmoid range transformation that squeezes the results to values between 0
+                and 5.5. We chose to use 5.5 so that the distribution
+                of the error for those movies whose true rating is 5 is not always negative. This allows the model to
+                learn values only within this
+                range for its predicted ratings. We trained the model over 15 epochs using the Mean Squared Error loss
+                (MSELoss), a
+                learning rate of 0.005, and a weight decay of 0.1 [TODO: Ref to medium article]. Since these
+                hyperparameters gave us robust results, we did not tune them further.</p>
             <p>
                 EmbeddingMF was able to generate movie rating predictions with an average validation error of 0.71. The
-                dataset used to train and test the model included the MovieLens 1M columns of user ID, movie ID, and the movies' genres. However, we also have access in MovieLens 1M to user occupations, user ages,
-                and user locations (via US zip codes). How might we leverage this metadata in improving our validation error? 
+                dataset used to train and test the model included the MovieLens 1M columns of user ID, movie ID, and the
+                movies' genres. However, we also have access in MovieLens 1M to user occupations, user ages,
+                and user locations (via US zip codes). How might we leverage this metadata in improving our validation
+                error?
             </p>
             <h3>DeepFM: A deep learning factorization machine</h3>
             <p>
@@ -714,7 +729,8 @@
             <div class="quote">
                 <h3>
                     <blockquote><q>All models are wrong, but some are useful.</q> <br>
-                        <h6>- George Box, 1976</h6><dt-cite key="box1976science"/>
+                        <h6>- George Box, 1976</h6>
+                        <dt-cite key="box1976science" />
                     </blockquote>
                 </h3>
             </div>
@@ -731,7 +747,8 @@
             <div class="example">
                 <div id="tester2" style="width:750px;height:700px;"></div>
             </div>
-            <figcaption class="centered">Distribution and mean of the predictive models' and training data's ratings across all movies</figcaption>
+            <figcaption class="centered">Distribution and mean of the predictive models' and training data's ratings
+                across all movies</figcaption>
             <p></p>
             <p>
                 To better understand these results, we decide to validate our approaches using the Root Mean Squared
@@ -773,9 +790,6 @@
                 (movie rated 5 by the users), predicted ratings from the embedding matrix factorization, and predicted
                 ratings from the DeepFM model.
             </p>
-            <p style="color: red;">
-                WRITE SOMETHING HERE
-            </p>
             <div class="row">
                 <div class="centered">
                     <img src="how-to-venn.png" height="600px">
@@ -787,14 +801,18 @@
 
             <p></p>
             <div class="example">
-                <p class="example_text" style="color: red;">
-                    Let's consider the following user: Xiao. He is 25-34 years old writer who lives in the West Coast.
-                    We have retrieved the top 10ish movies that both models would recommend to himand some movies that
-                    he liked and rate 5 but the models have not recommended to him.
-                </p>
                 <p class="example_text">
                     <i><b>This box is interactive!</b> the movies are represented by dot in the different sets of the
                         Venn Diagram. The line that starts from the center represent the error that has been made.</i>
+                </p>
+                <p class="example_text">
+                    Let's consider the following user called Xiao. He is a 25-34 years old writer who lives in the West
+                    Coast (USA). To better understand his preferences and what the two recommenders should and have
+                    recommend him to watch next we decided to retrieved the top10 movies from both the recommendation
+                    models and a set movies that he has ranked 5. Since the prediction rating is a continuos value,
+                    from 1 to 5, we have decided to consider only the movies that has an error, defined as true rating -
+                    predicted rating less or equal to 0.6. By intersecting the different results it was then possible to
+                    fill the Venn diagram interesection describe above.
                 </p>
                 <div class="row">
                     <div class="column example_text">
@@ -858,26 +876,38 @@
 
 
             <h2>Conclusion</h2>
-            
+
             <p> Why didn't Xiao like the movies DeepFM and EmbeddingMF recommended to him?
-                A system is rarely aware of what it does not know, and is limited by the data it is provided for training. What if these features, this 
-                metadata, are not the correct sources of information for predicting what our user may like to watch? Xiao was so similar to the demographics 
-                of the users who enjoyed <i>Buffy the Vampire Slayer</i>, yet his true rating for this movie was 1. What aspects of <i>Buffy</i> were responsible
+                A system is rarely aware of what it does not know, and is limited by the data it is provided for
+                training. What if these features, this
+                metadata, are not the correct sources of information for predicting what our user may like to watch?
+                Xiao was so similar to the demographics
+                of the users who enjoyed <i>Buffy the Vampire Slayer</i>, yet his true rating for this movie was 1. What
+                aspects of <i>Buffy</i> were responsible
                 for Xiao's dislike?
             </p>
             <p>
-                How we might learn the answer to this question, and how we might collect data for recalibrating recommender models to specific user needs, are open questions in 
-                the field of recommender systems research. While recommender systems aim to generate a personalized experience on the web, models are trained 
-                on a group of users with similar characteristics, not on a single user and their individual opinions. Through exploration of Xiao's top recommendations, we have seen that 
-                the features we have used for characterizing user similarities may not be sufficient for making good recommendations. Such exploration has allowed us
-                insight, beyond model fit and validation losses, into the fact that there are some features out there, missing from our models, that
+                How we might learn the answer to this question, and how we might collect data for recalibrating
+                recommender models to specific user needs, are open questions in
+                the field of recommender systems research. While recommender systems aim to generate a personalized
+                experience on the web, models are trained
+                on a group of users with similar characteristics, not on a single user and their individual opinions.
+                Through exploration of Xiao's top recommendations, we have seen that
+                the features we have used for characterizing user similarities may not be sufficient for making good
+                recommendations. Such exploration has allowed us
+                insight, beyond model fit and validation losses, into the fact that there are some features out there,
+                missing from our models, that
                 can make our recommendations into the personalized experience we seek.
             </p>
             <p>
-                What do we ask users to learn these niche recommendations? How do we collect, or compute, such abstract data representations? 
-                The discovery of machine-recommended content that speaks to, and connects with us on a personal level may require moving beyond a <i>one-model-fits-all-users</i> approach. 
-                Calibrating our models per-user, through specific user feedback and desires, could be the key to reaching our personalized recommendation dreams&mdash;
-                and finally answering that one <i>infuriating</i> question: <br><br><i><b>What should we watch tonight?</b></i>
+                What do we ask users to learn these niche recommendations? How do we collect, or compute, such abstract
+                data representations?
+                The discovery of machine-recommended content that speaks to, and connects with us on a personal level
+                may require moving beyond a <i>one-model-fits-all-users</i> approach.
+                Calibrating our models per-user, through specific user feedback and desires, could be the key to
+                reaching our personalized recommendation dreams&mdash;
+                and finally answering that one <i>infuriating</i> question: <br><br><i><b>What should we watch
+                        tonight?</b></i>
             </p>
 
     </d-article>
@@ -1391,51 +1421,51 @@
                             },
                             barmode: "overlay",
                             shapes: [
-                            {   //Training mean: 3.579944
-                                type: 'line',
-                                x0: 3.58,
-                                y0: 0,
-                                x1: 3.58,
-                                y1: 50*1000,
-                                line: {
-                                    color: 'rgba(103, 141, 88, 0.8)',
-                                    width: 2,
-                                    dash: 'dashdot'
+                                {   //Training mean: 3.579944
+                                    type: 'line',
+                                    x0: 3.58,
+                                    y0: 0,
+                                    x1: 3.58,
+                                    y1: 50 * 1000,
+                                    line: {
+                                        color: 'rgba(103, 141, 88, 0.8)',
+                                        width: 2,
+                                        dash: 'dashdot'
+                                    }
+                                },
+                                {   //DeepFM 3.596508
+                                    type: 'line',
+                                    x0: 3.6,
+                                    y0: 0,
+                                    x1: 3.6,
+                                    y1: 70 * 1000,
+                                    line: {
+                                        color: 'rgba(57, 45, 50, 0.8)',
+                                        width: 2,
+                                        dash: 'dashdot'
+                                    }
+                                },
+                                {   //EmbeddingMF: 3.535788
+                                    type: 'line',
+                                    x0: 3.54,
+                                    y0: 0,
+                                    x1: 3.54,
+                                    y1: 95 * 1000,
+                                    line: {
+                                        color: 'rgba(244, 159, 10, 0.6)',
+                                        width: 2,
+                                        dash: 'dashdot'
+                                    }
                                 }
-                            },
-                            {   //DeepFM 3.596508
-                                type: 'line',
-                                x0: 3.6,
-                                y0: 0,
-                                x1: 3.6,
-                                y1: 70*1000,
-                                line: {
-                                    color: 'rgba(57, 45, 50, 0.8)',
-                                    width: 2,
-                                    dash: 'dashdot'
-                                }
-                            },
-                            {   //EmbeddingMF: 3.535788
-                                type: 'line',
-                                x0: 3.54,
-                                y0: 0,
-                                x1: 3.54,
-                                y1: 95*1000,
-                                line: {
-                                    color: 'rgba(244, 159, 10, 0.6)',
-                                    width: 2,
-                                    dash: 'dashdot'
-                                }
-                            }
                             ],
                             annotations: [
-                            
+
                                 { //Training data
                                     showarrow: false,
                                     text: "<b>Mean rating: 3.58</b>",
                                     x: 3.61,
                                     xanchor: "left",
-                                    y: 18*1000,
+                                    y: 18 * 1000,
                                     yanchor: "bottom",
                                     align: "left",
                                     font: {
@@ -1451,7 +1481,7 @@
                                     text: "<b>Mean rating: 3.54</b>",
                                     x: 3.54,
                                     xanchor: "left",
-                                    y: 85*1000,
+                                    y: 85 * 1000,
                                     yanchor: "right",
                                     font: {
                                         color: 'rgba(244, 159, 10, 1)',
@@ -1462,7 +1492,7 @@
                                     text: "<b>Mean rating: 3.6</b>",
                                     x: 3.6,
                                     xanchor: "left",
-                                    y: 67*1000,
+                                    y: 67 * 1000,
                                     yanchor: "right",
                                     font: {
                                         color: 'rgba(57, 45, 50, 1)',
@@ -1503,7 +1533,7 @@
                             //    start: 1,
                             //   
                             //},
-                            marker: { color:"rgba(57, 45, 50, 0.8)" },
+                            marker: { color: "rgba(57, 45, 50, 0.8)" },
 
                         };
 
@@ -1527,7 +1557,7 @@
         var drawRatingDensity = async () => {
             // User highlight: rgba(142, 181, 205, 0.4)
             // Mean vertical marker: "#C97064"
-            
+
 
             var config = { responsive: true, displayModeBar: false };
             var layout1 = {
