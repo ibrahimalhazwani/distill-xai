@@ -62,7 +62,7 @@
                     Ibrahim Al-Hazwani
                 </p>
                 <p class="affiliation">
-                    University of Zurich, UZH Digital Society Initiative
+                    University of Zurich, Digital Society Initiative Zu ̈rich
                 </p>
                 <p class="author">
                     Gabriela Morgenshtern
@@ -87,7 +87,7 @@
                     Jürgen Bernard
                 </p>
                 <p class="affiliation">
-                    University of Zurich, UZH Digital Society Initiative
+                    University of Zurich, Digital Society Initiative Zu ̈rich
                 </p>
             </div>
             <div>
@@ -107,8 +107,9 @@
         </div>
         <figcaption class="centered">
             Timeline of recommender systems techniques. The green line highlight the different techniques that the
-            article will describe. Specifically, with the green solid line we have the two techniques available in the
-            literature. With the dashed green line we have identify our custom model that connects the other two models.
+            article will describe. Specifically, the green solid line marks the two techniques available in the
+            literature. The dashed green line, identify a custom model built by the author that connects the other two
+            models.
         </figcaption>
         <p></p>
         <p>If you have ever used an e-commerce service or a streaming platform, you have already seen at least
@@ -635,8 +636,7 @@
                 difference
                 between our latent factors and the ground truth is minimized.
             </p>
-            <p style="color: red;">
-                TODO: Add Medium Reference (@Ibra: get from Yves) <br>
+            <p>
                 The model consists of a user matrix of dimensions <i>(n_users x 128 features)</i>, a movie matrix of
                 dimensions <i>(n_movies x 128 features)</i>, a user bias vector of length <i>[n_users]</i>, and a movie
                 bias vector <i>of length [n_movies]</i>. We randomly initialize the latent factors
@@ -648,7 +648,7 @@
                 learn values only within this
                 range for its predicted ratings. We trained the model over 15 epochs using the Mean Squared Error loss
                 (MSELoss), a
-                learning rate of 0.005, and a weight decay of 0.1 [TODO: Ref to medium article]. Since these
+                learning rate of 0.005, and a weight decay of 0.1 [17]. Since these
                 hyperparameters gave us robust results, we did not tune them further.</p>
             <p>
                 EmbeddingMF was able to generate movie rating predictions with an average validation error of 0.71. The
@@ -662,10 +662,23 @@
                 The adoption of deep learning models has been on the rise in every domain, including recommender
                 system.
                 The first model that generated state of the art (SOTA) results was Wide&Deep [5], a deep learning
-                model made by Google in 2016. A complete timeline of SOTA model can be seen in the figure below. For the
-                goal of this article, we are going to consider as a deep learning model, the Factorization-Machine based
-                neural network (DeepFM), developed by Huawei in 2017 [6].
+                model made by Google in 2016. For the goal of this article, we are going to consider as a deep learning
+                model, the Factorization-Machine based neural network (DeepFM), developed by Huawei in 2017 [6].
             </p>
+            <p style="color: red">
+            <ul>
+                <li>
+                    with state of the art we identify the best available technology as it has been developed using most
+                    modern techniques and technologies.
+                </li>
+                <li>
+                    we choose DeepFM since it uses Machine Factorization a basic mathematical approach to combining
+                    matrix factorization with regression. Considering that we started form matrix factorization, this
+                    model represents can be seen as an upgrade of both the two models described above.
+                </li>
+            </ul>
+            </p>
+
 
             <!-- <h3>DeepFM</h3> -->
             <p>
@@ -729,7 +742,7 @@
             <div class="quote">
                 <h3>
                     <blockquote><q>All models are wrong, but some are useful.</q> <br>
-                        <h6>- George Box, 1976</h6>
+                        <h6>- George Box, 1976, [15]</h6>
                         <dt-cite key="box1976science" />
                     </blockquote>
                 </h3>
@@ -741,8 +754,6 @@
                 predictive rating, see figure below, it is possible to notice that the distribution of the DeepFM is
                 skewed towards the rating 3, while the one of the EmbeddingFM is skewed towards the 4 as the true
                 ratings.
-
-                [TODO: add mean ratings of all models in this and error plot]
             </p>
             <div class="example">
                 <div id="tester2" style="width:750px;height:700px;"></div>
@@ -993,6 +1004,9 @@
         <p>
             [16] Ruder, Sebastian. "An overview of gradient descent optimization algorithms." arXiv preprint
             arXiv:1609.04747 (2016).
+        </p>
+        <p>
+            [17] https://towardsdatascience.com/various-implementations-of-collaborative-filtering-100385c6dfe0
         </p>
         <h3>Reuse</h3>
         <p>
