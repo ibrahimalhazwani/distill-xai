@@ -858,17 +858,32 @@
 
 
             <h2>Conclusion</h2>
-            <p style="color: red;">TO EDIT : the two models above actually result in
+            <p style="color: red;">TO EDIT [@Ibra: Do we still want this? ]: the two models above actually result in
                 non-personalized recommendations, such as those you may have seen in print newspapers or
                 magazines. These recommendations rely solely on popular opinion of the population,
                 rather than characteristics specific to a user.
             </p>
-            <p>
-                While recommender systems aims in generating a personalized experience on the web, the model are not
-                trained on a single user but on a group. With this article we have shows that ....
-                Thanks to this explnation we tried to show that if the focus shift from data/model centric to more
-                human centric the models are not really generate personalized recommendations.
+            <p> Why didn't Xiao like the movies DeepFM and EmbeddingMF recommended to him?
+                A system is rarely aware of what it does not know, and is limited by the data it is provided for training. What if these features, this 
+                metadata, are not the correct sources of information for predicting what our user may like to watch? Xiao was so similar to the demographics 
+                of the users who enjoyed <i>Buffy the Vampire Slayer</i>, yet his true rating for this movie was 1. What aspects of <i>Buffy</i> were responsible
+                for Xiao's dislike?
             </p>
+            <p>
+                How we might learn the answer to this question, and how we might collect data for recalibrating recommender models to specific user needs, are open questions in 
+                the field of recommender systems research. While recommender systems aim to generate a personalized experience on the web, models are trained 
+                on a group of users with similar characteristics, not on a single user and their individual opinions. Through exploration of Xiao's top recommendations, we have seen that 
+                the features we have used for characterizing user similarities may not be sufficient for making good recommendations. Such exploration has allowed us
+                insight, beyond model fit and validation losses, into the fact that there are some features out there, missing from our models, that
+                can make our recommendations into the personalized experience we seek.
+            </p>
+            <p>
+                What do we ask users to learn these niche recommendations? How do we collect, or compute, such abstract data representations? 
+                The discovery of machine-recommended content that speaks to, and connects with us on a personal level may require moving beyond a <i>one-model-fits-all-users</i> approach. 
+                Calibrating our models per-user, through specific user feedback and desires, could be the key to reaching our personalized recommendation dreams&mdash;
+                and finally answering that one <i>infuriating</i> question: <br><br><i><b>What should we watch tonight?</b></i>
+            </p>
+
     </d-article>
 
     <d-appendix>
