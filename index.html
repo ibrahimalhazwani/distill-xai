@@ -126,29 +126,29 @@
             We explain differences in two models' competence in predicting a user's rating of movies they have seen
             by leveraging various visualization strategies. We do so by training our two models using the MovieLens 1M
             dataset, selecting different sets of features (columns) per model [TODO: MovieLens 1M ref]. Through this
-            article, we hope
-            to give you an intuition and visual understanding of how recommender systems work.
+            article, we hope to give you an intuition and visual understanding of how recommender systems work.
         </p>
 
 
-        <!--
-            <d-cite key="ricci2011introduction">
-                <d-hover-box id="hover-box" style="display: none;">
-                    <ul>
-                        <li>
-                            <strong>Introduction to recommender systems handbook</strong>
-                            <a href="https://doi.org/10.1007/978-0-387-85820-3_1"></a>
-                            <br> F. Ricci, L. Rokach, B. Shapira
-                            <br> Recommender Systems Handbook. Springer, Boston, MA.
-                            <a href="https://doi.org/10.1007/978-0-387-85820-3_1" style="text-decoration: inherit;">DOI: 10.1007/978-0-387-85820-3_1 </a>
-                        </li>
-                    </ul>
-                </d-hover-box>
-                <div id="citation-" class="citation">
-                    <span class="citation-number">[1]</span>
-                </div>
-            </d-cite>
-        -->
+
+        <!-- <d-cite key="ricci2011introduction">
+            <d-hover-box id="hover-box" style="display: none;">
+                <ol>
+                    <li>
+                        <strong>Introduction to recommender systems handbook</strong>
+                        <a href="https://doi.org/10.1007/978-0-387-85820-3_1"></a>
+                        <br> F. Ricci, L. Rokach, B. Shapira
+                        <br> Recommender Systems Handbook. Springer, Boston, MA.
+                        <a href="https://doi.org/10.1007/978-0-387-85820-3_1" style="text-decoration: inherit;">DOI:
+                            10.1007/978-0-387-85820-3_1 </a>
+                    </li>
+                </ol>
+            </d-hover-box>
+            <div id="citation-" class="citation">
+                <span class="citation-number">[1]</span>
+            </div>
+        </d-cite> -->
+
         </p>
 
 
@@ -263,9 +263,6 @@
         <p>
             Classical recommender systems can be grouped into two main approaches: content-based (CB) and
             collaborative filtering (CF).
-            <!--The former one recommends an item, i.e. movie, song, ad, etc., to a user based on the item
-            characteristics and user's interests. The latter one uses the known preferences of a group of users to make
-            recommendations or predictions for other users.-->
         </p>
 
         <div>
@@ -276,9 +273,6 @@
                 <b>Content-based filtering</b> generates a
                 recommendation using additional information about the given user and item, through what we
                 call <i>features</i>, which explain the observed interaction between a user and an item.
-                <!-- Content-based methods are less prone to the <i>Cold-Start Problem</i> because new items or new
-                users can be described using characteristics relating to them alone, rather than by describing them
-                through their similarity to the behaviour of others'. -->
             </p>
             <figcaption id="left_caption_CB">
                 On the left is an illustration of the content-based process. If Alan has watched one movie, the
@@ -296,8 +290,6 @@
                 like explicit feedback (ratings) for movies watched in the past. In CF, it is sufficient to detect
                 similar users and/or items, cluster them, and make new predictions based on the similarity existing
                 within a cluster [6].
-                <!-- The main issue with CF method is known as the <i>Cold-Start Problem</i>. -->
-
             </p>
             <figcaption id="left_caption_CF">
                 On the left is an illustration of the collaborative filtering process. If Alan and Sarah have
@@ -402,8 +394,6 @@
                             <img src="user-matrix.png" width="150px">
                             <div id="popup6" style="display: None">The <b>user matrix</b> stores the users' item-feature
                                 preferences. Here, the 4 users set 2 feature preferences in a range of [0,1].
-                                <!-- Usually the preference are in the range [0,1] where 0 means that the user
-                                does not like that feature, while one means that the use like it. -->
                             </div>
                         </div>
                     </div>
