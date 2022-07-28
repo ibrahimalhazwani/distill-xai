@@ -660,26 +660,13 @@
             <h3>DeepFM: A deep learning factorization machine</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, and recommender
-                systems are no exception.
-                The first  deep learning model generating state of the art (SOTA) results was Wide&Deep, published by 
-                Cheng et al. of Google Inc. in 2016 [5]. For the
-                goal of this article, we are going to consider as a deep learning model, the Factorization-Machine based
-                neural network (DeepFM), developed by Huawei in 2017 [6].
+                systems are no exception. In this section we consider the factorization machine (FM)-based
+                neural network DeepFM, a deep learning recommender system developed by Guo et. al. for Huawei in 2017 [6].
+                DeepFM accepts a shared input of raw features to both of its components, the FM and neural network, without any feature engineering.
+                We choose DeepFM for our next recommendation system progression as machine factorization is a mathematical approach combining
+                matrix factorization with regression. Considering our matrix factorization starting point, DeepFM can be seen as an upgrade to both the 
+                two models we explored above.
             </p>
-            <p style="color: red">
-            <ul>
-                <li>
-                    with state of the art we identify the best available technology as it has been developed using most
-                    modern techniques and technologies.
-                </li>
-                <li>
-                    we choose DeepFM since it uses Machine Factorization a basic mathematical approach to combining
-                    matrix factorization with regression. Considering that we started form matrix factorization, this
-                    model represents can be seen as an upgrade of both the two models described above.
-                </li>
-            </ul>
-            </p>
-
 
             <!-- <h3>DeepFM</h3> -->
             <p>
@@ -735,20 +722,6 @@
                 We trained the model over 100 epochs, with a batch size of 2048, using MSELoss, and a dropout rate of 0.5 [TODO: Ref DeepFM article]. 
                 Our training of DeepFM concluded in a validation error of 0.7553, comparable to our implementation of EmbeddingMF.
             </p>
-            
-            <p style="color: red">
-                <ul>
-                    <li>
-                        with state of the art we identify the best available technology as it has been developed using most
-                        modern techniques and technologies.
-                    </li>
-                    <li>
-                        we choose DeepFM since it uses Machine Factorization a basic mathematical approach to combining
-                        matrix factorization with regression. Considering that we started form matrix factorization, this
-                        model represents can be seen as an upgrade of both the two models described above.
-                    </li>
-                </ul>
-                </p>
 
             <h2>One recommender cannot rule them all</h2>
             <div class="quote">
