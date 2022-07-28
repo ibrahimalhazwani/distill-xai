@@ -62,7 +62,7 @@
                     Ibrahim Al-Hazwani
                 </p>
                 <p class="affiliation">
-                    University of Zurich and UZH Digital Society Initiative
+                    University of Zurich, UZH Digital Society Initiative
                 </p>
                 <p class="author">
                     Gabriela Morgenshtern
@@ -81,13 +81,13 @@
                     Menna El-Assady
                 </p>
                 <p class="affiliation">
-                    ETH Zürich
+                    ETH Zürich, AI Center
                 </p>
                 <p class="author">
                     Jürgen Bernard
                 </p>
                 <p class="affiliation">
-                    University of Zurich and UZH Digital Society Initiative
+                    University of Zurich, UZH Digital Society Initiative
                 </p>
             </div>
             <div>
@@ -692,7 +692,19 @@
                     and used to compress the input fields vector to the embedding vectors. </li>
             </ol>
             </p>
-
+            <p style="color: RED;">
+            <ul>
+                <li>Validation score:0.7553</li>
+                <li>
+                    epochs=100,
+                    batch_size=2048,
+                    loss = 'MSE',
+                    optimizer='adam',
+                    dnn_dim :[128,128],
+                    dnn dropout: 0.5
+                </li>
+            </ul>
+            </p>
             <h2>One recommender cannot rule them all</h2>
             <div class="quote">
                 <h3>
@@ -1932,14 +1944,14 @@
         };
 
         var layout = {
-            title: 'True & Predicted Ratings for User 1680',
+            title: 'True & Predicted Ratings for Xiao',
             annotations: [
                 {
                     x: 0.4,
                     y: 1.8,
                     xref: 'x',
                     yref: 'y',
-                    text: 'Movies with a rating of 5',
+                    text: 'Movies rated 5 by Xiao',
                     showarrow: true,
                     arrowhead: 3,
                     ax: -30,
