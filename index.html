@@ -1276,6 +1276,7 @@
 
         // Density Plot //
         var drawChartDensity = async () => {
+            //mean of the two models: DeepFM: 3.596508, EmbeddingMF: 3.535788
 
             await d3.csv("https://raw.githubusercontent.com/ibrahimalhazwani/distill-xai/main/ratings_val.csv",
                 function (rows) {
@@ -1347,7 +1348,57 @@
                                 xanchor: 'right',
                                 y: 1
                             },
-                            barmode: "overlay"
+                            barmode: "overlay",
+                            shapes: [
+                            {   //DeepFM 3.596508
+                                type: 'line',
+                                x0: 3.6,
+                                y0: 0,
+                                x1: 3.6,
+                                y1: 70*1000,
+                                line: {
+                                    color: 'rgba(57, 45, 50, 0.8)',
+                                    width: 2,
+                                    dash: 'dashdot'
+                                }
+                            },
+                            {   //EmbeddingMF: 3.535788
+                                type: 'line',
+                                x0: 3.54,
+                                y0: 0,
+                                x1: 3.54,
+                                y1: 95*1000,
+                                line: {
+                                    color: 'rgba(244, 159, 10, 0.8)',
+                                    width: 2,
+                                    dash: 'dashdot'
+                                }
+                            }
+                            ],
+                            annotations: [
+                                {//EmbeddingMF
+                                    showarrow: false,
+                                    text: "<b>3.54</b>",
+                                    x: 3.54,
+                                    xanchor: "left",
+                                    y: 85*1000,
+                                    yanchor: "right",
+                                    font: {
+                                        color: 'rgba(244, 159, 10, 1)',
+                                    }
+                                },
+                                {//DeepFM
+                                    showarrow: false,
+                                    text: "<b>3.6</b>",
+                                    x: 3.6,
+                                    xanchor: "left",
+                                    y: 67*1000,
+                                    yanchor: "right",
+                                    font: {
+                                        color: 'rgba(57, 45, 50, 0.8)',
+                                    }
+                                }
+                            ]
 
                         };
                         var config = { responsive: true, displayModeBar: false };
@@ -1405,6 +1456,7 @@
         var drawRatingDensity = async () => {
             // User highlight: rgba(142, 181, 205, 0.4)
             // Mean vertical marker: "#C97064"
+            
 
             var config = { responsive: true, displayModeBar: false };
             var layout1 = {
