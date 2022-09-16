@@ -68,7 +68,7 @@
                     Gabriela Morgenshtern
                 </p>
                 <p class="affiliation">
-                    University of Zurich
+                    University of Zurich, Digital Society Initiative Zürich
                 </p>
                 <p class="author">
                     Yves Rutishauser
@@ -114,8 +114,8 @@
         <p></p>
         <p>If you have ever used an e-commerce service or a streaming platform, you have already seen at least
             one of these: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. In
-            this article, we will give you an introduction to Recommender Systems (RS), and illustrate how new
-            deep-learning algorithmic techniques in this field work.
+            this <u>educational article</u>, we will give you an introduction to Recommender Systems (RS), and
+            illustrate how new deep-learning algorithmic techniques in this field work.
         </p>
 
         <p>
@@ -148,9 +148,7 @@
                 <span class="citation-number">[1]</span>
             </div>
         </d-cite> -->
-
         </p>
-
 
         <h2>Recommender systems: what are they?</h2>
 
@@ -346,23 +344,29 @@
 
         <div>
             <h2>
-                Matrix Factorization: Interpretable collaborative filtering
+                Matrix Factorization: <q>Interpretable</q> collaborative filtering
             </h2>
 
             <p></p>
 
             <p>
                 Matrix Factorization (MF) is a class of collaborative filtering techniques [3]. In
-                its most simplistic form, Matrix Factorization characterizes both the items and the users by a vector of
+                its most simplistic form, MF characterizes both the items and the users by a vector of
                 factors (<i>matrices</i>), which then generate latent features (<i><q>embeddings</q></i>)
                 when they are multiplied together (<i><q>into the matrix dot product</q></i>).
             </p>
             <p>
-                This method has become popular because it offers flexibility for modeling real-life scenarios
-                while maintaining robust scalability and predictive accuracy [2]. Moreover,
-                since it is based on pure math, it can be classified as an <i>interpretable</i> recommendation method!
+                This method has become popular because it offers flexibility for modeling real-life scenarios while
+                maintaining robust scalability and predictive accuracy [2]. If we consider the toy example below, it is
+                possible to understand how the predictions are made since both the number of features of the user and
+                the item ones are few. Once this method is scaled up to more features, as it happens in real-world
+                scenarios, the ability to interpret the prediction is lost [cite]. For this reason, there is a specific
+                research field called <q>explainability on latent factor models</q>. To learn more about it see the
+                following references [cite].
+                <!-- Moreover, since it is based on pure math, it can be classified as an <i>interpretable</i> recommendation
+                method!
                 With MF, we are able to track exactly how our input data is transformed by the model
-                when making a recommendation.
+                when making a recommendation. -->
             </p>
             <div class="example">
                 <p class="example_text">
@@ -371,24 +375,17 @@
                 </p>
 
                 <div class="row">
-                    <div class="column-rmatrix-text">
-                        <figcaption>Rating matrix</figcaption>
-                    </div>
                     <div class="column-umatrix-text">
                         <figcaption>User matrix</figcaption>
                     </div>
                     <div class="column-imatrix-text">
                         <figcaption>Item matrix</figcaption>
                     </div>
+                    <div class="column-rmatrix-text">
+                        <figcaption>Rating matrix</figcaption>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="column">
-                        <div id="parent5">
-                            <img src="rating-matrix.png" width="300px">
-                            <div id="popup5" style="display: None">The <b>rating matrix</b> stores the dot product of
-                                the user and item matrices.</div>
-                        </div>
-                    </div>
                     <div class="column-umatrix">
                         <div id="parent6">
                             <img src="user-matrix.png" width="150px">
@@ -399,10 +396,17 @@
                     </div>
                     <div class="column-imatrix">
                         <div id="parent7">
-                            <img src="item-matrix.png" width="150px">
+                            <img src="item-matrix.png" width="220px">
                             <div id="popup7" style="display: None">The <b>item matrix</b> stores the items' feature
                                 scores. Here, each of the 4 items contains 2 features.
                             </div>
+                        </div>
+                    </div>
+                    <div class="column-rmatrix">
+                        <div id="parent5">
+                            <img src="rating-matrix.png" width="210px">
+                            <div id="popup5" style="display: None">The <b>rating matrix</b> stores the dot product of
+                                the user and item matrices.</div>
                         </div>
                     </div>
                 </div>
@@ -587,8 +591,10 @@
                 can be done through approaches like gradient descent [16].
             </p>
             <p>
-                We will use the <i><q>EmbeddingMF</q></i> approach, which includes a bias term on top of our existing
-                dot product.
+                We will use the <i><q>EmbeddingMF</q></i> approach, which includes a general bias term on top of our
+                existing dot product. EmbeddingMF is a clear simplification of the FunkSVD method [cite] where at least
+                three different bias terms (general, user, item) are added on top of the matrix factorization
+                approach.
             </p>
             <div class="row">
                 <img src="ebeddingMF-figure.png" width="600px">
@@ -658,24 +664,21 @@
                 DeepFM accepts a shared input of raw features to both of its components, the FM and neural network,
                 without any feature engineering.
                 We choose DeepFM for our next recommendation system progression as machine factorization is a
-                mathematical approach combining
-                matrix factorization with regression. Considering our matrix factorization starting point, DeepFM can be
-                seen as an upgrade to both the
-                two models we explored above.
+                mathematical approach combining matrix factorization with regression. Considering our matrix
+                factorization starting point, DeepFM can be seen as an upgrade to both the two models we explored above.
             </p>
 
             <!-- <h3>DeepFM</h3> -->
             <p>
                 Architecturally, DeepFM consists of two components that share the same input: a Factorization Machine
-                (FM),
-                and a deep component.
+                (FM), and a deep component.
             </p>
             <p>
                 <b>Factorization Machines (FM)</b>: A model class combining the advantages of Support Vector
-                Machines with factorization models [7]. Factorization Machines are a general predictor,
-                modeling all interactions between variables using factorized parameters. FMs are a powerful strategy
-                to use when designing recommender systems, as they are able to estimate interactions even in
-                highly sparse data contexts.
+                Machines with factorization models [7]. FM are a general predictor, modeling all interactions between
+                variables using factorized parameters. FMs are a powerful strategy
+                to use when designing recommender systems, as they are able to estimate interactions even in highly
+                sparse data contexts.
             </p>
 
             <p>
@@ -758,14 +761,15 @@
             <p></p>
             <p>
                 To better understand these results, we validate our models using the Root Mean Squared
-                Error (RMSE), the standard metric for validation in the recommender systems research. RMSE is typically
-                used when
-                we want to evaluate a predicted score, such as the predictive rating of a movie, and compare it
-                to a ground truth (true rating). Compared to other metrics, RMSE penalizes more harshly a larger
-                absolute
-                error, giving you a measure of how concentrated your data is around the curve you have fit through your
-                model.
-                Lower RMSE translates to better recommendation accuracy [1, 8].
+                Error (RMSE), a standard metric widley used for validation in the recommender systems research. We
+                decides to use RMSE over other evalutation metrics, like MAP or nDCG, for its understand semplicity.
+                <!-- and for better allignement to our goal of comparing the predicted rating of specific items over comparing a list  -->
+                Moreover, RMSE is typically used when we want to evaluate a predicted score, such as the predictive
+                rating of a
+                movie, and compare it to a ground truth (true rating) as we want to do in our case. Compared to other
+                metrics, RMSE penalizes more
+                harshly a larger absolute error, giving you a measure of how concentrated your data is around the curve
+                you have fit through your model. Lower RMSE translates to better recommendation accuracy [1, 8].
             </p>
             <div class="row">
                 <div class="column">
@@ -794,8 +798,8 @@
                 <div id="tester" style="width:750px;height:700px;"></div>
             </div>
             <figcaption class="centered">
-                RMSE of EmbeddingMF and DeepFM, both featuring large RMSE values at the two extremes of true ratings (x
-                axis)
+                RMSE of EmbeddingMF (yellow) and DeepFM (grey), both featuring large RMSE values at the two extremes of
+                true ratings (x axis)
             </figcaption>
             <p></p>
             <p>
@@ -823,15 +827,18 @@
             <p></p>
             <div class="example">
                 <p class="example_text">
-                    <i><b>This box is interactive!</b> The movies are represented by dots in the different sets and intersections of the
+                    <i><b>This box is interactive!</b> The movies are represented by dots in the different sets and
+                        intersections of the
                         Venn Diagram. The line that starts from the center of the circle represents the error (RMSE)
-                        that the model made in generating the rating prediction. Hover over one a point to discover the movie's name, its
+                        that the model made in generating the rating prediction. Hover over one a point to discover the
+                        movie's name, its
                         true rating, and its predicted scores from the model(s)</i>
                 </p>
                 <p class="example_text">
                     Let's consider Xiao. He is a young writer, between 25-34 years old, living in the West
                     Coast (USA). We want to better understand his preferences and what the two recommenders should, and
-                    have, recommended to him. To this end, we have retrieved the top 10 movies from both the recommendation
+                    have, recommended to him. To this end, we have retrieved the top 10 movies from both the
+                    recommendation
                     models, and a set of movies that Xiao himself has ranked 5. We examine the intersections of these
                     sets by visualizing them in a Venn diagram, as described in our annotated legend above.
                 </p>
@@ -886,7 +893,7 @@
             </p>
             <div id="ratings1" style="width:750px;height:350px;"></div>
             <figcaption class="centered">
-                Dashed lines in <b>brown (DeepFM)</b> and <b>yellow (EmbeddingMF)</b> reflect the prediction of each
+                Dashed lines in <b>grey (DeepFM)</b> and <b>yellow (EmbeddingMF)</b> reflect the prediction of each
                 model for <b>Xiao (User 1680)</b>
             </figcaption>
 
@@ -904,7 +911,8 @@
             </p>
             <p>
                 Maybe some characterists of Xiao's were overlooked, making him an outlier in these rating sets? Let us
-                see the user trends (for users' occupation, we exclude from consideration the MovieLens category 0: undefined):
+                see the user trends (for users' occupation, we exclude from consideration the MovieLens category 0:
+                undefined):
 
             <h4><i>Buffy the Vampire Slayer</i></h4>
             <ul>

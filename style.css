@@ -208,28 +208,33 @@ img {
 .column-umatrix {
     flex: 50%;
     margin-top: 23px;
+    margin-left: 30px;
 }
 
 .column-rmatrix-text {
     flex: 50%;
-    margin-left: 110px;
+    margin-left: 130px;
 }
-
 
 .column-umatrix-text {
     flex: 50%;
-    margin-left: 80px;
+    margin-left: 60px;
 }
 
 .column-imatrix {
     flex: 50%;
     margin-top: 50px;
+    margin-left: -10px;
+}
+
+.column-rmatrix {
+    flex: 50%;
     margin-right: 20px;
 }
 
 .column-imatrix-text {
     flex: 50%;
-    margin-left: 60px;
+    margin-left: 40px;
 }
 
 .column-rs-rmatrix {
