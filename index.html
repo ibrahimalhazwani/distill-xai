@@ -707,9 +707,13 @@
             </p>
             <p>
                 <b>Factorization Machines (FM)</b>: A model class combining the advantages of Support Vector
-                Machines with factorization models [7]. FMs model all interactions between
-                variables using factorized parameters. Particularly useful in data contexts with high sparsity!
-
+                Machines with factorization models [7]. FM model all interactions between
+                variables using factorized parameters-- user-item interactions which are represented as tuples. 
+                These tuples are vectors consisting of real-valued and numeric variables that FM treats as features,
+                learning <q><i>n-way</i></q> interactions between them, n being the relevant degree of interaction
+                for the design of some given model. The computation FM conducts includes 
+                a weight for each base feature, and an interaction term representing feature combinations [CITE:https://towardsdatascience.com/factorization-machines-for-item-recommendation-with-implicit-feedback-data-5655a7c749db].
+                Particularly useful in data contexts with high sparsity!
                 Including the FM component as part of the overall DeepFM architecture, in addition to the DNN component,
                 eliminates the need to pre-train the features by FM, allowing us to jointly train the combined model
                 (FM + DNN) end-to-end. The outputs of the FM become latent feature vectors,
