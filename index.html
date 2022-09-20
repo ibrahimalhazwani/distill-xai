@@ -364,9 +364,9 @@
                 how predictions are computed, and understand how to interpret the effect that an individual feature may
                 have on a given prediction.
                 When this method scales up to a more realistic number of features,
-                the ability to interpret the prediction is lost <b>[TO DO: CITE]</b>. There exists much academic debate
+                the ability to interpret the prediction is lost [19]. There exists much academic debate
                 on uncovering the <q>explainability of latent factor models</q>. To learn more about it, see the
-                following references <b>[TO DO: CITE]</b>.
+                following references <b>[19, 20, 21, 22]</b>.
 
             </p>
             <div class="example">
@@ -556,7 +556,9 @@
 
             <p>
                 While Matrix Factorization can produce good results in a short time, a naïve approch has a time
-                complexity of O(mnk) [19], this method has its disavantages:
+                complexity of O(mnk), where <i>m</i> are the number of users, <i>n</i>
+                the number of items, and <i>k</i> the number of latent factors (a hyperparameter) [24]. 
+                This method has its disavantages:
             <ul>
                 <li><b>Cold start problem</b>: The matrix cannot handle fresh items, such as new movies or new users
                     the training data did not include [14].
@@ -595,8 +597,7 @@
                 existing dot product. EmbeddingMF is a simplification of the FunkSVD method. FunkSVD, unlike our
                 EmbeddingMF model,
                 incorporates at least three separate bias terms (general, user, item), on top of the matrix
-                factorization
-                <b>[TO DO: CITE]</b>.
+                factorization [2].
             </p>
 
             <p>
@@ -712,7 +713,8 @@
                 These tuples are vectors consisting of real-valued and numeric variables that FM treats as features,
                 learning <q><i>n-way</i></q> interactions between them, n being the relevant degree of interaction
                 for the design of some given model. The computation FM conducts includes 
-                a weight for each base feature, and an interaction term representing feature combinations [CITE:https://towardsdatascience.com/factorization-machines-for-item-recommendation-with-implicit-feedback-data-5655a7c749db].
+                a weight for each base feature, and an interaction term representing feature combinations 
+                [23].
                 Particularly useful in data contexts with high sparsity!
                 Including the FM component as part of the overall DeepFM architecture, in addition to the DNN component,
                 eliminates the need to pre-train the features by FM, allowing us to jointly train the combined model
@@ -1095,7 +1097,35 @@
             Transactions on Interactive Intelligent Systems (TiiS) 5, 4: 19:1–19:19. https://doi.org/10.1145/2827872
         </p>
         <p>
-            [19]
+            [19] Zhang, Yongfeng, et al. "Explicit factor models for explainable recommendation based on phrase-level 
+            sentiment analysis." Proceedings of the 37th international ACM SIGIR conference on Research & development 
+            in information retrieval. 2014.
+        </p>
+
+        <p>
+            [20] Abdollahi, Behnoush, and Olfa Nasraoui. "Using explainability for constrained matrix factorization." 
+            Proceedings of the eleventh ACM conference on recommender systems. 2017.
+        </p>
+
+        <p>
+            [21] Alhejaili, Abdullah, and Shaheen Fatima. "Expressive Latent Feature Modelling for Explainable Matrix
+            Factorisation based Recommender Systems." ACM Transactions on Interactive Intelligent Systems (TiiS) (2022).
+        </p>
+
+        <p>
+            [22] Abdollahi, Behnoush, and Olfa Nasraoui. "Explainable matrix factorization for collaborative filtering." 
+            Proceedings of the 25th International Conference Companion on World Wide Web. 2016.
+        </p>
+        
+        <p>
+            [23] Lundquist, Eric. “Factorization Machines for Item Recommendation With Implicit Feedback Data.” 
+            Medium, 30 Mar. 2022, towardsdatascience.com/factorization-machines-for-item-recommendation-with-implicit-feedback-data-5655a7c749db.
+        
+        </p>
+
+        <p>
+            [24] Arora, Sanjeev, et al. "Computing a nonnegative matrix factorization--provably." 
+            Proceedings of the forty-fourth annual ACM symposium on Theory of computing. 2012.
         </p>
         <h3>Reuse</h3>
         <p>
