@@ -112,11 +112,13 @@
             models.
         </figcaption>
         <p></p>
-        <p>If you have ever used an e-commerce service or a streaming platform, you have already come across something like: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. Our
+        <p>If you have ever used an e-commerce service or a streaming platform, you have already come across something
+            like: <q><i>recommended for you</i></q>, or <q><i>other users have also bought this</i></q>. Our
             educational article below will give you an introduction to Recommender Systems (RS), and
-            illustrate how this field currently leverages deep-learning techniques. 
-            Our article is meant to foster in the reader a broad inuition of RS, highlight 
-            common scenarios causing failure in various RS techniques, and provide a visual understanding of how recommender systems work.
+            illustrate how this field currently leverages deep-learning techniques.
+            Our article is meant to foster in the reader a broad inuition of RS, highlight
+            common scenarios causing failure in various RS techniques, and provide a visual understanding of how
+            recommender systems work.
         </p>
 
         <p>
@@ -126,7 +128,7 @@
 
             We explain differences in two models' competence in predicting a user's rating of movies they have seen,
             through various visualizations. Our two models use the MovieLens 1M
-            dataset, selecting different sets of features (columns) per model [18]. 
+            dataset, selecting different sets of features (columns) per model [18].
         </p>
 
 
@@ -357,14 +359,15 @@
             </p>
             <p>
                 This method has become popular because it offers flexibility for modeling real-life scenarios, while
-                maintaining robust scalability and predictive accuracy [2]. The toy example below includes only a 
-                very limited number of features in both the user and item matrices, allowing us to follow 
-                how predictions are computed, and understand how to interpret the effect that an individual feature may have on a given prediction. 
-                When this method scales up to a more realistic number of features, 
+                maintaining robust scalability and predictive accuracy [2]. The toy example below includes only a
+                very limited number of features in both the user and item matrices, allowing us to follow
+                how predictions are computed, and understand how to interpret the effect that an individual feature may
+                have on a given prediction.
+                When this method scales up to a more realistic number of features,
                 the ability to interpret the prediction is lost <b>[TO DO: CITE]</b>. There exists much academic debate
                 on uncovering the <q>explainability of latent factor models</q>. To learn more about it, see the
                 following references <b>[TO DO: CITE]</b>.
-        
+
             </p>
             <div class="example">
                 <p class="example_text">
@@ -552,8 +555,8 @@
             <p></p>
 
             <p>
-                While Matrix Factorization can produce good results in a short time <b>[TO DO: CITE (speed of computation)]</b>, 
-                this method has its disavantages:
+                While Matrix Factorization can produce good results in a short time, a naïve approch has a time
+                complexity of O(mnk) [19], this method has its disavantages:
             <ul>
                 <li><b>Cold start problem</b>: The matrix cannot handle fresh items, such as new movies or new users
                     the training data did not include [14].
@@ -589,16 +592,18 @@
             </p>
             <p>
                 We will use the <i><q>EmbeddingMF</q></i> approach, which includes a general bias term on top of our
-                existing dot product. EmbeddingMF is a simplification of the FunkSVD method. FunkSVD, unlike our EmbeddingMF model,
-                incorporates at least three separate bias terms (general, user, item), on top of the matrix factorization
-                <b>[TO DO: CITE]</b>. 
+                existing dot product. EmbeddingMF is a simplification of the FunkSVD method. FunkSVD, unlike our
+                EmbeddingMF model,
+                incorporates at least three separate bias terms (general, user, item), on top of the matrix
+                factorization
+                <b>[TO DO: CITE]</b>.
             </p>
 
             <p>
                 <i>
-                Note: Our inclusion of a single bias term serves to broadly illustrate to the reader the effect 
-                of bias on an RS model. So, although EmbeddingMF is not the most effective or cutting-edge RS,
-                it is sufficient for our purposes. 
+                    Note: Our inclusion of a single bias term serves to broadly illustrate to the reader the effect
+                    of bias on an RS model. So, although EmbeddingMF is not the most effective or cutting-edge RS,
+                    it is sufficient for our purposes.
                 </i>
             </p>
             <div class="row">
@@ -618,7 +623,8 @@
                     <i>E.g. For a set of 100 users and 200 features, U will have dimensions of (100, 200)</i>
                 </li>
                 <li>
-                    <b>A movie embedding matrix <i>M</i></b>, containing one movie per row and <i>n</i> movie features, as
+                    <b>A movie embedding matrix <i>M</i></b>, containing one movie per row and <i>n</i> movie features,
+                    as
                     columns.
                     <br>
                     <i>E.g. For a set of 100 movies and 200 features, M will have dimensions of (100, 200)</i>
@@ -633,7 +639,7 @@
                 After multiplication, we add bias terms to each user and each movie. Adding bias to our matrix product
                 results in a matrix representing predictive user ratings for all the movies in our dataset.
                 Since these latent factors (features) are initialized randomly (independently and identically
-                distributed Normal samples, <i>i.i.d</i>), the initial ratings computed by the model will likely differ 
+                distributed Normal samples, <i>i.i.d</i>), the initial ratings computed by the model will likely differ
                 significantly from the ground truth. Through training, the difference
                 between our latent factors and the ground truth is minimized.
             </p>
@@ -661,18 +667,25 @@
             <h3>DeepFM: A deep learning factorization machine</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, and recommender
-                systems are no exception. In this section, we move away from Matrix Factorization, and consider another technique:
-                a factorization machine (FM)-based neural network. DeepFM is a deep learning recommender system developed by Guo et. al. for Huawei in 2017
-                [6]. The DeepFM model has a structure that considers several concepts we have discussed above, combining these into a 
-                (then considered) novel neural network architecture. 
-            </p> 
+                systems are no exception. In this section, we move away from Matrix Factorization, and consider another
+                technique:
+                a factorization machine (FM)-based neural network. DeepFM is a deep learning recommender system
+                developed by Guo et. al. for Huawei in 2017
+                [6]. The DeepFM model has a structure that considers several concepts we have discussed above, combining
+                these into a
+                (then considered) novel neural network architecture.
+            </p>
             <p><i>We haven't covered FMs yet-- this is coming up, don't fret!</i></p>
-            <p> 
-                DeepFM's output unit combines information from two components: a factorization machine, and a neural network. 
-                Both of these components accept a shared input of raw (sparse) feature data. The neural network learns dense embeddings
-                from the sparse data, uncovering patterns pointing to both low- and high-complexity interactions between features.
+            <p>
+                DeepFM's output unit combines information from two components: a factorization machine, and a neural
+                network.
+                Both of these components accept a shared input of raw (sparse) feature data. The neural network learns
+                dense embeddings
+                from the sparse data, uncovering patterns pointing to both low- and high-complexity interactions between
+                features.
                 The FM component is responsible for making recommendations,
-                and the deep learning component to learn features. Prior to exposure to the without any additional feature engineering.
+                and the deep learning component to learn features. Prior to exposure to the without any additional
+                feature engineering.
                 We choose DeepFM for our next recommendation system progression as machine factorization is a
                 mathematical approach combining matrix factorization with regression. Considering our matrix
                 factorization starting point, DeepFM can be seen as an upgrade to both the two models we explored above.
@@ -1071,6 +1084,9 @@
         <p>
             [18] F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM
             Transactions on Interactive Intelligent Systems (TiiS) 5, 4: 19:1–19:19. https://doi.org/10.1145/2827872
+        </p>
+        <p>
+            [19]
         </p>
         <h3>Reuse</h3>
         <p>
