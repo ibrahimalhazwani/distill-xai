@@ -667,6 +667,7 @@
             <h3>DeepFM: A deep learning factorization machine</h3>
             <p>
                 The adoption of deep learning models has been on the rise in every domain, and recommender
+<<<<<<< HEAD
                 systems are no exception. In this section, we move away from Matrix Factorization, and consider another
                 technique:
                 a factorization machine (FM)-based neural network. DeepFM is a deep learning recommender system
@@ -689,19 +690,49 @@
                 We choose DeepFM for our next recommendation system progression as machine factorization is a
                 mathematical approach combining matrix factorization with regression. Considering our matrix
                 factorization starting point, DeepFM can be seen as an upgrade to both the two models we explored above.
+=======
+                systems are no exception. In this section, we build upon Matrix Factorization, turning it into something
+                we call a factorization machine (FM). More on that in a minute. 
+                The example we use to 
+                a factorization machine (FM)-based neural network. DeepFM is a deep learning recommender system developed by Guo et. al. 
+                for Huawei in 2017
+                [6]. The DeepFM model has a structure that considers several concepts we have discussed above, combining these into a 
+                (then considered) novel neural network architecture. 
+            </p> 
+            <p><i>We haven't covered FMs yet-- this is coming up, don't fret!</i></p>
+            <p> 
+                DeepFM's output unit combines information from two components: a factorization machine, and a neural network. 
+                Both of these components accept a shared input of raw (sparse) feature data. The neural network learns dense embeddings
+                from the sparse data, uncovering patterns pointing to both low- and high-order interactions between features.
+                It models low-order feature interactions like FM, and models high-order feature interactions like DNN.
+                Due to the relationships between the FM and NN, this model can learn recommendations
+                without any additional feature engineering, and can accomodate input data which includes vectors of varying lengths. 
+                DeepFM's initial dense embedding layer compresses the input to a low-dimensional, low-sparsity, real-value vector, 
+                before further this into the FM, and the first hidden layer of the deep component.
+                No matter how sparse our input data may be with respect to various features,
+                DeepFM learns embeddings of the appropriate shape and appropriate sparsity for its components.
+                We choose DeepFM for our next recommendation system progression because machine factorization 
+                combines in its computation concepts of both matrix factorization with regression. 
+                When we consider that we began with a relatively simple matrix factorization, 
+                DeepFM can be seen as an <q>upgrade</q> to both the two models we explored above.
+>>>>>>> 2dc9c6b3f25817b852c22efc921e737a793368f3
             </p>
 
             <!-- <h3>DeepFM</h3> -->
             <p>
                 Architecturally, DeepFM consists of two components that share the same input: a Factorization Machine
-                (FM), and a deep component.
+                (FM), and a deep neural network. 
             </p>
             <p>
                 <b>Factorization Machines (FM)</b>: A model class combining the advantages of Support Vector
-                Machines with factorization models [7]. FM are a general predictor, modeling all interactions between
-                variables using factorized parameters. FMs are a powerful strategy
-                to use when designing recommender systems, as they are able to estimate interactions even in highly
-                sparse data contexts.
+                Machines with factorization models [7]. FMs model all interactions between
+                variables using factorized parameters. Particularly useful in data contexts with high sparsity!
+
+                Including the FM component as part of the overall DeepFM architecture, in addition to the DNN component, 
+                eliminates the need to pre-train the features by FM, allowing us to jointly train the combined model 
+                (FM + DNN) end-to-end. The outputs of the FM become latent feature vectors, 
+                and used as network weights in the output units of the overall model (rather than a
+                random initialization). 
             </p>
 
             <div class="centered">
@@ -717,25 +748,17 @@
 
             <p>
                 <b>Deep component</b>: The deep component is a feed-forward neural network, used to learn
-                high-order feature interactions.
-                For a given feature <i>i</i>, a weight <i>w<sub>i</sub></i> is used to
-                weigh its order-1 (linear) importance, and a latent vector <i>V<sub>i</sub></i> is used to measure the
-                impact of its interactions with other features. The latent vector is then fed to the FM component to
-                model
-                order-2 (pairwise) feature interactions. The result, <i>y<sub>FM</sub></i> , is then fed to the deep
-                component, to model the high-order feature interactions.
+                both low- and high-order feature interactions. That means that, for a given feature <i>i</i>, 
+                a weight <i>w<sub>i</sub></i> represents its order-1 (linear) importance, 
+                and a latent vector <i>V<sub>i</sub></i> is used to measure the impact of interactions feature <i>i</i>  
+                has with other features the model considers. This latent vector  <i>V<sub>i</sub></i> is then fed to the 
+                FM component, to model order-2 (pairwise) feature interactions. 
+                The result, <i>y<sub>FM</sub></i> , is then fed to the deep component, to model the high-order feature interactions.
             </p>
             <p>
-                Of note are two interesting features of the deep learning structure of DeepFM:
-            <ol>
-                <li>Although the lengths of the input vectors may be different, their embeddings are of the
-                    same size</li>
-                <li>The outputs of the FM, our latent feature vectors, are used as network weights (rather than a
-                    random initialization). These are then learned and used to compress the input vector to the
-                    embedding vector dimensions. </li>
-            </ol>
-            All parameters are trained jointly, and the combined prediction <i>y</i> is represented by the
-            following formula:
+            
+            All parameters are trained jointly, rather than pre-training via the FM and then applying the DNN. 
+            The combined prediction <i>y</i> is represented by the following formula:
             </p>
             <div class="row">
                 <div class="column">
